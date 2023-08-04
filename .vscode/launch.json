@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/user/Documents/GitHub/COSC345-Project",
-      "program": "c:/Users/user/Documents/GitHub/COSC345-Project/build/Debug/outDebug",
+      "cwd": "${fileDirname}",
+      "program": "${fileDirname}/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

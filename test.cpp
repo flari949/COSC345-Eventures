@@ -42,7 +42,7 @@ std::string fetchDataFromAPI(const std::string& apiUrl, const std::string& usern
 
 int main() {
     // Replace these with your API endpoint and authentication credentials
-    std::string apiUrl = "https://api.eventfinda.co.nz/v2/artists.json?row=10&q=michael";
+    std::string apiUrl = "https://api.eventfinda.co.nz/v2/artists.json?rows=1&q=henry";
     std::string username = "eventure";
     std::string password = "5jryqspxvxkk";
 
