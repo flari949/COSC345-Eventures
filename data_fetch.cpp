@@ -60,25 +60,31 @@ int main() {
     doc.Parse(responseData.c_str());
 
     // Check if parsing was successful
-    if (!doc.HasParseError()) {
-        // Check for events array
-        if (doc.HasMember("events") && doc["events"].IsArray()) {
-            const rapidjson::Value& events = doc["events"];
-            // Check events array populated
-            if (!events.Empty() && events[0].IsObject()) {
-                const rapidjson::Value& event = events[0];
-                // Check url object present
-                if (event.HasMember("url") && event["url"].IsString()) {
-                    const char* url = event["url"].GetString();
-                    std::cout << "Response url: " << url << std::endl;
-                } else {
-                    std::cerr << "URL not found in JSON" << std::endl;
+    if (!doc.HasParseError() && doc.IsObject()) {
+
+        // Check response contains appropriate data
+        if (doc.MemberCount() >= 2) {
+            auto lastMember = doc.MemberEnd() - 1;
+            const rapidjson::Value& itemArray = lastMember->value;
+            // Check item array format
+            if (itemArray.IsArray()) {
+                // Iterate over object instances
+                for (rapidjson::SizeType i = 0; i < itemArray.Size(); ++i) {
+                    const rapidjson::Value& item = itemArray[i];
+                    // Check item format
+                    if (item.IsObject()) {
+                        // URL data
+                        if (item.HasMember("url") && item["url"].IsString()) {
+                            const char* url = item["url"].GetString();
+                            std::cout << "Response url: " << url << std::endl;
+                        }
+                    }
                 }
             } else {
-                std::cerr << "Events array is empty or not an object" << std::endl;
+                std::cerr << "Object itemArray is not an array" << std::endl;
             }
         } else {
-            std::cerr << "Events array not found in JSON" << std::endl;
+            std::cerr << "Value not found or empty" << std::endl;
         }
     } else {
         std::cerr << "Failed to parse JSON data" << std::endl;
