@@ -44,7 +44,7 @@ std::string fetchDataFromAPI(const std::string& apiUrl, const std::string& usern
 }
 
 int main() {
-    std::string apiUrl = "https://api.eventfinda.co.nz/v2/events.json?rows=1&fields=event:(url)";
+    std::string apiUrl = "https://api.eventfinda.co.nz/v2/artists.json?rows=1&q=michael";
     // Need to add as env variables for security
     std::string username = "eventure";
     std::string password = "5jryqspxvxkk";
@@ -77,6 +77,21 @@ int main() {
                         if (item.HasMember("url") && item["url"].IsString()) {
                             const char* url = item["url"].GetString();
                             std::cout << "Response url: " << url << std::endl;
+                        }
+                        // Address data
+                        if (item.HasMember("address") && item["address"].IsString()) {
+                            const char* url = item["address"].GetString();
+                            std::cout << "Response address: " << url << std::endl;
+                        }
+                        // Unique id data - Doesn't pay respect to endpoint
+                        if (item.HasMember("id") && item["id"].IsString()) {
+                            const char* url = item["id"].GetString();
+                            std::cout << "Response id: " << url << std::endl;
+                        }
+                        // Name data - Doesn't pay respect to endpoint
+                        if (item.HasMember("name") && item["name"].IsString()) {
+                            const char* url = item["name"].GetString();
+                            std::cout << "Response name: " << url << std::endl;
                         }
                     }
                 }
