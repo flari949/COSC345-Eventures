@@ -67,8 +67,8 @@ int process_json(std::string apiUrl, std::string username, std::string password)
     return 0;
 }
 
-int process_map(std::string key, std::string url) {
-    std::string mapData = fetchMapAPI(key, url);
+int process_map(std::string url) {
+    std::string mapData = fetchMapAPI(url);
 
     // std::cout << "Map data: " << mapData << std::endl;
 

@@ -6,6 +6,6 @@
 #include <string>
 
 int process_json(std::string apiUrl, std::string username, std::string password);
-int process_map(std::string mapAPIUrl, std::string mapAPIKey);
+int process_map(std::string mapAPIUrl);
 
 #endif

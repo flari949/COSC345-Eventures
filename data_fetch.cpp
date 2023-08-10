@@ -46,7 +46,7 @@ std::string fetchDataFromAPI(const std::string& apiUrl, const std::string& usern
     return response;
 }
 
-std::string fetchMapAPI(const std::string& key, const std::string& url) {
+std::string fetchMapAPI(const std::string& url) {
     CURL* curl = curl_easy_init();
     if (!curl) {
         std::cerr << "Error initializing libcurl." << std::endl;

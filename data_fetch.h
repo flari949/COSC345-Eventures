@@ -6,6 +6,6 @@
 #include <string>
 
 std::string fetchDataFromAPI(const std::string& apiUrl, const std::string& username, const std::string& password);
-std::string fetchMapAPI(const std::string& key, const std::string& url);
+std::string fetchMapAPI(const std::string& url);
 
 #endif

@@ -18,7 +18,7 @@ int main() {
     std::string mapAPIKey = "c01h7e45g7q2sgxt0me0jsn3542";
     std::string mapAPIUrl = "https://basemaps.linz.govt.nz/v1/tiles/aerial/NZTM2000Quad/WMTSCapabilities.xml?api=" + mapAPIKey;
     printf("Map API url: %s\n", mapAPIUrl.c_str());
-    process_map(mapAPIKey, mapAPIUrl);
+    process_map(mapAPIUrl);
   
     return 0;
 }
