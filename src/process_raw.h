@@ -1,7 +1,7 @@
-// process_json.h
+// process_raw.h
 
-#ifndef PROCESS_JSON_H
-#define PROCESS_JSON_H
+#ifndef PROCESS_RAW_H
+#define PROCESS_RAW_H
 
 #include <string>
 

@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
-#include <rapidjson/document.h>
+#include "rapidjson/document.h"
 #include "rapidxml/rapidxml.hpp"
 #include "data_fetch.h"
 
 /*
-    Program to process API JSON data
+    Functions to process API data
 */
 
 int process_json(std::string apiUrl, std::string username, std::string password) {
@@ -66,6 +66,7 @@ int process_json(std::string apiUrl, std::string username, std::string password)
 
     return 0;
 }
+
 
 int process_map(std::string url) {
     std::string mapData = fetchMapAPI(url);
