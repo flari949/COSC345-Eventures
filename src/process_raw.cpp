@@ -12,9 +12,6 @@ int process_json(std::string apiUrl, std::string username, std::string password)
     // Fetch data from the API
     std::string responseData = fetchDataFromAPI(apiUrl, username, password);
 
-    // Print the response data
-    // std::cout << "API Response:\n" << responseData << std::endl;
-
     // Parse the JSON string
     rapidjson::Document doc;
     doc.Parse(responseData.c_str());
@@ -29,28 +26,13 @@ int process_json(std::string apiUrl, std::string username, std::string password)
             if (itemArray.IsArray()) {
                 // Iterate over object instances
                 for (rapidjson::SizeType i = 0; i < itemArray.Size(); ++i) {
-                    const rapidjson::Value &item = itemArray[i];
-                    // Check item format
-                    if (item.IsObject()) {
-                        // URL data
-                        if (item.HasMember("url") && item["url"].IsString()) {
-                            const char *url = item["url"].GetString();
-                            std::cout << "Response url: " << url << std::endl;
-                        }
-                        // Address data
-                        if (item.HasMember("address") && item["address"].IsString()) {
-                            const char *url = item["address"].GetString();
-                            std::cout << "Response address: " << url << std::endl;
-                        }
-                        // Unique id data - Doesn't pay respect to endpoint
-                        if (item.HasMember("id") && item["id"].IsString()) {
-                            const char *url = item["id"].GetString();
-                            std::cout << "Response id: " << url << std::endl;
-                        }
-                        // Name data - Doesn't pay respect to endpoint
-                        if (item.HasMember("name") && item["name"].IsString()) {
-                            const char *url = item["name"].GetString();
-                            std::cout << "Response name: " << url << std::endl;
+                    const rapidjson::Value& item = itemArray[i];
+                    // Access object fields
+                    for (auto& member : item.GetObject()) {
+                        if (member.value.IsString()) {
+                            const char* value = member.value.GetString();
+                            // Individual event data iterated through; data field name be accessed with member.name.GetString()
+                            std::cout << value << std::endl;
                         }
                     }
                 }
