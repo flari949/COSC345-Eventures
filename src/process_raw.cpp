@@ -31,7 +31,7 @@ int process_json(std::string apiUrl, std::string username, std::string password)
                     for (auto& member : item.GetObject()) {
                         if (member.value.IsString()) {
                             const char* value = member.value.GetString();
-                            // Individual event data iterated through; data field name be accessed with member.name.GetString()
+                            // Data field name can be accessed with member.name.GetString()
                             std::cout << value << std::endl;
                         }
                     }

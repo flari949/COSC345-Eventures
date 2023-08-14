@@ -11,14 +11,15 @@
 int main() {
 
     // Parameterised search values to be passed to the data retrieval function
-    std::string search = "concert";
-    std::string fields = "name,url";
-    std::string coords = "";
-    std::string radius = "5";
-    std::string start_date = "";
-    std::string num_rows = "2";
+    std::string search = "concert"; // General search parameter
+    std::string fields = "name,url"; // Fields to retrieve
+    std::string coords = ""; // Format: latitude,longitude
+    std::string radius = "5"; // Distance in kilometers
+    std::string start_date = ""; // Defaults to now; format: YYYY-MM-DD
+    std::string num_rows = "2"; // Number of rows (items) to return
+    std::string row_offset = ""; // Row offset - for paging
 
-    std::string eventFindaUrl = event_url(search, fields, coords, radius, start_date, num_rows);
+    std::string eventFindaUrl = event_url(search, fields, coords, radius, start_date, num_rows, row_offset);
     
     // Need to add as env variables for security
     std::string username = "eventure";
