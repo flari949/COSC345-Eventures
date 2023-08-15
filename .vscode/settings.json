@@ -136,6 +136,8 @@
     "complex": "cpp",
     "ios": "cpp",
     "locale": "cpp",
-    "optional": "cpp"
+    "optional": "cpp",
+    "iomanip": "cpp",
+    "stack": "cpp"
   }
 }
