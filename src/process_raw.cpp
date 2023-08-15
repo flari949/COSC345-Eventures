@@ -11,10 +11,16 @@
 int process_json(std::string apiUrl, std::string username, std::string password) {
     // Fetch data from the API
     std::string responseData = fetchDataFromAPI(apiUrl, username, password);
-
     // Parse the JSON string
     rapidjson::Document doc;
     doc.Parse(responseData.c_str());
+
+    std::string name;
+    std::string url;
+    std::string description;
+    std::string location;
+    std::string start;
+    std::string end;
 
     // Check if parsing was successful
     if (!doc.HasParseError() && doc.IsObject()) {
@@ -32,7 +38,24 @@ int process_json(std::string apiUrl, std::string username, std::string password)
                         if (member.value.IsString()) {
                             const char* value = member.value.GetString();
                             // Individual event data iterated through; data field name be accessed with member.name.GetString()
-                            std::cout << value << std::endl;
+                            // std::cout << value << std::endl;
+                           if (std::strcmp(member.name.GetString(), "url") == 0) {
+                                // Handle URL
+                            } else if (std::strcmp(member.name.GetString(), "name") == 0) {
+                                std::cout << "\n " << std::endl;
+                                std::cout << value << std::endl;
+                                std::cout << "-------------------------" << std::endl;
+                                // Print out information about the event
+                            } else if (std::strcmp(member.name.GetString(), "datetime_start") == 0) {
+                                std::cout << "Starts: " << value << std::endl;
+                            } else if (std::strcmp(member.name.GetString(), "datetime_end") == 0) {
+                                std::cout << "Ends: " << value << std::endl;
+                            } else if (std::strcmp(member.name.GetString(), "location_summary") == 0) {
+                                std::cout << "Location: " << value << std::endl;
+                            } else if (std::strcmp(member.name.GetString(), "description") == 0) {
+                                std::cout << "Description: " << value << std::endl;
+                                std::cout << "-------------------------" << std::endl;
+                            }
                         }
                     }
                 }
@@ -65,6 +88,7 @@ int process_map(std::string url) {
     doc.parse<0>(&xmlDataCopy[0]); // Parse the XML data
 
     std::cout << "Parsed xml data" << std::endl;
+    // std::cout << mapData << std::endl;
 
     std::cout << "Name of my first node is: " << doc.first_node()->name() << std::endl;
 

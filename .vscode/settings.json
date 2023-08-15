@@ -136,6 +136,9 @@
     "complex": "cpp",
     "ios": "cpp",
     "locale": "cpp",
-    "optional": "cpp"
-  }
+    "optional": "cpp",
+    "iomanip": "cpp",
+    "stack": "cpp"
+  },
+  "liveServer.settings.port": 5501
 }
