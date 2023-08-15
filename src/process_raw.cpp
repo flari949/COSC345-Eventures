@@ -16,9 +16,6 @@ int process_json(std::string apiUrl, std::string username, std::string password)
     rapidjson::Document doc;
     doc.Parse(responseData.c_str());
 
-    std::string url;
-    int count = 1;
-
     // Check if parsing was successful
     if (!doc.HasParseError() && doc.IsObject()) {
         // Check response contains appropriate data
@@ -27,6 +24,8 @@ int process_json(std::string apiUrl, std::string username, std::string password)
             const rapidjson::Value &itemArray = lastMember->value;
             // Check item array format
             if (itemArray.IsArray()) {
+                std::string url;
+                int count = 1;
                 // Iterate over object instances
                 for (rapidjson::SizeType i = 0; i < itemArray.Size(); ++i) {
                     const rapidjson::Value& item = itemArray[i];

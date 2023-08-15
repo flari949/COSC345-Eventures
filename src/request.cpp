@@ -9,7 +9,7 @@
 */
 
 // Return coords (lat, long) for a given city
-std::string get_coords(std::string city) {
+std::string get_coords(std::string const city) {
     std::string coords = "";
     if(city == "Auckland") {
         coords = "-36.84846,174.76334";
