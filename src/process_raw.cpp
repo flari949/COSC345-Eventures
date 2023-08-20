@@ -62,12 +62,15 @@ int process_json(std::string apiUrl, std::string username, std::string password)
                 }
             } else {
                 std::cerr << "Object itemArray is not an array" << std::endl;
+                return 1;
             }
         } else {
             std::cerr << "Value not found or empty" << std::endl;
+            return 1;
         }
     } else {
         std::cerr << "Failed to parse JSON data" << std::endl;
+        return 1;
     }
 
     return 0;
