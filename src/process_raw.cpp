@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include "rapidjson/document.h"
-#include "rapidxml/rapidxml.hpp"
 #include "data_fetch.h"
 
 /*
@@ -72,30 +71,6 @@ int process_json(std::string apiUrl, std::string username, std::string password)
         std::cerr << "Failed to parse JSON data" << std::endl;
         return 1;
     }
-
-    return 0;
-}
-
-
-int process_map(std::string url) {
-    std::string mapData = fetchMapAPI(url);
-
-    // std::cout << "Map data: " << mapData << std::endl;
-
-    // Parse the XML data using RapidXML
-    rapidxml::xml_document<> doc;
-
-    std::string xmlDataCopy = mapData; // Copy the content
-    xmlDataCopy.push_back('\0');
-
-    // Parse the XML data
-    doc.parse<0>(&xmlDataCopy[0]); // Parse the XML data
-
-    std::cout << "Parsed xml data" << std::endl;
-
-    std::cout << "Name of my first node is: " << doc.first_node()->name() << std::endl;
-
-    // Accessing specific elements using RapidXML
 
     return 0;
 }
