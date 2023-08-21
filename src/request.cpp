@@ -39,7 +39,7 @@ int main() {
     std::string coords = get_coords(city); // Format: latitude,longitude
     std::string radius = "5"; // Distance in kilometers
     std::string start_date = ""; // Defaults to now; format: YYYY-MM-DD
-    std::string num_rows = "5"; // Number of rows (items) to return
+    std::string num_rows = "3"; // Number of rows (items) to return
     std::string row_offset = ""; // Row offset - for paging
 
     std::string eventFindaUrl = event_url(search, fields, coords, radius, start_date, num_rows, row_offset);
@@ -50,12 +50,6 @@ int main() {
 
     std::cout << "Here are the next " << num_rows << " events in " << city << ": " << std::endl;
     process_json(eventFindaUrl, username, password);
-
-    // LINZ API
-    std::string mapAPIKey = "c01h7e45g7q2sgxt0me0jsn3542";
-    std::string mapAPIUrl = "https://basemaps.linz.govt.nz/v1/tiles/aerial/NZTM2000Quad/WMTSCapabilities.xml?api=" + mapAPIKey;
-    printf("\n\nMap API url: %s\n", mapAPIUrl.c_str());
-    process_map(mapAPIUrl);
   
     return 0;
 }
