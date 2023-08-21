@@ -45,25 +45,3 @@ std::string fetchDataFromAPI(const std::string& apiUrl, const std::string& usern
 
     return response;
 }
-
-std::string fetchMapAPI(const std::string& url) {
-    CURL* curl = curl_easy_init();
-    if (!curl) {
-        std::cerr << "Error initializing libcurl." << std::endl;
-    }
-
-    std::string response;
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
-
-    CURLcode res = curl_easy_perform(curl);
-    if (res != CURLE_OK) {
-        std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
-        curl_easy_cleanup(curl);
-    }
-
-    curl_easy_cleanup(curl);
-    std::cout << "Curl connection to LINZ success" << std::endl;
-    return response; // Return success
-}

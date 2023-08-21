@@ -1,0 +1,8 @@
+# Ignore build artifacts
+build/*
+
+# Ignore user-specific settings
+*.pro.user
+
+# Ignore IDE-soecific settings
+.vscode/
