@@ -1,5 +1,6 @@
 [![C/C++ CI](https://github.com/flari949/COSC345-Eventures/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/flari949/COSC345-Eventures/actions/workflows/c-cpp.yml)
 [![Codacy Analysis CLI](https://github.com/flari949/COSC345-Eventures/actions/workflows/codacy-analysis.yaml/badge.svg)](https://github.com/flari949/COSC345-Eventures/actions/workflows/codacy-analysis.yaml)
+[![Documentation](https://codedocs.xyz/lukePiper03/COSC345-Eventures.svg)](https://codedocs.xyz/lukePiper03/COSC345-Eventures/)
 # COSC345-Project
 ## About The Project
 The Eventures application project is a group project for the COSC345 university paper at the University Of Otago. This project aims to design and create a useful application for the betterment of a user or society with the primary programming language as C/C++. The project requires the incorporation of two or more publicly available datasets (of different data domains) that can be combined to create additional meaning.
