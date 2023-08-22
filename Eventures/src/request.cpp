@@ -30,8 +30,8 @@ int main() {
     std::cout << "Welcome to Eventures " << std::endl;
     std::cout << "What city are you looking for upcoming events in (Auckland, Wellington, Christchurch, Dunedin): " << std::endl;
     // Scan for user input
-    std::string city;
-    std::cin >> city;
+    std::string city = "Auckland";
+//    std::cin >> city;
 
     // Parameterised search values to be passed to the data retrieval function
     std::string search = ""; // General search parameter

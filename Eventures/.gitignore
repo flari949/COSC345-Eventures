@@ -5,4 +5,4 @@ build/.qtc_clangd/**
 *.pro.user
 
 # Ignore IDE-specific settings
-.vscode/**
+.vscode/
