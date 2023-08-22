@@ -19,8 +19,10 @@ SOURCES += \
     src/request.cpp
 
 HEADERS += \
-    src \
-    src/mainwindow.h
+    src/data_fetch.h \
+    src/event_url.h \
+    src/mainwindow.h \
+    src/process_raw.h
 
 FORMS += \
     mainwindow.ui
