@@ -1,5 +1,5 @@
 # Ignore build artifacts
-build/.qtc_clangd/**
+.qtc_clangd/**
 
 # Ignore user-specific settings
 *.pro.user
