@@ -11,24 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Get all tags for correct version determination
-        working-directory:  ${{ github.workspace }}
-        run: |
-          git fetch --all --tags -f
-
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v2
-        with:
-          version:      5.15.2
-          host:         windows
-          target:       desktop
-          arch:         win64_msvc2019_64
-          setup-python: false
-
-      - name: Run qmake
-        run: qmake
+        uses: actions/checkout@v3
 
       - name: Build project
         run: make
