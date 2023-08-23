@@ -1,21 +1,23 @@
-name: C/C++ CI
+name: Build Project
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - qtci
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: make
-      run: make
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install qmake
+        run: sudo apt-get install qt5-qmake
+
+      - name: Run qmake
+        run: qmake
+
+      - name: Build project
+        run: make
