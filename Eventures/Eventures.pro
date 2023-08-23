@@ -1,6 +1,6 @@
 QT       += core gui
 
-DESTDIR = $$PWD/deploy
+#DESTDIR = $$PWD/deploy
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,7 +25,7 @@ HEADERS += \
     src/process_raw.h
 
 FORMS += \
-    mainwindow.ui
+    src/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
