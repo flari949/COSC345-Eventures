@@ -1,5 +1,5 @@
 [![C/C++ CI](https://github.com/flari949/COSC345-Eventures/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/flari949/COSC345-Eventures/actions/workflows/c-cpp.yml)
-[![Codacy Analysis CLI](https://github.com/flari949/COSC345-Eventures/actions/workflows/codacy-analysis.yaml/badge.svg)](https://github.com/flari949/COSC345-Eventures/actions/workflows/codacy-analysis.yaml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/198761ccc0644b26b6df4f6158db10e4)](https://app.codacy.com/gh/flari949/COSC345-Eventures/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Documentation](https://codedocs.xyz/lukePiper03/COSC345-Eventures.svg)](https://codedocs.xyz/lukePiper03/COSC345-Eventures/)
 # COSC345-Project
 ## About The Project
