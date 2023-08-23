@@ -15,5 +15,6 @@ jobs:
 
       - name: Build project
         run: |
+          cd Eventures
           ls
           make
