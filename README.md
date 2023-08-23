@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/58766d6f1e59451b8aa8c730e70ef3c3)](https://app.codacy.com/gh/flari949/COSC345-Eventures?utm_source=github.com&utm_medium=referral&utm_content=flari949/COSC345-Eventures&utm_campaign=Badge_Grade)
 [![C/C++ CI](https://github.com/flari949/COSC345-Eventures/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/flari949/COSC345-Eventures/actions/workflows/c-cpp.yml)
 [![Codacy Analysis CLI](https://github.com/flari949/COSC345-Eventures/actions/workflows/codacy-analysis.yaml/badge.svg)](https://github.com/flari949/COSC345-Eventures/actions/workflows/codacy-analysis.yaml)
 [![Documentation](https://codedocs.xyz/lukePiper03/COSC345-Eventures.svg)](https://codedocs.xyz/lukePiper03/COSC345-Eventures/)
