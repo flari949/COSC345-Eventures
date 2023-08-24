@@ -21,13 +21,13 @@ Eventures aims to combine [EventFinda](eventfinda.co.nz) event data along with [
   - MinGW: Version 11.2.0; System: 64-bit
 
 ## Prerequisites:
-Note: The listed software are required for updated build purposes only.
+Note: The listed software are required for compiling purposes only.
 Before compiling the project, make sure you have the following software installed and set up on your system:
 1. **Qt Creator - Open-Source:**
      - [Download Qt Online Installer](https://www.qt.io/download-open-source)
      - Open installation wizard and advance to installation folder
      - Select custom installation
-     - Select the most recent fill-release version of Qt, Qt Creator, CMake and Ninja, as well as the MinGW version corresponding user system.
+     - Select the most recent full-release version of Qt, Qt Creator, CMake and Ninja, as well as the MinGW version corresponding user system.
      - Progress through installation
 
 ## Compiling The Project
@@ -38,7 +38,7 @@ Before compiling the project, make sure you have the following software installe
      git clone https://github.com/flari949/COSC345-Eventures.git
      ```
 
- 2. **Compile The Project:**
+ 2. **Compile The Project: (Requires Qt Installation)**
     - **Compiling With Qt Creator:**
        - Open Qt Creator
        - Select: File/Open File or Project/ (Ctrl + O)
@@ -52,7 +52,7 @@ Before compiling the project, make sure you have the following software installe
        ```
        cd /path/to/project/Eventures
        ```
-       - Run QMake (*Requires Qt installation - Step can be skipped using existing Makefile*):
+       - Run QMake:
        ```
        qmake
        ```
@@ -61,12 +61,12 @@ Before compiling the project, make sure you have the following software installe
        make
        ```
       <hr>
-    - **Copy Qt Runtime Dependencies (Optional - Requires Qt Installation):**
+    - **Copy Qt Runtime Dependencies (Optional):**
        - Navigate to the executable directory:
        ```
        cd /path/to/project/Eventures/release 
        ```
-       - Generate runtime dependencies with Qt deploy executable:
+       - Generate runtime dependencies with Qt Windows deploy executable:
        ```
        /path/to/Qt/6.5.2/msvc2019_64/bin/windeploy.exe Eventures.exe
        ```
