@@ -80,7 +80,25 @@ jobs:
           name: ${{ env.ARTIFACT }}
           path: ${{ runner.temp }}\${{ env.ARTIFACT }}
               
-      - name: Upload coverage reports to Codecov
+      - name: Install gcovr
+        run: pip install gcovr
+        shell: cmd
+
+      - name: Compile tests with coverage flags
+        working-directory: ${{github.workspace}}/tests
+        run: |
+          g++ --coverage RecipeTests.cpp -c -O0 -g
+          g++ --coverage RecipeTests.o
+          a.exe
+          gcov -b -l -p -c *.gcno
+          gcovr --cobertura coverage.xml
+        shell: cmd
+
+      - name: Upload Report to Codecov
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          files: ./tests/coverage.xml
+          fail_ci_if_error: false
+          functionalities: fix
