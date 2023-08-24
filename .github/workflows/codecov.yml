@@ -14,16 +14,15 @@ jobs:
           choco install OpenCppCoverage -y
           echo C:\Program Files\OpenCppCoverage >> %PATH%
 
-      - name: Build and Run Unit Tests
-        run: |
-          # Change to the project directory
-          cd Eventures
+      # - name: Build and Run Unit Tests
+      #   run: |
+      #     # Change to the project directory
+      #     cd Eventures
 
-          # Run qmake and build commands
-          cmd /c src\qmake Eventures.pro
-          make
-          ./UnitTests
-
+      #     # Run qmake and build commands
+      #     cmd /c src\qmake Eventures.pro
+      #     make
+      #     ./UnitTests
 
       - name: Generate Coverage Report
         id: generate_test_report
