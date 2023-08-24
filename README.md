@@ -8,6 +8,8 @@ The Eventures application project is a group project for the COSC345 university 
 ### Eventures
 Eventures aims to combine [EventFinda](eventfinda.co.nz) event data along with [Land Information New Zealand](https://data.linz.govt.nz) geographical map data to superimpose event data on a visual interface for a unique and valuable exploration and discovery application.
 
+## Link to Questionnaire: https://www.surveymonkey.com/r/QFQFH97
+
 ## Project Setup and Installation Guide
 **Tested with Software Versions:**
   - C++ compiler supporting the C++17 standard
