@@ -18,11 +18,12 @@ jobs:
         run: |
           # Change to the project directory
           cd Eventures
-          
+
           # Run qmake and build commands
-          .\src\qmake Eventures.pro
+          cmd /c src\qmake Eventures.pro
           make
           ./UnitTests
+
 
       - name: Generate Coverage Report
         id: generate_test_report
