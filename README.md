@@ -19,7 +19,7 @@ Eventures aims to combine [EventFinda](eventfinda.co.nz) event data along with [
   - MinGW: Version 11.2.0; System: 64-bit
 
 ## Prerequisites:
-Note: The listed software are required for build purposes only.
+Note: The listed software are required for updated build purposes only.
 Before compiling the project, make sure you have the following software installed and set up on your system:
 1. **Qt Creator - Open-Source:**
      - [Download Qt Online Installer](https://www.qt.io/download-open-source)
@@ -28,46 +28,70 @@ Before compiling the project, make sure you have the following software installe
      - Select the most recent fill-release version of Qt, Qt Creator, CMake and Ninja, as well as the MinGW version corresponding user system.
      - Progress through installation
 
-## Compiling the Project
- 1. **Clone the Repository:**
+## Compiling The Project
+ 1. **Clone The Repository:**
      - Open a terminal and navigate to your preferred directory.
      - Clone the repository:
      ```
      git clone https://github.com/flari949/COSC345-Eventures.git
      ```
 
- 2. **Compile the Project:**
-     - Open Qt Creator
-     - Select: File/Open File or Project/ (Ctrl + O)
-     - Navigate to and select the Eventures.pro file within the repository
-     ```
-     Path/to/repository/COSC345-Project/Eventures/Eventures.pro
-     ```
-     - Select: Build/Build Project "Eventures" (Ctrl + B)
+ 2. **Compile The Project:**
+    - **Compiling With Qt Creator:**
+       - Open Qt Creator
+       - Select: File/Open File or Project/ (Ctrl + O)
+       - Navigate to and select the Eventures.pro file within the repository
+       ```
+       Path/to/repository/COSC345-Project/Eventures/Eventures.pro
+       ```
+       - Select: Build/Build Project "Eventures" (Ctrl + B)
+    - **Compiling With Command Line:**
+       - Navigate to the project .qmake.stash file location:
+       ```
+       cd /path/to/project/Eventures
+       ```
+       - Run QMake (*Requires Qt installation - Step can be skipped using existing Makefile*):
+       ```
+       qmake
+       ```
+       - Run Make:
+       ```
+       make
+       ```
+      <hr>
+    - **Copy Qt Runtime Dependencies (Optional - Requires Qt Installation):**
+       - Navigate to the executable directory:
+       ```
+       cd /path/to/project/Eventures/release 
+       ```
+       - Generate runtime dependencies with Qt deploy executable:
+       ```
+       /path/to/Qt/6.5.2/msvc2019_64/bin/windeploy.exe Eventures.exe
+       ```
 
-## Running the Project
- 1. **Run The Executable With Qt Creator:**
+## Running The Project
+ - **Running The Executable With Qt Creator:**
      - Ensure project is open in Qt creator (Ctrl + O and navigate to Eventures.pro)
      - Select: Build/Run (Ctrl + R)
- 2. **Run The Executable With Bash Command Line:**
-     1. For a new build:
-        - Navigate to the project runtime dependency folder:
-        ```
-        cd /path/to/project/Eventures/include/runtime_dependencies
-        ```
-        - Run the executable with respect to filepath:
-        ```
-        ../../deploy/Eventures.exe
-        ```
-     2. For an existing build:
-        - Navigate to the project deploy folder:
-        ```
-        cd /path/to/project/Eventures/deploy
-        ```
-        - Run the executable
-        ```
-        ./Eventures.exe
-        ```
+ - **Running The Executable With Command Line:**
+     - <ins>Without generating runtime dependencies:</ins>
+          - Navigate to the project runtime dependency folder:
+          ```
+          cd /path/to/project/Eventures/include/runtime_dependencies
+          ```
+          - Run the executable with respect to filepath:
+          ```
+          ../../release/Eventures.exe
+          ```
+     - <ins>Build with runtime dependencies in active folder:</ins>
+          - Navigate to the project release folder:
+          ```
+          cd /path/to/project/Eventures/release
+          ```
+          - Run the executable
+          ```
+          ./Eventures.exe
+          ```
 
 ## Target Audience
 This application is aimed at university students who don't have the time or the knowledge of local events required to attend. This application has the potential to benefit many more than just the target audience however this is the group the application will cater for the most. Notably, the application will also serve to be of great aid to event organisers who wish to spread knowledge and awareness of their events.
