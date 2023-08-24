@@ -17,10 +17,9 @@ jobs:
       - name: Build and Run Unit Tests
         run: |
           # Add commands to build your project and run unit tests
-          /Eventures/src/qmake Eventures.pro
+          Eventures\src\qmake Eventures.pro
           make
           ./UnitTests
-
 
       - name: Generate Coverage Report
         id: generate_test_report
