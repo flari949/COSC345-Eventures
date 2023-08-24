@@ -16,8 +16,11 @@ jobs:
 
       - name: Build and Run Unit Tests
         run: |
-          # Add commands to build your project and run unit tests
-          Eventures\src\qmake Eventures.pro
+          # Change to the project directory
+          cd Eventures
+          
+          # Run qmake and build commands
+          .\src\qmake Eventures.pro
           make
           ./UnitTests
 
