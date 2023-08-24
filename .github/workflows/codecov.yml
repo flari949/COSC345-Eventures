@@ -12,7 +12,7 @@ jobs:
         id: setup_opencppcoverage
         run: |
           choco install OpenCppCoverage -y
-          echo "C:\Program Files\OpenCppCoverage" >> $env:PATH
+          echo C:\Program Files\OpenCppCoverage >> %PATH%
 
       - name: Build and Run Unit Tests
         run: |
