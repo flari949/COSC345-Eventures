@@ -1,3 +1,18 @@
+/*!
+* @mainpage Eventures
+* @section intro_sec Introduction
+* Eventures is a C++ application that allows users to search for upcoming events in New Zealand cities.
+The application uses the Eventfinda API to retrieve event data. The application also uses the LINZ to display the location of events on a map GUI interface.
+* @section team_sec Team
+* Eventures was developed by a team of four students from the University of Otago as part of the COSC345 Software Engineering paper.
+* Luke Piper
+* Riley Flanagan
+* Eszter Scarlett Herbet
+* Kristie Koorts
+* @section target_sec Target User
+* The target user for Eventures is anyone who is looking for upcoming events in New Zealand cities. Mainly however we want to target students who are looking for events in their city.
+*/
+
 #include <iostream>
 #include <string>
 #include "event_url.h"
