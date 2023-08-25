@@ -53,7 +53,7 @@ Before compiling the project, make sure you have the following software installe
        ```
        cd /path/to/project/Eventures
        ```
-       - Run QMake:
+       - Run QMake - ^Ensure the QMake executable is in your path directory:
        ```
        qmake
        ```
