@@ -1,3 +1,8 @@
+/*!
+* @file mainwindow.h
+* @brief  mainwindow header file
+*/
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
