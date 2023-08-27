@@ -7,15 +7,15 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 HEADERS += \
-    src/data_fetch.h \
-    src/event_url.h \
-    src/process_raw.h
+    ../Eventures/src/data_fetch.h \
+    ../Eventures/src/event_url.h \
+    ../Eventures/src/process_raw.h
 
 SOURCES += \
-    src/data_fetch.cpp \
-    src/process_raw.cpp \
+    ../Eventures/src/data_fetch.cpp \
+    ../Eventures/src/process_raw.cpp \
     UnitTests.cpp \
-    src/event_url.cpp
+    ../Eventures/src/event_url.cpp
 
 LIBS += -L$$PWD/lib -llibcurl
 INCLUDEPATH += $$PWD/include
