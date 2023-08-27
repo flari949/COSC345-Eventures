@@ -38,9 +38,9 @@ There are two available methods for configuring and executing the project: throu
      - Select the most recent full-release version of Qt, Qt Creator, CMake and Ninja, as well as the MinGW version corresponding user system.
      - Progress through installation
 
- 2. **Clone The Repository:**
-     - Open a terminal and navigate to your preferred directory.
-     - Clone the repository:
+2. **Clone The Repository:**
+   - Open a terminal and navigate to your preferred directory.
+   - Clone the repository:
      ```
      git clone https://github.com/flari949/COSC345-Eventures.git
      ```
@@ -54,29 +54,29 @@ There are two available methods for configuring and executing the project: throu
        ```
        Path/to/repository/COSC345-Project/Eventures/Eventures.pro
        ```
-- Within the projects section of Qt Creator:
+  - Within the projects section of Qt Creator:
   - Change and ensure the build directory is set to `\Eventures`.
   - Configure shadow build settings.
   - Add copy file (for Debug build):
-    - Source: `...\include\runtime_dependencies\libcurl.dll`
-    - Target: `..\debug\libcurl.dll` 
-- Repeat the same process for the Release build.
-- Ensure the working directory for run is set to `\Eventures`.
-- Select: Build > Build Project "Eventures" (Ctrl + B).
+      - Source: `...\include\runtime_dependencies\libcurl.dll`
+      - Target: `..\debug\libcurl.dll` 
+  - Repeat the same process for the Release build.
+  - Ensure the working directory for run is set to `\Eventures`.
+  - Select: Build > Build Project "Eventures" (Ctrl + B).
 
 ### **Copy Qt Runtime Dependencies (Optional):**
-* Navigate to the executable directory:
+  * Navigate to the executable directory:
     ```
     cd /path/to/project/Eventures
     ```
-* Generate runtime dependencies with Qt Windows deploy executable:
+  * Generate runtime dependencies with Qt Windows deploy executable:
     ```
     /path/to/Qt/6.5.2/msvc2019_64/bin/windeployqt.exe Eventures.exe
     ```
 
 ### **Running The Executable**
-* Ensure project is open in Qt creator (Ctrl + O and navigate to Eventures.pro)
-* Select: Build/Run (Ctrl + R)
+  * Ensure project is open in Qt creator (Ctrl + O and navigate to Eventures.pro)
+  * Select: Build/Run (Ctrl + R)
 
 ## Project Setup with Command line
 ### **Compilation**
