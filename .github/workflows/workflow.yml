@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'main'
+    
+    tags:
+      - 'v*'
 
 defaults:
   run:
@@ -11,7 +14,7 @@ defaults:
 
 env:
   SOURCE_DIR:   ${{ github.workspace }}\Eventures
-  QT_VERSION:   5.15.2
+  QT_VERSION:   6.5.2
   ARTIFACT:     Eventures-build.zip
 
 jobs:
@@ -49,8 +52,12 @@ jobs:
         run:  |
               7z x jom.zip -ojom
               
-      - name: Create build directory
-        run:  mkdir ${{ runner.temp }}\build
+      - name: Create build directories
+        run:  |
+          mkdir ${{ runner.temp }}\Eventures
+          xcopy /E /I ${{ env.SOURCE_DIR }} ${{ runner.temp }}\Eventures
+          mkdir ${{ runner.temp }}\UnitTests
+          xcopy /E /I ${{ github.workspace }}\UnitTests ${{ runner.temp }}\UnitTests
 
       - name: Set up Visual Studio shell
         uses: egor-tensin/vs-shell@v2
@@ -58,21 +65,22 @@ jobs:
           arch: x64
 
       - name: Build
-        working-directory: ${{ runner.temp }}\build
+        working-directory: ${{ runner.temp }}\Eventures
         run:  |
-              qmake -r ${{ env.SOURCE_DIR }}\Eventures.pro
-              ${{ runner.temp }}\jom\jom -j2
-              cd release
-              windeployqt --qmldir ${{ env.SOURCE_DIR }} Eventures.exe --pdb --release --compiler-runtime
-              copy C:\Windows\System32\concrt140.dll . 
+              qmake Eventures.pro
+              ${{ runner.temp }}\jom\jom -f Makefile.Debug
+              cd debug
+              windeployqt Eventures.exe
+              copy C:\Windows\System32\concrt140.dll .
               copy C:\Windows\System32\vccorlib140.dll .
               copy C:\Windows\System32\msvcp140.dll .
               copy C:\Windows\System32\vcruntime140.dll .
+              copy ${{ env.SOURCE_DIR }}\include\runtime_dependencies\libcurl.dll .
               
       - name: Zip build
         working-directory: ${{ runner.temp }}
         run:  |
-              7z a Eventures-build.zip ${{ runner.temp }}\build\* -r
+              7z a Eventures-build.zip ${{ runner.temp }}\Eventures\* -r
               
       - name: Save build artifact
         uses: actions/upload-artifact@master
@@ -80,25 +88,30 @@ jobs:
           name: ${{ env.ARTIFACT }}
           path: ${{ runner.temp }}\${{ env.ARTIFACT }}
               
-      - name: Install gcovr
-        run: pip install gcovr
-        shell: cmd
-
-      - name: Compile tests with coverage flags
-        working-directory: ${{github.workspace}}/tests
+      - name: Setup OpenCppCoverage and add to PATH
+        id: setup_opencppcoverage
+        
         run: |
-          g++ --coverage RecipeTests.cpp -c -O0 -g
-          g++ --coverage RecipeTests.o
-          a.exe
-          gcov -b -l -p -c *.gcno
-          gcovr --cobertura coverage.xml
+          choco install OpenCppCoverage -y
+          echo "C:\\Program Files\\OpenCppCoverage" >> $env:PATH
+          
+      - name: Compile tests and generate code coverage
+        working-directory: ${{ runner.temp }}\UnitTests
         shell: cmd
-
+        run: |
+          qmake UnitTests.pro
+          ${{ runner.temp }}\jom\jom -j2
+          cd release
+          windeployqt UnitTests.exe
+          copy ${{ env.SOURCE_DIR }}\include\runtime_dependencies\libcurl.dll .
+          
+      - name: Generate Report
+        shell: cmd
+        run: |
+          "C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe" --sources ${{ runner.temp }}\Eventures --export_type cobertura:coverage.xml -- ${{ runner.temp }}\Eventures\debug\Eventures.exe
       - name: Upload Report to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v2
         with:
-          files: ./tests/coverage.xml
-          fail_ci_if_error: false
+          files: ./coverage.xml
+          fail_ci_if_error: true
           functionalities: fix
