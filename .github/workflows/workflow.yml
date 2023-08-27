@@ -112,7 +112,7 @@ jobs:
       - name: Generate Report
         shell: cmd
         run: |
-          "C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe" --excluded_modules ${{ runner.temp }}\Eventures\include --sources ${{ runner.temp }}\Eventures --export_type cobertura:coverage.xml -- ${{ runner.temp }}\Eventures\debug\Eventures.exe
+          "C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe" --sources ${{ runner.temp }}\Eventures --excluded_sources ${{ runner.temp }}\Eventures\include --export_type cobertura:coverage.xml -- ${{ runner.temp }}\Eventures\debug\Eventures.exe
       - name: Upload Report to Codecov
         uses: codecov/codecov-action@v2
         with:
