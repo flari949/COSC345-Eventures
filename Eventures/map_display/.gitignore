@@ -1,0 +1,6 @@
+sdk/
+debug/
+release/
+*.pro.user
+.qtc_clangd
+Make*
