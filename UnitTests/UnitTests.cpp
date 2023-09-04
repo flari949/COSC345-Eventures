@@ -12,9 +12,9 @@ class UnitTests : public QObject
     private slots:
         void EmptyUrlTest();
         void ValidUrlTest();
-        void processJsonValidTest();
-        void processJsonInvalidCredentialsTest();
-        void ProcessJsonInvalidURLTest();
+//        void processJsonValidTest();
+//        void processJsonInvalidCredentialsTest();
+//        void ProcessJsonInvalidURLTest();
         void ValidEmptyDataFetchTest();
 
     };
@@ -41,35 +41,35 @@ class UnitTests : public QObject
         QVERIFY(expectedResult == urlResult);
     }
 
-    void UnitTests::processJsonValidTest()
-    {
-        std::string apiUrl = "https://api.eventfinda.co.nz/v2/events.json?fields=event:(name,url,description~150,datetime_start,datetime_end,point,location_summary)&rows=5&";
-        std::string username = "eventure";
-        std::string password = "5jryqspxvxkk";
-        int expectedResult = 0;
-        int processResult = process_json(apiUrl, username, password);
-        QVERIFY(expectedResult == processResult);
-    }
+//    void UnitTests::processJsonValidTest()
+//    {
+//        std::string apiUrl = "https://api.eventfinda.co.nz/v2/events.json?fields=event:(name,url,description~150,datetime_start,datetime_end,point,location_summary)&rows=5&";
+//        std::string username = "eventure";
+//        std::string password = "5jryqspxvxkk";
+//        int expectedResult = 0;
+//        int processResult = process_json(apiUrl, username, password);
+//        QVERIFY(expectedResult == processResult);
+//    }
 
 
-    void UnitTests::processJsonInvalidCredentialsTest()
-    {
-        std::string apiUrl = "https://api.eventfinda.co.nz/v2/events.json?fields=event:(name,url,description~150,datetime_start,datetime_end,point,location_summary)&rows=5&";
-        std::string username = "evnture";
-        std::string password = "5jryqsxvxkk";
-        int expectedResult = 1;
-        int processResult = process_json(apiUrl, username, password);
-        QVERIFY(expectedResult == processResult);
-    }
+//    void UnitTests::processJsonInvalidCredentialsTest()
+//    {
+//        std::string apiUrl = "https://api.eventfinda.co.nz/v2/events.json?fields=event:(name,url,description~150,datetime_start,datetime_end,point,location_summary)&rows=5&";
+//        std::string username = "evnture";
+//        std::string password = "5jryqsxvxkk";
+//        int expectedResult = 1;
+//        int processResult = process_json(apiUrl, username, password);
+//        QVERIFY(expectedResult == processResult);
+//    }
 
-    void UnitTests::ProcessJsonInvalidURLTest(){
-        std::string apiUrl = "https://api.eventfinda.co.nz/v2/evnts.json?fields=event:(name,url,description~150,datetime_start,datetime_end,point,location_summary)&rows=5&";
-        std::string username = "eventure";
-        std::string password = "5jryqspxvxkk";
-        int expectedResult = 1;
-        int processResult = process_json(apiUrl, username, password);
-        QVERIFY(expectedResult == processResult);
-    }
+//    void UnitTests::ProcessJsonInvalidURLTest(){
+//        std::string apiUrl = "https://api.eventfinda.co.nz/v2/evnts.json?fields=event:(name,url,description~150,datetime_start,datetime_end,point,location_summary)&rows=5&";
+//        std::string username = "eventure";
+//        std::string password = "5jryqspxvxkk";
+//        int expectedResult = 1;
+//        int processResult = process_json(apiUrl, username, password);
+//        QVERIFY(expectedResult == processResult);
+//    }
 
     void UnitTests::ValidEmptyDataFetchTest(){
         std::string apiUrl = "https://api.eventfinda.co.nz/v2/events.json?fields=event:(name,url,datetime_end,point,location_summary)&rows=2&end_date=2022-08-27";

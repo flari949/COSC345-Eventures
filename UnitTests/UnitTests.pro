@@ -17,5 +17,5 @@ SOURCES += \
     UnitTests.cpp \
     ../Eventures/src/event_url.cpp
 
-LIBS += -L$$PWD/lib -llibcurl
-INCLUDEPATH += $$PWD/include
+LIBS += -L$$PWD/../Eventures/include/lib -llibcurl
+INCLUDEPATH += $$PWD/../Eventures/include

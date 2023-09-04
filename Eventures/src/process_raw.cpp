@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <stdexcept>
 #include "rapidjson/document.h"
 #include "data_fetch.h"
 
@@ -50,17 +51,14 @@ std::vector<std::map<std::string, std::string>> process_json(std::string apiUrl,
                 }
                 return results;
             } else {
-                std::cerr << "Object itemArray is not an array" << std::endl;
-//                return NULL;
+                throw std::exception("Object itemArray is not an array");
             }
         } else {
-            std::cerr << "Value not found or empty" << std::endl;
-//            return 1;
+            throw std::exception("Value not found or empty");
         }
     } else {
-        std::cerr << "Failed to parse JSON data" << std::endl;
-//        return 1;
+        throw std::exception("Failed to parse JSON data");
     }
+    throw std::exception("Failed to process JSON data");
 
-//    return 0;
 }
