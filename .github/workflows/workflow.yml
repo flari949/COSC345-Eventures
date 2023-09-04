@@ -58,10 +58,6 @@ jobs:
           xcopy /E /I ${{ env.SOURCE_DIR }} ${{ runner.temp }}\Eventures
           mkdir ${{ runner.temp }}\UnitTests
           xcopy /E /I ${{ github.workspace }}\UnitTests ${{ runner.temp }}\UnitTests
-          mkdir ${{ runner.temp }}\include
-          xcopy /E /I ${{ env.SOURCE_DIR }}\include ${{ runner.temp }}\UnitTests\include
-          mkdir ${{ runner.temp }}\lib
-          xcopy /E /I ${{ env.SOURCE_DIR }}\lib ${{ runner.temp }}\UnitTests\lib
 
       - name: Set up Visual Studio shell
         uses: egor-tensin/vs-shell@v2
@@ -69,12 +65,12 @@ jobs:
           arch: x64
 
       - name: Build
-        working-directory: ${{ runner.temp }}\Eventures
+        working-directory: ${{ runner.temp }}\Eventures\backend_build
         run:  |
-              qmake Eventures.pro
+              qmake BackendBuild.pro
               ${{ runner.temp }}\jom\jom -f Makefile.Debug
               cd debug
-              windeployqt Eventures.exe
+              windeployqt BackendBuild.exe
               copy C:\Windows\System32\concrt140.dll .
               copy C:\Windows\System32\vccorlib140.dll .
               copy C:\Windows\System32\msvcp140.dll .
@@ -112,7 +108,7 @@ jobs:
       - name: Generate Report
         shell: cmd
         run: |
-          "C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe" --sources ${{ runner.temp }}\Eventures --excluded_sources ${{ runner.temp }}\Eventures\include --export_type cobertura:coverage.xml -- ${{ runner.temp }}\Eventures\debug\Eventures.exe
+          "C:\Program Files\OpenCppCoverage\OpenCppCoverage.exe" --sources ${{ runner.temp }}\Eventures --excluded_sources ${{ runner.temp }}\Eventures\include --export_type cobertura:coverage.xml -- ${{ runner.temp }}\Eventures\backend_build\debug\BackendBuild.exe
       - name: Upload Report to Codecov
         uses: codecov/codecov-action@v2
         with:
