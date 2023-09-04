@@ -21,7 +21,7 @@ Link to Questionnaire: https://www.surveymonkey.com/r/QFQFH97
 - Qt Creator: Version 11.0.2
 - CMake: Version 3.24.2
 - Ninja: Version 1.10.2
-- MinGW: Version 11.2.0; System: 64-bit
+- MSVC: Version 2019; System: 64-bit
 
 
 ### Prerequisites
