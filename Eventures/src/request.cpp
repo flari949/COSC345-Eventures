@@ -18,9 +18,12 @@ The application uses the Eventfinda API to retrieve event data. The application 
 #include "event_url.h"
 #include "process_raw.h"
 
+#include <vector>
+#include <map>
+
 
 /*
-    Program to parameterise API url requests
+    Program to parameterise API url requests   ---------      OVERRIDE PROGRAM WITH MAP INTERFACE SEARCH QUERY VALUES ETC
 */
 
 // Return coords (lat, long) for a given city
@@ -40,13 +43,8 @@ std::string get_coords(std::string const city) {
     return coords;
 }
 
-int main() {
-    // User interface
-    std::cout << "Welcome to Eventures " << std::endl;
-    std::cout << "What city are you looking for upcoming events in (Auckland, Wellington, Christchurch, Dunedin): " << std::endl;
-    // Scan for user input
+int get_events() {
     std::string city = "Auckland";
-//    std::cin >> city;
 
     // Parameterised search values to be passed to the data retrieval function
     std::string search = ""; // General search parameter
@@ -54,7 +52,7 @@ int main() {
     std::string coords = get_coords(city); // Format: latitude,longitude
     std::string radius = "5"; // Distance in kilometers
     std::string start_date = ""; // Defaults to now; format: YYYY-MM-DD
-    std::string num_rows = "3"; // Number of rows (items) to return
+    std::string num_rows = "5"; // Number of rows (items) to return
     std::string row_offset = ""; // Row offset - for paging
 
     std::string eventFindaUrl = event_url(search, fields, coords, radius, start_date, num_rows, row_offset);
@@ -63,8 +61,12 @@ int main() {
     std::string username = "eventure";
     std::string password = "5jryqspxvxkk";
 
-    std::cout << "Here are the next " << num_rows << " events in " << city << ": " << std::endl;
-    process_json(eventFindaUrl, username, password);
-  
+    // Request data in map format for shared parallel retrieval
+    std::vector<std::map<std::string, std::string>> vectormaps = process_json(eventFindaUrl, username, password);
+    for (int x=0; x < vectormaps.size(); x++) {
+        std::map<std::string, std::string> event = vectormaps[x];
+        std::cout << vectormaps[x]["name"] << std::endl;
+    }
+
     return 0;
 }

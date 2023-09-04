@@ -1,8 +1,6 @@
-# Ignore build artifacts
-.qtc_clangd/**
-
-# Ignore user-specific settings
+sdk/
+debug/
+release/
 *.pro.user
-
-# Ignore IDE-specific settings
-.vscode/
+.qtc_clangd
+Make*

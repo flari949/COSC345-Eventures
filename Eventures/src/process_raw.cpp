@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <map>
 #include "rapidjson/document.h"
 #include "data_fetch.h"
 
@@ -7,7 +9,7 @@
     Functions to process API data
 */
 
-int process_json(std::string apiUrl, std::string username, std::string password) {
+std::vector<std::map<std::string, std::string>> process_json(std::string apiUrl, std::string username, std::string password) {
     // Fetch data from the API
     std::string responseData = fetchDataFromAPI(apiUrl, username, password);
 
@@ -23,54 +25,42 @@ int process_json(std::string apiUrl, std::string username, std::string password)
             const rapidjson::Value &itemArray = lastMember->value;
             // Check item array format
             if (itemArray.IsArray()) {
-                std::string url;
-                int count = 1;
+                // Create dynamic array for data containerisation
+                std::vector<std::map<std::string, std::string>> results;
                 // Iterate over object instances
                 for (rapidjson::SizeType i = 0; i < itemArray.Size(); ++i) {
                     const rapidjson::Value& item = itemArray[i];
                     // Access object fields
+                    std::map<std::string, std::string> event_values;
                     for (auto& member : item.GetObject()) {
                         if (member.value.IsString()) {
-                            const char* value = member.value.GetString();
-                            // Data field name can be accessed with member.name.GetString()
-
-                            // Parse and print out informaton on each event
-                            if (std::strcmp(member.name.GetString(), "name") == 0) {
-                                std::cout << "\n " << std::endl;
-                                std::cout << count << ". " << value << std::endl;
-                                count++;
-                                std::cout << "-------------------------" << std::endl;
-                                // Print out information about the event
-                            } else if (std::strcmp(member.name.GetString(), "datetime_start") == 0) {
-                                std::cout << "Starts: " << value << std::endl;
-                            } else if (std::strcmp(member.name.GetString(), "datetime_end") == 0) {
-                                std::cout << "Ends: " << value << std::endl;
-                            } else if (std::strcmp(member.name.GetString(), "location_summary") == 0) {
-                                std::cout << "Location: " << value << std::endl;
-                                if(url != "") {
-                                    std::cout << "URL: " << url << std::endl;
+                            event_values[member.name.GetString()] = member.value.GetString();
+                        }
+                        // Check if field contains multiple values
+                        else if (member.value.IsObject()) {
+                            // Check for coordinate values
+                            if (member.value.HasMember("lat") && member.value.HasMember("lng")) {
+                                for (auto& val : member.value.GetObject()) {
+                                    event_values[val.name.GetString()] = std::to_string(val.value.GetFloat());
                                 }
-                            } else if (std::strcmp(member.name.GetString(), "description") == 0) {
-                                std::cout << "Description: " << value << std::endl;
-                                std::cout << "-------------------------" << std::endl;
-                            } else if (std::strcmp(member.name.GetString(), "url") == 0) {
-                                url = value;
                             }
                         }
                     }
+                    results.push_back(event_values);
                 }
+                return results;
             } else {
                 std::cerr << "Object itemArray is not an array" << std::endl;
-                return 1;
+//                return NULL;
             }
         } else {
             std::cerr << "Value not found or empty" << std::endl;
-            return 1;
+//            return 1;
         }
     } else {
         std::cerr << "Failed to parse JSON data" << std::endl;
-        return 1;
+//        return 1;
     }
 
-    return 0;
+//    return 0;
 }
