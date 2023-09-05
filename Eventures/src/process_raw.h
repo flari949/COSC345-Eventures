@@ -18,6 +18,5 @@
 * @return  0 if success, 1 if failure
 */
 std::vector<std::map<std::string, std::string>> process_json(std::string apiUrl, std::string username, std::string password);
-//int process_map(std::string mapAPIUrl);
 
 #endif

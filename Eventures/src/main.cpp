@@ -16,6 +16,11 @@
 #include "ArcGISRuntimeEnvironment.h"
 #include "MapQuickView.h"
 
+#include <vector>
+#include <map>
+#include <string>
+#include <iostream>
+
 #include <QDir>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -59,7 +64,14 @@ int main(int argc, char *argv[])
     // Set the source
     engine.load(QUrl("qrc:/qml/main.qml"));
 
-    get_events();
+    // Get event array                                  <------------------------ SET FUNCTION ARGS (for get_events)
+    std::vector<std::map<std::string, std::string>> eventarr = get_events();
+
+    // Access event data --> Fields available as in URL request
+    for (int x=0; x < eventarr.size(); x++) {
+        std::map<std::string, std::string> event = eventarr[x];
+        std::cout << eventarr[x]["name"] << " : " << eventarr[x]["lat"] << ", " << eventarr[x]["lng"] << std::endl;
+    }
 
     return app.exec();
 }

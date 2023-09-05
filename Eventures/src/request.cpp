@@ -23,7 +23,7 @@ The application uses the Eventfinda API to retrieve event data. The application 
 
 
 /*
-    Program to parameterise API url requests   ---------      OVERRIDE PROGRAM WITH MAP INTERFACE SEARCH QUERY VALUES ETC
+    Program to parameterise API url requests
 */
 
 // Return coords (lat, long) for a given city
@@ -43,7 +43,7 @@ std::string get_coords(std::string const city) {
     return coords;
 }
 
-int get_events() {
+std::vector<std::map<std::string, std::string>> get_events() {
     std::string city = "Auckland";
 
     // Parameterised search values to be passed to the data retrieval function
@@ -63,10 +63,6 @@ int get_events() {
 
     // Request data in map format for shared parallel retrieval
     std::vector<std::map<std::string, std::string>> vectormaps = process_json(eventFindaUrl, username, password);
-    for (int x=0; x < vectormaps.size(); x++) {
-        std::map<std::string, std::string> event = vectormaps[x];
-        std::cout << vectormaps[x]["name"] << std::endl;
-    }
 
-    return 0;
+    return vectormaps;
 }
