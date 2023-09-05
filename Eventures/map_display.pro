@@ -60,3 +60,13 @@ RESOURCES += \
 LIBS += \
     Ole32.lib \
     -L$$PWD/include/lib -llibcurl
+
+#-------------------------------------------------------------------------------
+
+win32 {
+    include (Win/Win.pri)
+}
+
+macx {
+    include (Mac/Mac.pri)
+}

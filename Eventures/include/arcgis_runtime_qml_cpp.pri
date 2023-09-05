@@ -32,6 +32,20 @@ equals(QT_MAJOR_VERSION, 6) {
 
 QT += gui network positioning sensors multimedia websockets
 
+macx: {
+    ARCH = $$QMAKE_HOST.arch
+    !equals(QMAKE_APPLE_DEVICE_ARCHS, ""):{
+        ARCH = $$QMAKE_APPLE_DEVICE_ARCHS
+    }
+    message("ArcGIS Maps SDK for Qt - Mac ("$$ARCH")")
+    PLATFORM = "macOS"
+}
+
+unix:!macx:!android:!ios {
+    message("ArcGIS Maps SDK for Qt - Linux ("$$QT_ARCH")")
+    PLATFORM = "linux"
+}
+
 win32 {
     message("ArcGIS Maps SDK for Qt - Windows ("$$QT_ARCH")")
     PLATFORM = "windows"
@@ -43,22 +57,82 @@ message("Version " $$ESRIRUNTIME_QT_VERSION)
 # Compiler options
 #-------------------------------------------------
 
-SDK_INSTALL_DIR = "C:/Program Files/ArcGIS SDKs/Qt200.2.0/sdk"
+SDK_INSTALL_DIR = "C:/Program Files/ArcGIS SDKs/Qt200.2.0"
 ARCGIS_RUNTIME_IMPORT_PATH = ""
+
+unix:!macx:!android:!ios {
+    eval(QMAKE_TARGET.arch = ""):{
+        # QMAKE_TARGET.arch isn't set properly on Linux.
+        # If we get a bitset-specific mkspec, use it
+        linux-g++-32:QMAKE_TARGET.arch = x86
+        linux-g++-64:QMAKE_TARGET.arch = x86_64
+
+        # If we get a generic one, then determine the
+        # arch of the machine and assign
+        linux-g++:{
+            ARCH = $$system(uname -m) # i686 or x86_64
+            contains(ARCH, x86_64):{
+                QMAKE_TARGET.arch = x86_64
+            }
+            else{
+                QMAKE_TARGET.arch = x86
+            }
+        } # linux-g++
+    } # eval
+} # unix
+
+macx {
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 11.0
+
+    QMAKE_POST_LINK  += install_name_tool -change libEsriCommonQt.dylib \"$${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/universal/lib/libEsriCommonQt.dylib\" $${TARGET}.app/Contents/MacOS/$${TARGET} $$escape_expand(\n\t)
+    QMAKE_POST_LINK  += install_name_tool -change libruntimecore.dylib \"$${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/universal/lib/libruntimecore.dylib\" $${TARGET}.app/Contents/MacOS/$${TARGET} $$escape_expand(\n\t)
+}
 
 #-------------------------------------------------
 #  Headers
 #-------------------------------------------------
 
-INCLUDEPATH += "$${SDK_INSTALL_DIR}/include"
+INCLUDEPATH += "$${SDK_INSTALL_DIR}/sdk/include"
 
 !macx:!android:!ios {
-  INCLUDEPATH += "$${SDK_INSTALL_DIR}/include/LocalServer"
+  INCLUDEPATH += "$${SDK_INSTALL_DIR}/sdk/include/LocalServer"
 }
 
 #-------------------------------------------------
 #  Libraries
 #-------------------------------------------------
+
+contains(QMAKE_TARGET.arch, x86):{
+  unix:!macx:!android:!ios {
+    LIBS += \
+      -L$${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/x86/lib \
+      -lEsriRuntimeQt \
+      -lEsriCommonQt \
+      -lruntimecore
+
+    ARCGIS_RUNTIME_IMPORT_PATH = $${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/x86/qml
+  }
+}
+else {
+  unix:!macx:!android:!ios {
+    LIBS += \
+      -L$${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/x64/lib \
+      -lEsriRuntimeQt \
+      -lEsriCommonQt \
+      -lruntimecore
+
+    ARCGIS_RUNTIME_IMPORT_PATH = $${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/x64/qml
+  }
+}
+
+macx:{
+  LIBS += \
+    -L$${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/universal/lib \
+    -lEsriCommonQt \
+    -lEsriRuntimeQt
+
+  ARCGIS_RUNTIME_IMPORT_PATH = $${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/universal/qml
+}
 
 win32:{
   QMAKE_CXXFLAGS_WARN_ON -= -w44996
@@ -70,17 +144,17 @@ win32:{
 
   contains(QT_ARCH, x86_64):{
     LIBS +=  \
-      -L$${SDK_INSTALL_DIR}/$${PLATFORM}/x64/bin \
-      -L$${SDK_INSTALL_DIR}/$${PLATFORM}/x64/lib
+      -L$${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/x64/bin \
+      -L$${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/x64/lib
 
-    ARCGIS_RUNTIME_IMPORT_PATH = $${SDK_INSTALL_DIR}/$${PLATFORM}/x64/qml
+    ARCGIS_RUNTIME_IMPORT_PATH = $${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/x64/qml
   }
   else {
     LIBS +=  \
-      -L$${SDK_INSTALL_DIR}/$${PLATFORM}/x86/bin \
-      -L$${SDK_INSTALL_DIR}/$${PLATFORM}/x86/lib
+      -L$${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/x86/bin \
+      -L$${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/x86/lib
 
-    ARCGIS_RUNTIME_IMPORT_PATH = $${SDK_INSTALL_DIR}/$${PLATFORM}/x86/qml
+    ARCGIS_RUNTIME_IMPORT_PATH = $${SDK_INSTALL_DIR}/sdk/$${PLATFORM}/x86/qml
   }
 
   CONFIG(debug, debug|release) {
@@ -107,6 +181,19 @@ QMLPATHS += $${ARCGIS_RUNTIME_IMPORT_PATH}
 # The following remains in place to support upgrading older templates to
 # newer versions of Runtime. New templates will use the above macros instead
 #----------------------------------------------------------------------------
+
+# DEFINES
+unix:!macx:!ios {
+    contains(QMAKE_HOST.os, Linux):{
+      # on some linux platforms the string 'linux' is replaced with 1
+      # temporarily replace it with ARCGISRUNTIME_SDK_LINUX_REPLACEMENT
+      LINUX_PLATFORM_REPLACEMENT = ARCGISRUNTIME_SDK_LINUX_REPLACEMENT
+
+      ARCGIS_RUNTIME_IMPORT_PATH = $$replace(ARCGIS_RUNTIME_IMPORT_PATH, linux, $$LINUX_PLATFORM_REPLACEMENT)
+
+      DEFINES += LINUX_PLATFORM_REPLACEMENT=$$LINUX_PLATFORM_REPLACEMENT
+    }
+}
 
 # Set ArcGIS Runtime QML API Path
 DEFINES += ARCGIS_RUNTIME_IMPORT_PATH=\"$$ARCGIS_RUNTIME_IMPORT_PATH\"
