@@ -67,10 +67,11 @@ int main(int argc, char *argv[])
     // Get event array                                  <------------------------ SET FUNCTION ARGS (for get_events)
     std::vector<std::map<std::string, std::string>> eventarr = get_events();
 
-    // Access event data --> Fields available as in URL request
+    // Access event data --> Fields available as in URL request - fields parameter
+    std::cout << "   - Name -   :   - Latitude -   :   - Longitude -" << std::endl;
     for (int x=0; x < eventarr.size(); x++) {
         std::map<std::string, std::string> event = eventarr[x];
-        std::cout << eventarr[x]["name"] << " : " << eventarr[x]["lat"] << ", " << eventarr[x]["lng"] << std::endl;
+        std::cout << eventarr[x]["name"] << " : " << eventarr[x]["lat"] << " : " << eventarr[x]["lng"] << std::endl;
     }
 
     return app.exec();
