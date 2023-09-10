@@ -16,6 +16,9 @@
 namespace Esri::ArcGISRuntime {
 class Map;
 class MapQuickView;
+
+class GraphicsOverlay;
+
 } // namespace Esri::ArcGISRuntime
 
 #include <QObject>
@@ -32,14 +35,18 @@ public:
     explicit Map_display(QObject* parent = nullptr);
     ~Map_display() override;
 
+
+
 signals:
     void mapViewChanged();
+
 
 private:
     Esri::ArcGISRuntime::MapQuickView* mapView() const;
     void setMapView(Esri::ArcGISRuntime::MapQuickView* mapView);
-
     void setupViewpoint();
+
+    void createGraphics(Esri::ArcGISRuntime::GraphicsOverlay* overlay);
 
     Esri::ArcGISRuntime::Map* m_map = nullptr;
     Esri::ArcGISRuntime::MapQuickView* m_mapView = nullptr;

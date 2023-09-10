@@ -16,7 +16,7 @@ TEMPLATE = app
 CONFIG += c++17
 
 # additional modules are pulled in via arcgisruntime.pri
-QT += qml quick
+QT += qml quick quickcontrols2
 
 TARGET = map_display
 
@@ -60,4 +60,6 @@ RESOURCES += \
 LIBS += \
     Ole32.lib \
     -L$$PWD/include/lib -llibcurl
+
+FORMS +=
 

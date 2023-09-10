@@ -1,6 +1,24 @@
 <RCC>
     <qresource prefix="/qml">
         <file>main.qml</file>
-		<file>Map_displayForm.qml</file>
+        <file>Map_displayForm.qml</file>
+        <file>images/calendar.png</file>
+        <file>images/calendar1.png</file>
+        <file>images/heart.png</file>
+        <file>images/home.png</file>
+        <file>images/minus.png</file>
+        <file>images/plus.png</file>
+        <file>ZoomButtons.qml</file>
+        <file>images/idea7.png</file>
+        <file>images/idea8.png</file>
+        <file>images/idea9.png</file>
+        <file>images/marker1.png</file>
+        <file>images/marker2.png</file>
+        <file>images/marker3.png</file>
+        <file>images/marker4.png</file>
+        <file>images/marker5.png</file>
+        <file>images/marker6.png</file>
+        <file>CustomMenuItem.qml</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>
