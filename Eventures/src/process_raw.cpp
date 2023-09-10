@@ -51,14 +51,18 @@ std::vector<std::map<std::string, std::string>> process_json(std::string apiUrl,
                 }
                 return results;
             } else {
-                throw std::exception("Object itemArray is not an array");
+                std::cerr << "Object itemArray is not an array" << std::endl;
+                abort();
             }
         } else {
-            throw std::exception("Value not found or empty");
+            // Return blank object on empty or not found result
+            std::cout << "Value not found or empty" << std::endl;
+            return std::vector<std::map<std::string, std::string>>();
         }
     } else {
-        throw std::exception("Failed to parse JSON data");
+        std::cerr << "Failed to parse JSON data" << std::endl;
+        abort();
     }
-    throw std::exception("Failed to process JSON data");
-
+    std::cerr << "Failed to process JSON data" << std::endl;
+    abort();
 }

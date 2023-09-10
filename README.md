@@ -122,7 +122,7 @@ There are two available methods for configuring and executing the project: throu
     ```
 ## Discord
 Join our Discord community to connect with other developers, ask questions, and get help with the project:
-[Join Eventures Discord](https://discord.gg/8FX4zFQA)
+[Join Eventures Discord](https://discord.gg/YpR748V89w)
 
 ## Artifact Generation
 The project's artifact generation is managed through the workflow defined in our GitHub Actions setup. Every time there's a new commit or pull request, the workflow automatically generates the necessary artifacts.
