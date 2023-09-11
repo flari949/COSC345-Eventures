@@ -160,6 +160,10 @@ Makefile: map_display.pro C:\Qt\6.5.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf 
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_help_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_httpserver.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_httpserver_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_insighttracker.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_insighttracker_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_insighttrackerqml.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_insighttrackerqml_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_jpeg_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_jsonrpc_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_labsanimation.pri \
@@ -231,11 +235,34 @@ Makefile: map_display.pro C:\Qt\6.5.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf 
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3d.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3d_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dassetimport.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dassetutils.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dassetutils_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3deffects.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3deffects_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dglslparser_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dhelpers.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dhelpers_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dhelpersimpl.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dhelpersimpl_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3diblbaker.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3diblbaker_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dparticleeffects.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dparticleeffects_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dparticles.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dparticles_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dphysics.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dphysics_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dphysicshelpers.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dphysicshelpers_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3druntimerender.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dspatialaudio_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dutils.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dutils_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri \
@@ -278,6 +305,8 @@ Makefile: map_display.pro C:\Qt\6.5.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf 
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_serialbus_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_serialport.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_serialport_private.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_shadertools.pri \
+		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_shadertools_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_spatialaudio.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_spatialaudio_private.pri \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_sql.pri \
@@ -353,6 +382,7 @@ Makefile: map_display.pro C:\Qt\6.5.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf 
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\features\yacc.prf \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\features\lex.prf \
 		map_display.pro \
+		C:\Qt\6.5.2\msvc2019_64\lib\Qt6QuickControls2.prl \
 		C:\Qt\6.5.2\msvc2019_64\lib\Qt6Quick.prl \
 		C:\Qt\6.5.2\msvc2019_64\lib\Qt6OpenGL.prl \
 		C:\Qt\6.5.2\msvc2019_64\lib\Qt6Multimedia.prl \
@@ -367,6 +397,7 @@ Makefile: map_display.pro C:\Qt\6.5.2\msvc2019_64\mkspecs\win32-msvc\qmake.conf 
 		C:\Qt\6.5.2\msvc2019_64\lib\Qt6EntryPoint.prl \
 		C:\Qt\6.5.2\msvc2019_64\mkspecs\features\build_pass.prf \
 		qml\qml.qrc \
+		C:\Qt\6.5.2\msvc2019_64\lib\Qt6QuickControls2d.prl \
 		C:\Qt\6.5.2\msvc2019_64\lib\Qt6Quickd.prl \
 		C:\Qt\6.5.2\msvc2019_64\lib\Qt6OpenGLd.prl \
 		C:\Qt\6.5.2\msvc2019_64\lib\Qt6Multimediad.prl \
@@ -456,6 +487,10 @@ C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_help.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_help_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_httpserver.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_httpserver_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_insighttracker.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_insighttracker_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_insighttrackerqml.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_insighttrackerqml_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_jpeg_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_jsonrpc_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_labsanimation.pri:
@@ -527,11 +562,34 @@ C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_qmlxmllistmodel.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_qmlxmllistmodel_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3d.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3d_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dassetimport.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dassetutils.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dassetutils_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3deffects.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3deffects_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dglslparser_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dhelpers.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dhelpers_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dhelpersimpl.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dhelpersimpl_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3diblbaker.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3diblbaker_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dparticleeffects.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dparticleeffects_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dparticles.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dparticles_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dphysics.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dphysics_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dphysicshelpers.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dphysicshelpers_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3druntimerender.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dspatialaudio_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dutils.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick3dutils_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quick_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri:
@@ -574,6 +632,8 @@ C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_serialbus.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_serialbus_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_serialport.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_serialport_private.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_shadertools.pri:
+C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_shadertools_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_spatialaudio.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_spatialaudio_private.pri:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\modules\qt_lib_sql.pri:
@@ -649,6 +709,7 @@ C:\Qt\6.5.2\msvc2019_64\mkspecs\features\exceptions.prf:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\features\yacc.prf:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\features\lex.prf:
 map_display.pro:
+C:\Qt\6.5.2\msvc2019_64\lib\Qt6QuickControls2.prl:
 C:\Qt\6.5.2\msvc2019_64\lib\Qt6Quick.prl:
 C:\Qt\6.5.2\msvc2019_64\lib\Qt6OpenGL.prl:
 C:\Qt\6.5.2\msvc2019_64\lib\Qt6Multimedia.prl:
@@ -663,6 +724,7 @@ C:\Qt\6.5.2\msvc2019_64\lib\Qt6Core.prl:
 C:\Qt\6.5.2\msvc2019_64\lib\Qt6EntryPoint.prl:
 C:\Qt\6.5.2\msvc2019_64\mkspecs\features\build_pass.prf:
 qml\qml.qrc:
+C:\Qt\6.5.2\msvc2019_64\lib\Qt6QuickControls2d.prl:
 C:\Qt\6.5.2\msvc2019_64\lib\Qt6Quickd.prl:
 C:\Qt\6.5.2\msvc2019_64\lib\Qt6OpenGLd.prl:
 C:\Qt\6.5.2\msvc2019_64\lib\Qt6Multimediad.prl:
