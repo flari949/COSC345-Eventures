@@ -11,6 +11,7 @@
 //
 
 #include "Map_display.h"
+#include <LicenseResult.h>
 
 #include "ArcGISRuntimeEnvironment.h"
 #include "MapQuickView.h"
@@ -44,9 +45,8 @@ int main(int argc, char *argv[])
 
     // Production deployment of applications built with ArcGIS Maps SDK requires you to
     // license ArcGIS Maps SDK functionality. For more information see
-    // https://links.esri.com/arcgis-runtime-license-and-deploy.        <----------------------------- ADD REFERENCE IN README AS WELL
-
-    // ArcGISRuntimeEnvironment::setLicense("Place license string in here");
+    // https://links.esri.com/arcgis-runtime-license-and-deploy.
+    LicenseResult result = ArcGISRuntimeEnvironment::setLicense("runtimelite,1000,rud3408966572,none,ZZ0RJAY3FLGL2B3TR178");
 
     // Register the map view for QML
     qmlRegisterType<MapQuickView>("Esri.map_display", 1, 0, "MapView");
