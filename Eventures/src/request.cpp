@@ -13,7 +13,6 @@ The application uses the Eventfinda API to retrieve event data. The application 
 * The target user for Eventures is anyone who is looking for upcoming events in New Zealand cities. Mainly however we want to target students who are looking for events in their city.
 */
 
-#include <iostream>
 #include <string>
 #include "event_url.h"
 #include "process_raw.h"
@@ -21,41 +20,21 @@ The application uses the Eventfinda API to retrieve event data. The application 
 #include <vector>
 #include <map>
 
-
 /*
-    Program to parameterise API url requests
+    Program to retrieve EventFinda API responses
 */
 
-// Return coords (lat, long) for a given city
-std::string get_coords(std::string const city) {
-    std::string coords = "";
-    if(city == "Auckland") {
-        coords = "-36.84846,174.76334";
-    } else if(city == "Wellington") {
-        coords = "-41.28664,174.77557";
-    } else if(city == "Christchurch") {
-        coords = "-43.5309,172.6365";
-    } else if(city == "Dunedin") {
-        coords = "-45.87416,170.50361";
-    } else {
-        std::cout << "Sorry, we don't have any events listed for that city. Please try again." << std::endl;
-    }
-    return coords;
-}
+std::vector<std::map<std::string, std::string>> get_events(
+    std::string search,
+    std::string fields,
+    std::string coords,
+    std::string radius,
+    std::string start_date,
+    std::string end_date,
+    std::string num_rows,
+    std::string row_offset) {
 
-std::vector<std::map<std::string, std::string>> get_events() {
-    std::string city = "Auckland";
-
-    // Parameterised search values to be passed to the data retrieval function
-    std::string search = ""; // General search parameter
-    std::string fields = "name,url,description~150,datetime_start,datetime_end,point,location_summary"; // Fields to retrieve
-    std::string coords = get_coords(city); // Format: latitude,longitude
-    std::string radius = "5"; // Distance in kilometers
-    std::string start_date = ""; // Defaults to now; format: YYYY-MM-DD
-    std::string num_rows = "5"; // Number of rows (items) to return
-    std::string row_offset = ""; // Row offset - for paging
-
-    std::string eventFindaUrl = event_url(search, fields, coords, radius, start_date, num_rows, row_offset);
+    std::string eventFindaUrl = event_url(search, fields, coords, radius, start_date, end_date, num_rows, row_offset);
     
     // Need to add as env variables for security
     std::string username = "eventure";

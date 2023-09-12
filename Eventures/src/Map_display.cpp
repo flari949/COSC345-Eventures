@@ -25,21 +25,21 @@
 #include "GraphicListModel.h"
 #include "GraphicsOverlay.h"
 #include "GraphicsOverlayListModel.h"
-#include "PolylineBuilder.h"
-#include "PolygonBuilder.h"
-#include "SimpleFillSymbol.h"
-#include "SimpleLineSymbol.h"
 #include "PictureMarkerSymbol.h"
-#include "SimpleMarkerSymbol.h"
-#include "SymbolTypes.h"
-#include "GeometryEngine.h"
+
+//#include "PolylineBuilder.h"
+//#include "PolygonBuilder.h"
+//#include "SimpleFillSymbol.h"
+//#include "SimpleLineSymbol.h"
+//#include "SimpleMarkerSymbol.h"
+//#include "SymbolTypes.h"
+//#include "GeometryEngine.h"
 
 #include "request.h"
 #include <vector>
 #include <map>
 #include <string>
 #include <iostream>
-
 
 using namespace Esri::ArcGISRuntime;
 
@@ -61,7 +61,7 @@ MapQuickView* Map_display::mapView() const
 
 void Map_display::setupViewpoint()
 {
-    // Center the map on Wellington, New Zealand
+    // Center the map on Auckland, New Zealand
     const Point center(174.76516172389003, -36.87343058062796, SpatialReference::wgs84());
     const Viewpoint viewpoint(center, 50000.0); // You can adjust the scale as needed
     m_mapView->setViewpoint(viewpoint);
@@ -69,27 +69,46 @@ void Map_display::setupViewpoint()
 
 void Map_display::createGraphics(GraphicsOverlay *overlay)
 {
+    // RETRIEVING EVENT DATA WITH SET PARAMS TO BE IN DIFFERENT FUNCTION
+
+    // Parameterised search values to be passed to the data retrieval function
+    std::string search = "Dunedin"; // General search parameter
+    std::string fields = "name,url,description~150,datetime_start,datetime_end,point,location_summary"; // Fields to retrieve
+    std::string coords = "-36.84846,174.76334"; // Format: latitude,longitude --> Default : Auckland
+    std::string radius = "5000"; // Distance in kilometers -> requires coordinate param be set
+    std::string start_date = ""; // Defaults to now; format : YYYY-MM-DD
+    std::string end_date = ""; // Defaults to 3 years from now; format : YYYY-MM-DD
+    std::string num_rows = "10"; // Number of rows (items) to return
+    std::string row_offset = ""; // Row offset - for paging
+
     // Get event array
-    std::vector<std::map<std::string, std::string>> eventarr = get_events();
+    std::vector<std::map<std::string, std::string>> eventarr = get_events(
+        search, fields, coords, radius, start_date, end_date, num_rows, row_offset);
 
-    for (const std::map<std::string, std::string>& event : eventarr) {
-        auto latIter = event.find("lat");
-        auto lngIter = event.find("lng");
+    // Get unique location coordinates & repitition count - prevents layering markers
+    std::map<std::pair<std::string, std::string>, int> points;
+    for (int itr=0; itr < eventarr.size(); itr++) {
+        // Count point occurances - can truncate coordinate values for generalisation
+        points[std::make_pair(eventarr[itr]["lat"], eventarr[itr]["lng"])] += 1;
+    }
 
-        if (latIter != event.end() && lngIter != event.end()) {
-            double lat = std::stod(latIter->second);
-            double lng = std::stod(lngIter->second);
+    for (auto const& location : points) {
+        double lat = std::stod(location.first.first);
+        double lng = std::stod(location.first.second);
+        // Number of events at location
+//        int occurances = location.second;
 
-            // Create a point using the event's latitude and longitude
-            Point point(lng, lat, SpatialReference::wgs84());
+//        std::cout << lat << " : " << lng <<  " = " << occurances << std::endl;
 
-            PictureMarkerSymbol* point_symbol = new PictureMarkerSymbol(QUrl("qrc:/qml/images/marker4.png"), this);
-            point_symbol->setWidth(30);
-            point_symbol->setHeight(30);
+        // Create a point using the event's latitude and longitude
+        Point point(lng, lat, SpatialReference::wgs84());
 
-            Graphic* point_graphic = new Graphic(point, point_symbol, this);
-            overlay->graphics()->append(point_graphic);
-        }
+        PictureMarkerSymbol* point_symbol = new PictureMarkerSymbol(QUrl("qrc:/qml/images/marker4.png"), this);
+        point_symbol->setWidth(30);
+        point_symbol->setHeight(30);
+
+        Graphic* point_graphic = new Graphic(point, point_symbol, this);
+        overlay->graphics()->append(point_graphic);
     }
 }
 
