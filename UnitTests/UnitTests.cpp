@@ -12,6 +12,7 @@ class UnitTests : public QObject
     private slots:
         void EmptyUrlTest();
         void ValidUrlTest();
+        void UnresolvedHostnameTest();
 //        void processJsonValidTest();
 //        void processJsonInvalidCredentialsTest();
 //        void ProcessJsonInvalidURLTest();
@@ -23,7 +24,7 @@ class UnitTests : public QObject
     void UnitTests::EmptyUrlTest()
     {
         std::string expectedResult = "https://api.eventfinda.co.nz/v2/events.json?";
-        std::string urlResult = event_url("", "", "", "", "", "", "");
+        std::string urlResult = event_url("", "", "", "", "", "", "", "");
         QVERIFY(expectedResult == urlResult);
     }
 
@@ -34,10 +35,11 @@ class UnitTests : public QObject
         std::string coords = "-45.87416,170.50361"; // Format: latitude,longitude
         std::string radius = "5";					// Distance in kilometers
         std::string start_date = "2023-01-07";		// Defaults to now; format: YYYY-MM-DD
+        std::string end_date = "2023-01-09";                  // Defaults to now; format: YYYY-MM-DD
         std::string num_rows = "5";					// Number of rows (items) to return
         std::string row_offset = "1";				// Row offset - for paging
-        std::string expectedResult = "https://api.eventfinda.co.nz/v2/events.json?autocomplete=music&fields=event:(name,url,description~150,datetime_start,datetime_end,point,location_summary)&point=-45.87416,170.50361&radius=5&start_date=2023-01-07&rows=5&offset=1";
-        std::string urlResult =  event_url(search, fields, coords, radius, start_date, num_rows, row_offset);
+        std::string expectedResult = "https://api.eventfinda.co.nz/v2/events.json?autocomplete=music&fields=event:(name,url,description~150,datetime_start,datetime_end,point,location_summary)&point=-45.87416,170.50361&radius=5&start_date=2023-01-07&end_date=2023-01-09&rows=5&offset=1";
+        std::string urlResult =  event_url(search, fields, coords, radius, start_date, end_date, num_rows, row_offset);
         QVERIFY(expectedResult == urlResult);
     }
 
@@ -80,6 +82,14 @@ class UnitTests : public QObject
         QVERIFY(expectedResult == fetchResult);
     }
 
+    void UnitTests::UnresolvedHostnameTest(){
+        std::string apiUrl = "https://api.eventinda.co.nz/v2/events.json?fields=event:(name,url,datetime_end,point,location_summary)&rows=2&end_date=2022-08-27";
+        std::string username = "eventure";
+        std::string password = "5jryqspxvxkk";
+        std::string expectedResult = "";
+        std::string fetchResult = fetchDataFromAPI(apiUrl, username, password);
+        QVERIFY(expectedResult == fetchResult);
+    }
 
 
 QTEST_APPLESS_MAIN(UnitTests)
