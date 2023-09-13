@@ -13,8 +13,10 @@ int main()
     std::string num_rows = "10"; // Number of rows (items) to return
     std::string row_offset = "0"; // Row offset - for paging
 
+    // Set event parameters
+    std::vector<std::map<std::string, std::string>> _ = get_events(
+        search, fields, coords, radius, start_date, end_date, num_rows, row_offset, false);
     // Get event array
-    std::vector<std::map<std::string, std::string>> eventarr = get_events(
-        search, fields, coords, radius, start_date, end_date, num_rows, row_offset);
+    std::vector<std::map<std::string, std::string>> eventarr = get_events();
     return 0;
 }
