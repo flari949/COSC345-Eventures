@@ -44,7 +44,8 @@ HEADERS += \
     src/data_fetch.h \
     src/event_url.h \
     src/process_raw.h \
-    src/request.h
+    src/request.h \
+    src/searchhandler.h
 
 SOURCES += \
     src/data_fetch.cpp \
@@ -52,7 +53,8 @@ SOURCES += \
     src/process_raw.cpp \
     src/request.cpp \
     src/main.cpp \
-    src/Map_display.cpp
+    src/Map_display.cpp \
+    src/searchhandler.cpp
 
 RESOURCES += \
     qml/qml.qrc \

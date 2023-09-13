@@ -14,7 +14,6 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import Esri.map_display
 
-
 ApplicationWindow {
     visible: true
     width: 1000
@@ -27,34 +26,58 @@ ApplicationWindow {
         anchors.top: parent.top
 
         CustomMenuItem {
-             text: ""
-             onClicked: {
-                 // Handle the button click event for "logo"
-             }
-             anchors {
-                 left: parent.left
-                 verticalCenter: parent.verticalCenter
-                 leftMargin: 10
-             }
+            text: ""
+            onClicked: {
+                // Handle the button click event for "logo"
+            }
+            anchors {
+                left: parent.left
+                verticalCenter: parent.verticalCenter
+                leftMargin: 10
+            }
 
-             Image {
-                 source: "images/idea9.png" // Set the path to your image
-                 width: 40 // Set the width of the image
-                 height: 40 // Set the height of the image
-             }
-         }
+            Image {
+                source: "images/idea9.png" // Set the path to your image
+                width: 40 // Set the width of the image
+                height: 40 // Set the height of the image
+            }
+        }
 
-            CustomMenuItem {
-                text: "Eventures"
-                onClicked: {
-                    // Handle the button click event for "Eventures"
-                }
-                anchors {
-                    right: parent.right
-                    verticalCenter: parent.verticalCenter
-                    rightMargin: 10
+        CustomMenuItem {
+            text: "Eventures"
+            onClicked: {
+                // Handle the button click event for "Eventures"
+            }
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+                rightMargin: 10
+            }
+        }
+
+        Row {
+            spacing: 10
+            anchors.centerIn: parent
+
+            TextField {
+                id: searchBar
+                placeholderText: "Search"
+                Keys.onReturnPressed: {
+                    searchSubmit();
                 }
             }
+
+            Button {
+                text: "Go!"
+                onClicked: {
+                    searchSubmit();
+                }
+            }
+        }
+    }
+
+    function searchSubmit() {
+        searchHandler.parse(searchBar.text)
     }
 
     Rectangle {
@@ -159,11 +182,12 @@ ApplicationWindow {
     }
 
     ZoomButtons {
-            anchors.fill: parent
-            anchors.bottomMargin: 30
-            anchors.rightMargin: 10
-        }
+        anchors.fill: parent
+        anchors.bottomMargin: 30
+        anchors.rightMargin: 10
+    }
 }
+
 
 
 
