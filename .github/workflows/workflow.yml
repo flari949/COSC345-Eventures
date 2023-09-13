@@ -64,12 +64,25 @@ jobs:
         with:
           arch: x64
 
-      - name: Build
+      - name: Build Debug
         working-directory: ${{ runner.temp }}\Eventures\backend_build
         run:  |
               qmake BackendBuild.pro
               ${{ runner.temp }}\jom\jom -f Makefile.Debug
               cd debug
+              windeployqt BackendBuild.exe
+              copy C:\Windows\System32\concrt140.dll .
+              copy C:\Windows\System32\vccorlib140.dll .
+              copy C:\Windows\System32\msvcp140.dll .
+              copy C:\Windows\System32\vcruntime140.dll .
+              copy ${{ env.SOURCE_DIR }}\include\runtime_dependencies\libcurl.dll .
+
+      - name: Build Release
+        working-directory: ${{ runner.temp }}\Eventures\backend_build
+        run:  |
+              qmake BackendBuild.pro
+              ${{ runner.temp }}\jom\jom -f Makefile.Release
+              cd release
               windeployqt BackendBuild.exe
               copy C:\Windows\System32\concrt140.dll .
               copy C:\Windows\System32\vccorlib140.dll .
