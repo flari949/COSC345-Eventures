@@ -23,6 +23,6 @@
 * @param  row_offset: row offset
 * @return  url for event search
 */
-std::string event_url(std::string search, std::string fields, std::string coords, std::string radius, std::string start_date, std::string end_date, std::string num_rows, std::string row_offset);
+std::string event_url(const std::string search, const std::string fields, const std::string coords, const std::string radius, const std::string start_date, const std::string end_date, const std::string num_rows, const std::string row_offset);
 
 #endif
