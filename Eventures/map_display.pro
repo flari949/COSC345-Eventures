@@ -64,7 +64,7 @@ LIBS += \
     Ole32.lib \
     -L$$PWD/include/lib -llibcurl
 
-## Lukes Version
+# Lukes Version
 #LIBS += \
 ##    Ole32.lib \
 #    -L/Users/lukepiper/anaconda3/lib -lcurl
