@@ -1,5 +1,5 @@
 /*!
-* @file searhhandler.h
+* @file searchhandler.h
 * @brief This file contains the declaration of the SearchHandler class,
 * responsible for handling search query on GUI searchbar by user.
 * User searches for city they want to look for events in around New Zealand

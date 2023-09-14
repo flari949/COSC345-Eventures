@@ -37,6 +37,10 @@ The combinations of these two datasets aims to help New Zealanders find events a
 * Mainly however we want to target students who are looking for events in their city.
 * Students new to their univeristy city using our app can make the most of their university experience
 *  and join clubs/meet new friends to help the adjustment away for their previous city.
+*
+* @section Source Code
+* For detailed documentation on the source codes found with the project,
+* please refer the Files->Files List in documetnation to get detailed documentation on specfic files
 */
 
 #include <iostream>

@@ -60,14 +60,14 @@ RESOURCES += \
     qml/qml.qrc \
 
 # Windows Version
-#LIBS += \
-#    Ole32.lib \
-#    -L$$PWD/include/lib -llibcurl
-
-# Lukes Version
 LIBS += \
-#    Ole32.lib \
-    -L/Users/lukepiper/anaconda3/lib -lcurl
+    Ole32.lib \
+    -L$$PWD/include/lib -llibcurl
+
+## Lukes Version
+#LIBS += \
+##    Ole32.lib \
+#    -L/Users/lukepiper/anaconda3/lib -lcurl
 
 FORMS +=
 
