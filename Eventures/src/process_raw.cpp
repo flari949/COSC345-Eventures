@@ -10,7 +10,7 @@
     Functions to process API data
 */
 
-std::vector<std::map<std::string, std::string>> process_json(std::string apiUrl, std::string username, std::string password) {
+std::vector<std::map<std::string, std::string>> process_json(const std::string& apiUrl, const std::string& username, const std::string& password) {
     // Fetch data from the API
     std::string responseData = fetchDataFromAPI(apiUrl, username, password);
 

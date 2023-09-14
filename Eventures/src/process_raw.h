@@ -18,6 +18,6 @@
 * @param  password: password
 * @return  0 if success, 1 if failure
 */
-std::vector<std::map<std::string, std::string>> process_json(std::string apiUrl, std::string username, std::string password);
+std::vector<std::map<std::string, std::string>> process_json(const std::string& apiUrl, const std::string& username, const std::string& password);
 
 #endif
