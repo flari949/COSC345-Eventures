@@ -59,9 +59,22 @@ SOURCES += \
 RESOURCES += \
     qml/qml.qrc \
 
+# Windows Version
 LIBS += \
     Ole32.lib \
     -L$$PWD/include/lib -llibcurl
 
+## Lukes Version
+#LIBS += \
+##    Ole32.lib \
+#    -L/Users/lukepiper/anaconda3/lib -lcurl
+
 FORMS +=
 
+
+#macx: LIBS += -L$$PWD/include/lib/ -lcurl
+
+#INCLUDEPATH += $$PWD/include
+#DEPENDPATH += $$PWD/include
+
+#macx: PRE_TARGETDEPS += $$PWD/include/lib/libcurl.a

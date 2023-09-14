@@ -2,15 +2,45 @@
 * @mainpage Eventures
 * @section intro_sec Introduction
 * Eventures is a C++ application that allows users to search for upcoming events in New Zealand cities.
-The application uses the Eventfinda API to retrieve event data. The application also uses the LINZ to display the location of events on a map GUI interface.
-* @section team_sec Team
+The application uses the Eventfinda API to retrieve events and event data.
+The application also uses the ArcGIS to display the location of events on a map GUI interface.
+The combinations of these two datasets aims to help New Zealanders find events and help great events been found and attended.
+
+* @section Features
+* VERSION Beta Release
+* *Some features might not be currently present in application version, if not then feature is goal for future releases*
+* - Fetch up to date event data from EventFinda API
+* - ArcGIS map display given a comprehensive map of New Zealand
+* - Zoom In/Out through map
+* - Search city filter enabling the filtering of events in specific cities
+* - Detailed description of event with relevant data
+* - Filtering by event type
+* - Saved interested events
+*
+* @section Development
+* This application development is set as a semester long project for Otago Universitys COSC345.
+* The development of this application has been taking place between 10 July up to present date,
+* with the final release date set for the 6th October. The source is built on the C++ langauge using QT as the IDE for graphics.
+* The application follows version contrtol and continous integration practices, in parrelllel with statis analysis (Codeacy) and code coverage tools (CodeCov).
+* Developers wanting to develop the Eventures application further are welcomed, however all pull requests will be looked over before merge to master.
+* Steps for installing QT then compiling, building and running program can be found inside GitHub repositiories README.
+*
+* @section Team
 * Eventures was developed by a team of four students from the University of Otago as part of the COSC345 Software Engineering paper.
 * Luke Piper
 * Riley Flanagan
 * Eszter Scarlett Herbet
 * Kristie Koorts
+*
 * @section target_sec Target User
-* The target user for Eventures is anyone who is looking for upcoming events in New Zealand cities. Mainly however we want to target students who are looking for events in their city.
+* The target user for Eventures is anyone who is looking for upcoming events in New Zealand cities.
+* Mainly however we want to target students who are looking for events in their city.
+* Students new to their univeristy city using our app can make the most of their university experience
+*  and join clubs/meet new friends to help the adjustment away for their previous city.
+*
+* @section Source Code
+* For detailed documentation on the source codes found with the project,
+* please refer the Files->Files List in documetnation to get detailed documentation on specfic files
 */
 
 #include <iostream>

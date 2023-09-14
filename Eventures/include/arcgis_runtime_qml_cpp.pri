@@ -58,6 +58,7 @@ message("Version " $$ESRIRUNTIME_QT_VERSION)
 #-------------------------------------------------
 
 SDK_INSTALL_DIR = "C:/Program Files/ArcGIS SDKs/Qt200.2.0"
+#SDK_INSTALL_DIR = "/Users/lukepiper/ArcGIS_SDKs/Qt200.2.0"
 ARCGIS_RUNTIME_IMPORT_PATH = ""
 
 unix:!macx:!android:!ios {
