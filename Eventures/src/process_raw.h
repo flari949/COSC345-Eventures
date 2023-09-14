@@ -1,6 +1,7 @@
 /*!
 * @file process_raw.h
-* @brief  process raw data returned from API
+* @brief  Process raw data returned from API.
+* Reads JSON returned data from EventFinaAPI, to help display the event information to program for user.
 */
 
 #ifndef PROCESS_RAW_H
@@ -11,7 +12,7 @@
 #include <map>
 
 /*!
-* @brief  process raw data returned from API
+* @brief  Process raw data returned from API and process it in to readable form to extract relevant event data
 * @param  apiUrl: API url
 * @param  username: username
 * @param  password: password

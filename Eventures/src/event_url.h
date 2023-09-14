@@ -1,7 +1,10 @@
 /*!
 * @file event_url.h
-* @brief  create url for event search based off user parameters inputted
+* @brief  Create url for event search based off user parameters inputted.
+* Parameters define search for querying EventFina API for actual information of events.
+* Most parameters are define by source code, besides from 'search' which is the city the user wants to search for events in.
 */
+
 
 #ifndef EVENT_URL_H
 #define EVENT_URL_H
@@ -9,7 +12,7 @@
 #include <string>
 
 /*!
-* @brief  create url for event search
+* @brief  Create url for event search to query EventFina API for event information
 * @param  search: search term
 * @param  fields: fields to return
 * @param  coords: coordinates

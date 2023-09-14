@@ -10,6 +10,12 @@
 // See the Sample code usage restrictions document for further information.
 //
 
+/*!
+* @file Map_display.h
+* @brief This file contains the declaration of the Map_display class,
+* which is responsible for displaying a map on screen at runtime.
+*/
+
 #ifndef MAP_DISPLAY_H
 #define MAP_DISPLAY_H
 
