@@ -76,10 +76,6 @@ ApplicationWindow {
         }
     }
 
-    function searchSubmit() {
-        searchHandler.parse(searchBar.text)
-    }
-
     Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 50
@@ -175,16 +171,36 @@ ApplicationWindow {
         }
     }
 
-    Map_displayForm {
+    Item {
         anchors.fill: parent
         anchors.topMargin: 50
         anchors.leftMargin: 40
+
+        // Create MapQuickView here, and create its Map etc. in C++ code
+        MapView {
+            id: view
+            objectName: "mapView"
+            anchors.fill: parent
+            // set focus to enable keyboard navigation
+            focus: true
+        }
+
+        // Declare the C++ instance which creates the map etc. and supply the view
+        Map_display {
+            id: model
+            mapView: view
+        }
     }
 
     ZoomButtons {
         anchors.fill: parent
         anchors.bottomMargin: 30
         anchors.rightMargin: 10
+    }
+
+    // Function to parse search values and update graphics
+    function searchSubmit() {
+        model.searchHandler(searchBar.text);
     }
 }
 

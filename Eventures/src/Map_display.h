@@ -40,7 +40,7 @@ class Map_display : public QObject
 public:
     explicit Map_display(QObject* parent = nullptr);
     ~Map_display() override;
-
+    Q_INVOKABLE void searchHandler(const QString &text);
 
 
 signals:

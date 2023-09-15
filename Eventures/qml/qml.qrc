@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/qml">
         <file>main.qml</file>
-        <file>Map_displayForm.qml</file>
         <file>images/calendar.png</file>
         <file>images/calendar1.png</file>
         <file>images/heart.png</file>

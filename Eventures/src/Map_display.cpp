@@ -69,8 +69,6 @@ void Map_display::setupViewpoint()
 
 void Map_display::createGraphics(GraphicsOverlay *overlay)
 {
-    // RETRIEVING EVENT DATA WITH SET PARAMS TO BE IN DIFFERENT FUNCTION
-
     // Get event array with active parameters
     std::vector<std::map<std::string, std::string>> eventarr = get_events();
 
@@ -118,6 +116,24 @@ void Map_display::setMapView(MapQuickView* mapView)
     m_mapView->graphicsOverlays()->append(overlay);
 
     setupViewpoint();
+
+    emit mapViewChanged();
+}
+
+
+void Map_display::searchHandler(const QString &text)
+{
+    // Update API parameters using data retrieval setter function
+    std::vector<std::map<std::string, std::string>> eventarr = get_events(
+        text.toStdString(), "", "", "", "" , "", "", "", false);
+
+    // Clear existing graphical overlays
+    m_mapView->graphicsOverlays()->clear();
+
+    // Create new overlay with updated points
+    GraphicsOverlay* overlay = new GraphicsOverlay(this);
+    createGraphics(overlay);
+    m_mapView->graphicsOverlays()->append(overlay);
 
     emit mapViewChanged();
 }

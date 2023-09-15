@@ -18,7 +18,7 @@ CONFIG += c++17
 # additional modules are pulled in via arcgisruntime.pri
 QT += qml quick quickcontrols2
 
-TARGET = map_display
+#TARGET = map_display
 
 lessThan(QT_MAJOR_VERSION, 6) {
     error("$$TARGET requires Qt 6.5.1")
@@ -44,8 +44,7 @@ HEADERS += \
     src/data_fetch.h \
     src/event_url.h \
     src/process_raw.h \
-    src/request.h \
-    src/searchhandler.h
+    src/request.h
 
 SOURCES += \
     src/data_fetch.cpp \
@@ -53,8 +52,7 @@ SOURCES += \
     src/process_raw.cpp \
     src/request.cpp \
     src/main.cpp \
-    src/Map_display.cpp \
-    src/searchhandler.cpp
+    src/Map_display.cpp
 
 RESOURCES += \
     qml/qml.qrc \

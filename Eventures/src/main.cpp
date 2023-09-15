@@ -26,8 +26,6 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "searchhandler.h"
-
 //------------------------------------------------------------------------------
 
 using namespace Esri::ArcGISRuntime;
@@ -35,9 +33,6 @@ using namespace Esri::ArcGISRuntime;
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-
-    // Create input handling class
-    SearchHandler searchHandler;
 
     const QString apiKey = QString("AAPK18146ed0fc9647b584c05aade161704beAv6qom-bquOTRFR3xo7KkCI_VT-qmP5ploa0dvIj5bZ7fp1o-46L_7Ai_ffh0Gu");
     if (apiKey.isEmpty())
@@ -68,10 +63,6 @@ int main(int argc, char *argv[])
 
     // Set the source
     engine.load(QUrl("qrc:/qml/main.qml"));
-
-    // Enable QML data retrieval
-    QQmlContext * rootContext = engine.rootContext();
-    rootContext->setContextProperty("searchHandler", &searchHandler);
 
     return app.exec();
 }
