@@ -19,7 +19,7 @@ Item {
                 anchors.fill: parent
 
                 onClicked: {
-                    // Handle button click here
+                    zoom(true);
                 }
 
                 Rectangle {
@@ -46,7 +46,7 @@ Item {
                 anchors.fill: parent
 
                 onClicked: {
-                    // Handle button click here
+                    zoom(false);
                 }
 
                 Rectangle {

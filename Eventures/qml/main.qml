@@ -202,6 +202,11 @@ ApplicationWindow {
     function searchSubmit() {
         model.searchHandler(searchBar.text);
     }
+
+    // Function to change zoom
+    function zoom(inc) {
+        model.setZoom(inc)
+    }
 }
 
 
