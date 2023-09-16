@@ -22,6 +22,7 @@ Link to Questionnaire: https://www.surveymonkey.com/r/QFQFH97
 - CMake: Version 3.24.2
 - Ninja: Version 1.10.2
 - MSVC: Version 2019; System: 64-bit
+- ArcGIS SDK: Version Qt 200.2.0
 
 
 ### Prerequisites
