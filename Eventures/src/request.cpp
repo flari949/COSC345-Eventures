@@ -69,11 +69,11 @@ std::vector<std::map<std::string, std::string>> get_events(
     // Set default search parameters
     static std::string search = ""; // General search parameter
     static std::string fields = "name,url,description~150,datetime_start,datetime_end,point,location_summary"; // Fields to retrieve
-    static std::string coords = "-36.84846,174.76334"; // Format: latitude,longitude --> Default : Auckland
-    static std::string radius = "50"; // Distance in kilometers -> requires coordinate param be set
+    static std::string coords = "-41.35249807015349,173.07275377115386"; // Format: latitude,longitude --> Default : Wellington
+    static std::string radius = "2000"; // Distance in kilometers -> requires coordinate param be set
     static std::string start_date = ""; // Defaults to now; format : YYYY-MM-DD
     static std::string end_date = ""; // Defaults to 3 years from now; format : YYYY-MM-DD
-    static std::string num_rows = "10"; // Number of rows (items) to return
+    static std::string num_rows = "20"; // Number of rows (items) to return --> Max : 20
     static std::string row_offset = ""; // Row offset - for paging
 
     // If function called as setter
@@ -81,12 +81,12 @@ std::vector<std::map<std::string, std::string>> get_events(
         // If parameter blank, substitute with previous. Use of null character "|" represents empty parameter
         search = (search_i == "|") ? "" : (search_i != "") ? search_i : search;
         fields = (fields_i == "|") ? "" : (fields_i != "") ? fields_i : fields;
-        coords = (coords_i != "" || coords_i != "|") ? coords_i : coords;
-        radius = (radius_i != "" || radius_i != "|") ? radius_i : radius;
-        start_date= (start_date_i != "" || start_date_i != "|") ? start_date_i : start_date;
-        end_date = (end_date_i != "" || end_date_i != "|") ? end_date_i : end_date;
-        num_rows = (num_rows_i != "" || num_rows_i != "|") ? num_rows_i : num_rows;
-        row_offset = (row_offset_i != "" || row_offset_i != "|") ? row_offset_i : row_offset;
+        coords = (coords_i != "") ? coords_i : coords;
+        radius = (radius_i != "") ? radius_i : radius;
+        start_date= (start_date_i != "") ? start_date_i : start_date;
+        end_date = (end_date_i != "") ? end_date_i : end_date;
+        num_rows = (num_rows_i != "") ? num_rows_i : num_rows;
+        row_offset = (row_offset_i != "") ? row_offset_i : row_offset;
         return std::vector<std::map<std::string, std::string>>();
     }
 

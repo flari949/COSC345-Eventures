@@ -29,6 +29,7 @@ class GraphicsOverlay;
 
 #include <QObject>
 #include "Point.h"
+#include <vector>
 
 Q_MOC_INCLUDE("MapQuickView.h")
 
@@ -43,6 +44,7 @@ public:
     ~Map_display() override;
     Q_INVOKABLE void searchHandler(const QString &text);
     Q_INVOKABLE void setZoom(bool magnify);
+    Q_INVOKABLE void switchViews(bool next);
 
 
 signals:
@@ -54,8 +56,11 @@ private:
     void setMapView(Esri::ArcGISRuntime::MapQuickView* mapView);
     void setupViewpoint();
 
-    Esri::ArcGISRuntime::Point createGraphics(Esri::ArcGISRuntime::GraphicsOverlay* overlay);
+    void createGraphics(Esri::ArcGISRuntime::GraphicsOverlay* overlay);
     void transition_coords(Esri::ArcGISRuntime::Point point);
+
+    std::vector<Esri::ArcGISRuntime::Point> activePoints;
+    int currIndex;
 
     Esri::ArcGISRuntime::Map* m_map = nullptr;
     Esri::ArcGISRuntime::MapQuickView* m_mapView = nullptr;

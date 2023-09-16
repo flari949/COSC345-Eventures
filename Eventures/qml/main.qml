@@ -248,7 +248,11 @@ ApplicationWindow {
 
     // Function to change zoom
     function zoom(inc) {
-        model.setZoom(inc)
+        model.setZoom(inc);
+    }
+
+    function switchPoint(next) {
+        model.switchViews(next);
     }
 }
 

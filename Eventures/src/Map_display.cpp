@@ -59,13 +59,13 @@ MapQuickView* Map_display::mapView() const
 
 void Map_display::setupViewpoint()
 {
-    // Center the map on Auckland, New Zealand
-    const Point center(174.76516172389003, -36.87343058062796, SpatialReference::wgs84());
-    const Viewpoint viewpoint(center, 50000.0); // You can adjust the scale as needed
+    // Center the map on Wellington, New Zealand
+    const Point center(173.07275377115386,-41.35249807015349, SpatialReference::wgs84());
+    const Viewpoint viewpoint(center, 12000000.0); // You can adjust the scale as needed
     m_mapView->setViewpoint(viewpoint);
 }
 
-Point Map_display::createGraphics(GraphicsOverlay *overlay)
+void Map_display::createGraphics(GraphicsOverlay *overlay)
 {
     // Get event array with active parameters
     std::vector<std::map<std::string, std::string>> eventarr = get_events();
@@ -77,12 +77,12 @@ Point Map_display::createGraphics(GraphicsOverlay *overlay)
         points[std::make_pair(eventarr[itr]["lat"], eventarr[itr]["lng"])] += 1;
     }
 
-    if (points.empty()) return Point();
-    double lat = 0, lng = 0;
+    if (points.empty()) return;
+    Map_display::activePoints.clear();
 
     for (auto const& location : points) {
-        lat = std::stod(location.first.first);
-        lng = std::stod(location.first.second);
+        double lat = std::stod(location.first.first);
+        double lng = std::stod(location.first.second);
 
         // Number of events at location
         int occurrences = location.second;
@@ -99,23 +99,26 @@ Point Map_display::createGraphics(GraphicsOverlay *overlay)
         Graphic* point_graphic = new Graphic(point, point_symbol, this);
         combinedOverlay->graphics()->append(point_graphic);
 
-        TextSymbol* textSymbol = new TextSymbol(this);
-        textSymbol->setText(QString::number(occurrences));
-        textSymbol->setColor(QColor(0, 0, 0));
-        textSymbol->setOffsetY(-30);
-        textSymbol->setFontWeight(FontWeight::Bold);
-        Graphic* textGraphic = new Graphic(point, textSymbol, this);
+        if (occurrences > 1){
+            TextSymbol* textSymbol = new TextSymbol(this);
+            textSymbol->setText(QString::number(occurrences));
+            textSymbol->setColor(QColor(0, 0, 0));
+            textSymbol->setOffsetY(-30);
+            textSymbol->setFontWeight(FontWeight::Bold);
+            Graphic* textGraphic = new Graphic(point, textSymbol, this);
 
-        SimpleMarkerSymbol* circleSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle::Circle, QColor("white"), 20, this);
-        circleSymbol->setOffsetY(-30);
-        Graphic* circleGraphic = new Graphic(point, circleSymbol, this);
+            SimpleMarkerSymbol* circleSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle::Circle, QColor("white"), 20, this);
+            circleSymbol->setOffsetY(-30);
+            Graphic* circleGraphic = new Graphic(point, circleSymbol, this);
 
-        // Add both the circle and text graphics to the combined overlay
-        combinedOverlay->graphics()->append(circleGraphic);
-        combinedOverlay->graphics()->append(textGraphic);
+            // Add both the circle and text graphics to the combined overlay
+            combinedOverlay->graphics()->append(circleGraphic);
+            combinedOverlay->graphics()->append(textGraphic);
+        }
+        Map_display::activePoints.push_back(point);
     }
 
-    return Point(lng, lat, SpatialReference::wgs84());
+    return;
 }
 
 
@@ -144,7 +147,7 @@ void Map_display::setMapView(MapQuickView* mapView)
 void Map_display::transition_coords(Point center)
 {
     const Viewpoint newViewpoint(center, 100000.0);
-    m_mapView->setViewpointAnimated(newViewpoint, 2.0f, AnimationCurve::EaseInOutCubic);
+    m_mapView->setViewpointAnimated(newViewpoint, 1.5f, AnimationCurve::EaseInOutCubic);
 }
 
 
@@ -160,10 +163,10 @@ void Map_display::searchHandler(const QString &text)
 
     // Create new overlay with updated points
     GraphicsOverlay* overlay = new GraphicsOverlay(this);
-    Point rep_point = createGraphics(overlay);
+    createGraphics(overlay);
     m_mapView->graphicsOverlays()->append(overlay);
 
-    transition_coords(rep_point);
+    transition_coords(Map_display::activePoints[0]);
 
     emit mapViewChanged();
 }
@@ -179,5 +182,18 @@ void Map_display::setZoom(bool magnify)
 };
 
 
+// Switch between marker views
+void Map_display::switchViews(bool next)
+{
+    int index = Map_display::currIndex;
+    index += (next) ? 1 : -1;
 
+    int len = static_cast<int>(Map_display::activePoints.size())-1;
 
+    index = (index>len) ? 0 : (index<0) ? len : index;
+    transition_coords(Map_display::activePoints[index]);
+
+    Map_display::currIndex = index;
+
+    emit mapViewChanged();
+}
