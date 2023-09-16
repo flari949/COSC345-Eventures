@@ -29,6 +29,10 @@
 #include "PictureMarkerSymbol.h"
 #include "Geometry.h"
 
+#include "SimpleMarkerSymbol.h"
+#include "TextSymbol.h"
+#include "SymbolTypes.h"
+
 #include "request.h"
 #include <vector>
 #include <map>
@@ -66,10 +70,10 @@ Point Map_display::createGraphics(GraphicsOverlay *overlay)
     // Get event array with active parameters
     std::vector<std::map<std::string, std::string>> eventarr = get_events();
 
-    // Get unique location coordinates & repitition count - prevents layering markers
+    // Get unique location coordinates & repetition count - prevents layering markers
     std::map<std::pair<std::string, std::string>, int> points;
-    for (int itr=0; itr < eventarr.size(); itr++) {
-        // Count point occurances - can truncate coordinate values for generalisation
+    for (int itr = 0; itr < eventarr.size(); itr++) {
+        // Count point occurrences - can truncate coordinate values for generalization
         points[std::make_pair(eventarr[itr]["lat"], eventarr[itr]["lng"])] += 1;
     }
 
@@ -79,8 +83,9 @@ Point Map_display::createGraphics(GraphicsOverlay *overlay)
     for (auto const& location : points) {
         lat = std::stod(location.first.first);
         lng = std::stod(location.first.second);
+
         // Number of events at location
-//        int occurances = location.second;
+        int occurrences = location.second;
 
         // Create a point using the event's latitude and longitude
         Point point(lng, lat, SpatialReference::wgs84());
@@ -89,9 +94,27 @@ Point Map_display::createGraphics(GraphicsOverlay *overlay)
         point_symbol->setWidth(30);
         point_symbol->setHeight(30);
 
+        // GraphicsOverlay for circle and text graphics, to display the number of events at a certain location
+        GraphicsOverlay* combinedOverlay = overlay;
         Graphic* point_graphic = new Graphic(point, point_symbol, this);
-        overlay->graphics()->append(point_graphic);
-    };
+        combinedOverlay->graphics()->append(point_graphic);
+
+        TextSymbol* textSymbol = new TextSymbol(this);
+        textSymbol->setText(QString::number(occurrences));
+        textSymbol->setColor(QColor(0, 0, 0));
+        textSymbol->setOffsetY(-30);
+        textSymbol->setFontWeight(FontWeight::Bold);
+        Graphic* textGraphic = new Graphic(point, textSymbol, this);
+
+        SimpleMarkerSymbol* circleSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle::Circle, QColor("white"), 20, this);
+        circleSymbol->setOffsetY(-30);
+        Graphic* circleGraphic = new Graphic(point, circleSymbol, this);
+
+        // Add both the circle and text graphics to the combined overlay
+        combinedOverlay->graphics()->append(circleGraphic);
+        combinedOverlay->graphics()->append(textGraphic);
+    }
+
     return Point(lng, lat, SpatialReference::wgs84());
 }
 
