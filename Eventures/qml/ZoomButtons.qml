@@ -30,9 +30,9 @@ Item {
 
                 Image {
                     anchors.centerIn: parent
-                    source: "images/plus.png" // Replace with your icon image
-                    width: 20 // Adjust the image width as needed
-                    height: 20 // Adjust the image height as needed
+                    source: "images/plus.png"
+                    width: 20
+                    height: 20
                 }
             }
         }
@@ -57,9 +57,9 @@ Item {
 
                 Image {
                     anchors.centerIn: parent
-                    source: "images/minus.png" // Replace with your icon image
-                    width: 20 // Adjust the image width as needed
-                    height: 20 // Adjust the image height as needed
+                    source: "images/minus.png"
+                    width: 20
+                    height: 20
                 }
             }
         }

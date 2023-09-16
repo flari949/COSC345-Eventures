@@ -54,26 +54,6 @@ ApplicationWindow {
                 rightMargin: 10
             }
         }
-
-        Row {
-            spacing: 10
-            anchors.centerIn: parent
-
-            TextField {
-                id: searchBar
-                placeholderText: "Search"
-                Keys.onReturnPressed: {
-                    searchSubmit();
-                }
-            }
-
-            Button {
-                text: "Go!"
-                onClicked: {
-                    searchSubmit();
-                }
-            }
-        }
     }
 
     Rectangle {
@@ -96,9 +76,7 @@ ApplicationWindow {
                     id: homeButtonArea
                     anchors.fill: parent
 
-                    onClicked: {
-                        // Handle button click here
-                    }
+                    onClicked: {}
 
                     Rectangle {
                         color: homeButtonArea.pressed ? "#fe817b" : "black"
@@ -108,9 +86,9 @@ ApplicationWindow {
 
                     Image {
                         anchors.centerIn: parent
-                        source: "images/home.png" // Replace with your icon image
-                        width: 30 // Adjust the image width as needed
-                        height: 30 // Adjust the image height as needed
+                        source: "images/home.png"
+                        width: 30
+                        height: 30
                     }
                 }
             }
@@ -123,9 +101,7 @@ ApplicationWindow {
                     id: heartButtonArea
                     anchors.fill: parent
 
-                    onClicked: {
-                        // Handle button click here
-                    }
+                    onClicked: {}
 
                     Rectangle {
                         color: heartButtonArea.pressed ? "#fe817b" : "black"
@@ -135,9 +111,9 @@ ApplicationWindow {
 
                     Image {
                         anchors.centerIn: parent
-                        source: "images/heart.png" // Replace with your icon image
-                        width: 30 // Adjust the image width as needed
-                        height: 30 // Adjust the image height as needed
+                        source: "images/heart.png"
+                        width: 30
+                        height: 30
                     }
                 }
             }
@@ -150,9 +126,7 @@ ApplicationWindow {
                     id: calendarButtonArea
                     anchors.fill: parent
 
-                    onClicked: {
-                        // Handle button click here
-                    }
+                    onClicked: {}
 
                     Rectangle {
                         color: calendarButtonArea.pressed ? "#fe817b" : "black"
@@ -162,9 +136,9 @@ ApplicationWindow {
 
                     Image {
                         anchors.centerIn: parent
-                        source: "images/calendar.png" // Replace with your icon image
-                        width: 30 // Adjust the image width as needed
-                        height: 30 // Adjust the image height as needed
+                        source: "images/calendar.png"
+                        width: 30
+                        height: 30
                     }
                 }
             }
@@ -189,6 +163,75 @@ ApplicationWindow {
         Map_display {
             id: model
             mapView: view
+        }
+    }
+
+    Rectangle {
+        id: searchRectangle
+        width: parent.width - 80 // Span the full width of the parent
+        height: 50 // Set the height of the search bar area
+        color: "black" // Set the background color of the search bar area
+        anchors.top: parent.top // Position it below the top bar
+        anchors.topMargin: 60
+        x: parent.width / 2 - width / 2 + 20 /// Centered with a 40px left margin
+        radius: 40
+
+        Rectangle {
+                id: inputFieldBackground
+                width: parent.width - 100
+                height: parent.height - 10
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left;
+                anchors.leftMargin: 20
+                color: "black"
+                radius: 20
+
+                TextInput {
+                            id: searchBar
+                            anchors.fill: parent
+                            text: "Auckland.."
+                            color: "white"
+                            font.pixelSize: 20
+                            font.bold: true
+                            verticalAlignment: TextInput.AlignVCenter
+
+                            onActiveFocusChanged: {
+                                if (activeFocus) {
+                                    text = ""; // Clear the placeholder text when clicked
+                                }
+                            }
+                            Keys.onReturnPressed: {
+                                searchSubmit();
+                            }
+                        }
+                    }
+
+        Item {
+                anchors.top: searchRectangle.top
+                anchors.topMargin: 5 // Position 10 pixels below the top of the inputFieldBackground
+
+                anchors.right: parent.right
+                anchors.rightMargin: 100 // Adjust the right margin as needed
+
+                Rectangle {
+                    width: 80
+                    height: 40
+                    color: "#fe817b"
+                    radius: 5 // You can adjust the radius to round the corners if needed
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "Go!"
+                        color: "white" // Set the text color to white or any desired color
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            searchSubmit();
+                        }
+                    }
+                }
         }
     }
 
