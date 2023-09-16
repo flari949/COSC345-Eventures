@@ -8,7 +8,7 @@
 The Eventures application project is a group project for the COSC345 university paper at the University Of Otago. This project aims to design and create a useful application for the betterment of a user or society with the primary programming language as C/C++. The project requires the incorporation of two or more publicly available datasets (of different data domains) that can be combined to create additional meaning.
 
 ### What is Eventures
-> Eventures aims to combine [EventFinda](eventfinda.co.nz) event data along with [ArcGIS]([https://data.linz.govt.nz](https://www.arcgis.com/apps/mapviewer/index.html)) geographical mapping services data to superimpose event data on a visual interface for a unique and valuable exploration and discovery application.
+> Eventures aims to combine [EventFinda](eventfinda.co.nz) event data along with [ArcGIS](https://www.arcgis.com/apps/mapviewer/index.html) geographical mapping services data to superimpose event data on a visual interface for a unique and valuable exploration and discovery application.
 
 ### Eventures Questionnaire
 Link to Questionnaire: https://www.surveymonkey.com/r/QFQFH97
