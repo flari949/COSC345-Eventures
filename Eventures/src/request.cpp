@@ -87,6 +87,14 @@ std::vector<std::map<std::string, std::string>> get_events(
         end_date = (end_date_i != "") ? end_date_i : end_date;
         num_rows = (num_rows_i != "") ? num_rows_i : num_rows;
         row_offset = (row_offset_i != "") ? row_offset_i : row_offset;
+
+        // Remove space characters from string
+        size_t space = search.find(" ");
+        while (space != std::string::npos) {
+            search.erase(space, 1); // Erase the space character
+            space = search.find(" ", space + 1); // Find the next space
+        }
+        
         return std::vector<std::map<std::string, std::string>>();
     }
 
