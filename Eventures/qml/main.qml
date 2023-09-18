@@ -243,7 +243,7 @@ ApplicationWindow {
 
     // Function to parse search values and update graphics
     function searchSubmit() {
-        model.searchHandler(searchBar.text);
+        model.searchHandler(searchBar.text, 0);
     }
 
     // Function to change zoom
@@ -251,6 +251,7 @@ ApplicationWindow {
         model.setZoom(inc);
     }
 
+    // Function to iterate over markers
     function switchPoint(next) {
         model.switchViews(next);
     }

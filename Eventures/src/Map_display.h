@@ -42,9 +42,11 @@ class Map_display : public QObject
 public:
     explicit Map_display(QObject* parent = nullptr);
     ~Map_display() override;
-    Q_INVOKABLE void searchHandler(const QString &text);
+    Q_INVOKABLE void searchHandler(const QString &text, int page);
     Q_INVOKABLE void setZoom(bool magnify);
     Q_INVOKABLE void switchViews(bool next);
+    Q_INVOKABLE int checkPage(bool next);
+
 
 
 signals:
@@ -58,9 +60,11 @@ private:
 
     void createGraphics(Esri::ArcGISRuntime::GraphicsOverlay* overlay);
     void transition_coords(Esri::ArcGISRuntime::Point point);
+    void connectSignals();
 
     std::vector<Esri::ArcGISRuntime::Point> activePoints;
-    int currIndex;
+    int currIndex = 0;
+    int results = 0;
 
     Esri::ArcGISRuntime::Map* m_map = nullptr;
     Esri::ArcGISRuntime::MapQuickView* m_mapView = nullptr;

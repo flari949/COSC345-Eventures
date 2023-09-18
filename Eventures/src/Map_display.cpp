@@ -38,6 +38,10 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <QMouseEvent>
+#include <QUuid>
+#include "TaskWatcher.h"
+#include "IdentifyGraphicsOverlayResult.h"
 
 using namespace Esri::ArcGISRuntime;
 
@@ -69,6 +73,7 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
 {
     // Get event array with active parameters
     std::vector<std::map<std::string, std::string>> eventarr = get_events();
+    Map_display::results += static_cast<int>(eventarr.size());
 
     // Get unique location coordinates & repetition count - prevents layering markers
     std::map<std::pair<std::string, std::string>, int> points;
@@ -79,7 +84,7 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
 
     if (points.empty()) return;
     Map_display::activePoints.clear();
-
+    int index = 0;
     for (auto const& location : points) {
         double lat = std::stod(location.first.first);
         double lng = std::stod(location.first.second);
@@ -97,6 +102,7 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
         // GraphicsOverlay for circle and text graphics, to display the number of events at a certain location
         GraphicsOverlay* combinedOverlay = overlay;
         Graphic* point_graphic = new Graphic(point, point_symbol, this);
+        point_graphic->setProperty("id", index++);
         combinedOverlay->graphics()->append(point_graphic);
 
         if (occurrences > 1){
@@ -137,6 +143,8 @@ void Map_display::setMapView(MapQuickView* mapView)
     createGraphics(overlay);
     m_mapView->graphicsOverlays()->append(overlay);
 
+    connectSignals();
+
     setupViewpoint();
 
     emit mapViewChanged();
@@ -152,11 +160,15 @@ void Map_display::transition_coords(Point center)
 
 
 // Parse new search parameters to EventFinda API
-void Map_display::searchHandler(const QString &text)
+void Map_display::searchHandler(const QString &text, int page)
 {
-    // Update API parameters using data retrieval setter function
+    int offset = page * 20;
+    if (page > 0) {
+        Map_display::results = 0;
+    }
+    // Update API parameters using data retrieval URL setter function
     std::vector<std::map<std::string, std::string>> eventarr = get_events(
-        text.toStdString(), "", "", "", "" , "", "", "", false);
+        text.toStdString(), "", "", "", "" , "", "20", std::to_string(offset), false);
 
     // Clear existing graphical overlays
     m_mapView->graphicsOverlays()->clear();
@@ -166,13 +178,14 @@ void Map_display::searchHandler(const QString &text)
     createGraphics(overlay);
     m_mapView->graphicsOverlays()->append(overlay);
 
+    // Find function auto invoke
     transition_coords(Map_display::activePoints[0]);
 
     emit mapViewChanged();
 }
 
 
-// Change application magnification level
+// Change application magnification level (20% inc/decriments)
 void Map_display::setZoom(bool magnify)
 {
     double scale = m_mapView->mapScale();
@@ -197,3 +210,51 @@ void Map_display::switchViews(bool next)
 
     emit mapViewChanged();
 }
+
+
+// Handle event marker click event - Update to show event data
+void Map_display::connectSignals()
+{
+    connect(m_mapView, &MapQuickView::mouseClicked, this, [this](QMouseEvent& mouseEvent){
+        constexpr double tolerance = 5.0;
+        constexpr int max = 1;
+        GraphicsOverlay* m_graphicsOverlay = m_mapView->graphicsOverlays()->first();
+        m_mapView->identifyGraphicsOverlay(m_graphicsOverlay, mouseEvent.position().x(), mouseEvent.position().y(), tolerance, false, max);
+    });
+
+    connect(m_mapView, &MapQuickView::identifyGraphicsOverlayCompleted, this, [this](const QUuid&, IdentifyGraphicsOverlayResult* rawIdentifyResult)
+    {
+        auto identifyResult = std::unique_ptr<IdentifyGraphicsOverlayResult>(rawIdentifyResult);
+        if (identifyResult && !identifyResult->graphics().empty()) {
+            Esri::ArcGISRuntime::Graphic* clickedGraphic = identifyResult->graphics().at(0);
+            transition_coords(Map_display::activePoints[clickedGraphic->property("id").toInt()]);
+        }
+    });
+}
+
+
+// Check neighbouring page populated
+int Map_display::checkPage(bool next) {
+    int page = (Map_display::results/20)-1;
+    if (next) {
+        // If current page full (following page can exist)
+        if (Map_display::results % 20 == 0) {
+            get_events("", "|", "", "", "" , "", "1", std::to_string(page+1), false);
+            // If following page exists
+            if (get_events().size() >= 1) {
+                return page+1;
+            }
+        }
+    } else {
+        // If previous page exists
+        if (page > 0) {
+            return page-1;
+        }
+    }
+    // If page does not exist
+    return -1;
+}
+
+
+
+

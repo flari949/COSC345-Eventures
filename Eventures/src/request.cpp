@@ -80,7 +80,7 @@ std::vector<std::map<std::string, std::string>> get_events(
     if (!get){
         // If parameter blank, substitute with previous. Use of null character "|" represents empty parameter
         search = (search_i == "|") ? "" : (search_i != "") ? search_i : search;
-        fields = (fields_i == "|") ? "" : (fields_i != "") ? fields_i : fields;
+        fields = (fields_i == "|") ? "" : (fields_i != "") ? "name,url,description~150,datetime_start,datetime_end,point,location_summary" : fields;
         coords = (coords_i != "") ? coords_i : coords;
         radius = (radius_i != "") ? radius_i : radius;
         start_date= (start_date_i != "") ? start_date_i : start_date;
@@ -94,7 +94,7 @@ std::vector<std::map<std::string, std::string>> get_events(
             search.erase(space, 1); // Erase the space character
             space = search.find(" ", space + 1); // Find the next space
         }
-        
+
         return std::vector<std::map<std::string, std::string>>();
     }
 
