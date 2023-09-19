@@ -45,8 +45,9 @@ public:
     Q_INVOKABLE void searchHandler(const QString &text, int page);
     Q_INVOKABLE void setZoom(bool magnify);
     Q_INVOKABLE void switchViews(bool next);
+    Q_INVOKABLE void findPoint();
     Q_INVOKABLE int checkPage(bool next);
-
+    Q_INVOKABLE void setupViewpoint();
 
 
 signals:
@@ -56,7 +57,6 @@ signals:
 private:
     Esri::ArcGISRuntime::MapQuickView* mapView() const;
     void setMapView(Esri::ArcGISRuntime::MapQuickView* mapView);
-    void setupViewpoint();
 
     void createGraphics(Esri::ArcGISRuntime::GraphicsOverlay* overlay);
     void transition_coords(Esri::ArcGISRuntime::Point point);
