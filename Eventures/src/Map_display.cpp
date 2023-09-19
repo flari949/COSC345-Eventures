@@ -77,16 +77,22 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
     // Get event array with active parameters
     std::vector<std::map<std::string, std::string>> eventarr = get_events();
     Map_display::results += static_cast<int>(eventarr.size());
+    Map_display::eventInfo.clear();
 
     // Get unique location coordinates & repetition count - prevents layering markers
     std::map<std::pair<std::string, std::string>, int> points;
+    std::vector<std::string> dataStrings;
+
     for (int itr = 0; itr < eventarr.size(); itr++) {
+        dataStrings.push_back(eventarr[itr]["description"]);
         // Count point occurrences - can truncate coordinate values for generalization
         points[std::make_pair(eventarr[itr]["lat"], eventarr[itr]["lng"])] += 1;
     }
 
     if (points.empty()) return;
     Map_display::activePoints.clear();
+    Map_display::eventInfo.resize(static_cast<int>(points.size()));
+
     int index = 0;
     for (auto const& location : points) {
         double lat = std::stod(location.first.first);
@@ -94,6 +100,9 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
 
         // Number of events at location
         int occurrences = location.second;
+        for (int itr = 0; itr < occurrences; itr++) {
+            Map_display::eventInfo[index].push_back(dataStrings[itr]);
+        }
 
         // Create a point using the event's latitude and longitude
         Point point(lng, lat, SpatialReference::wgs84());
@@ -223,6 +232,17 @@ void Map_display::switchViews(bool next)
 }
 
 
+// Display event info box
+void Map_display::showInfo(int index)
+{
+    int numItems = static_cast<int>(Map_display::eventInfo[index].size());
+    for (int itr = 0; itr < numItems; itr++) {
+        std::string desc = Map_display::eventInfo[index][itr];
+//        std::cout << desc << std::endl;
+    }
+}
+
+
 // Handle event marker click event - Update to show event data
 void Map_display::connectSignals()
 {
@@ -239,6 +259,7 @@ void Map_display::connectSignals()
         if (identifyResult && !identifyResult->graphics().empty()) {
             Esri::ArcGISRuntime::Graphic* clickedGraphic = identifyResult->graphics().at(0);
             transition_coords(Map_display::activePoints[clickedGraphic->property("id").toInt()]);
+            showInfo(clickedGraphic->property("id").toInt());
         }
     });
 }
@@ -257,7 +278,7 @@ int Map_display::checkPage(bool next) {
             }
         }
     } else {
-        // If previous page exists
+        // If previous page exists ----------------------------------------> if paged -> reduce results count
         if (page > 0) {
             return page-1;
         }

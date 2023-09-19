@@ -83,7 +83,7 @@ std::vector<std::map<std::string, std::string>> get_events(
         fields = (fields_i == "|") ? "" : (fields_i != "") ? "name,url,description~150,datetime_start,datetime_end,point,location_summary" : fields;
         coords = (coords_i != "") ? coords_i : coords;
         radius = (radius_i != "") ? radius_i : radius;
-        start_date= (start_date_i != "") ? start_date_i : start_date;
+        start_date = (start_date_i != "") ? start_date_i : start_date;
         end_date = (end_date_i != "") ? end_date_i : end_date;
         num_rows = (num_rows_i != "") ? num_rows_i : num_rows;
         row_offset = (row_offset_i != "") ? row_offset_i : row_offset;

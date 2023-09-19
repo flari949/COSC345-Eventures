@@ -61,8 +61,10 @@ private:
     void createGraphics(Esri::ArcGISRuntime::GraphicsOverlay* overlay);
     void transition_coords(Esri::ArcGISRuntime::Point point);
     void connectSignals();
+    void showInfo(int index);
 
     std::vector<Esri::ArcGISRuntime::Point> activePoints;
+    std::vector<std::vector<std::string>> eventInfo;
     int currIndex = 0;
     int results = 0;
 
