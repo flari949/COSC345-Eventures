@@ -18,6 +18,9 @@ ApplicationWindow {
     visible: true
     width: 1000
     height: 800
+    minimumWidth: 400
+    minimumHeight: 300
+
 
     Rectangle {
         width: parent.width
