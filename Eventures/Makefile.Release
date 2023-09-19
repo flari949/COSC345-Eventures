@@ -820,7 +820,11 @@ release\Map_display.obj: src\Map_display.cpp src\Map_display.h \
 		"C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\include\SimpleMarkerSymbol.h" \
 		"C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\include\TextSymbol.h" \
 		"C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\include\SymbolTypes.h" \
-		src\request.h
+		src\request.h \
+		C:\Qt\6.5.2\msvc2019_64\include\QtGui\QMouseEvent \
+		C:\Qt\6.5.2\msvc2019_64\include\QtCore\QUuid \
+		C:\Qt\6.5.2\msvc2019_64\include\QtCore\quuid.h \
+		"C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\include\IdentifyGraphicsOverlayResult.h"
 
 release\qrc_qml.obj: release\qrc_qml.cpp 
 

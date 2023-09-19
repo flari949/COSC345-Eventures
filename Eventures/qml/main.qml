@@ -79,7 +79,7 @@ ApplicationWindow {
                     id: homeButtonArea
                     anchors.fill: parent
 
-                    onClicked: {}
+                    onClicked: {model.setupViewpoint()}
 
                     Rectangle {
                         color: homeButtonArea.pressed ? "#fe817b" : "black"
@@ -257,6 +257,11 @@ ApplicationWindow {
     // Function to iterate over markers
     function switchPoint(next) {
         model.switchViews(next);
+    }
+
+    // Function to focus on active point
+    function findPoint() {
+        model.findPoint();
     }
 }
 

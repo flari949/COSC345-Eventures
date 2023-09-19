@@ -51,6 +51,7 @@ Map_display::Map_display(QObject* parent /* = nullptr */):
 {
 }
 
+
 Map_display::~Map_display()
 {
 }
@@ -61,6 +62,7 @@ MapQuickView* Map_display::mapView() const
     return m_mapView;
 }
 
+
 void Map_display::setupViewpoint()
 {
     // Center the map on Wellington, New Zealand
@@ -68,6 +70,7 @@ void Map_display::setupViewpoint()
     const Viewpoint viewpoint(center, 12000000.0); // You can adjust the scale as needed
     m_mapView->setViewpoint(viewpoint);
 }
+
 
 void Map_display::createGraphics(GraphicsOverlay *overlay)
 {
@@ -193,6 +196,14 @@ void Map_display::setZoom(bool magnify)
     m_mapView->setViewpointScale(scale);
     emit mapViewChanged();
 };
+
+
+// Find most recent (active) point
+void Map_display::findPoint()
+{
+    transition_coords(Map_display::activePoints[Map_display::currIndex]);
+    emit mapViewChanged();
+}
 
 
 // Switch between marker views
