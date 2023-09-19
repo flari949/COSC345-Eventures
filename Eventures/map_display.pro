@@ -32,6 +32,7 @@ equals(QT_MAJOR_VERSION, 6) {
 		error("$$TARGET requires Qt 6.5.1")
 	}
 }
+RC_ICONS = appicon.ico
 
 ARCGIS_RUNTIME_VERSION = 200.2.0
 include($$PWD/include/arcgisruntime.pri)
