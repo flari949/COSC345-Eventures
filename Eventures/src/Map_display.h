@@ -63,9 +63,13 @@ private:
     void connectSignals();
     void showInfo(int index);
 
+    // Maintain list of active point graphics
     std::vector<Esri::ArcGISRuntime::Point> activePoints;
+    // Description associated with active points
     std::vector<std::vector<std::string>> eventInfo;
+    // Index of the currently highlighted point
     int currIndex = 0;
+    // Number of results under search returned so far
     int results = 0;
 
     Esri::ArcGISRuntime::Map* m_map = nullptr;

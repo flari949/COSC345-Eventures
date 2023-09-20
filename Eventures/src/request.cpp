@@ -74,13 +74,13 @@ std::vector<std::map<std::string, std::string>> get_events(
     static std::string start_date = ""; // Defaults to now; format : YYYY-MM-DD
     static std::string end_date = ""; // Defaults to 3 years from now; format : YYYY-MM-DD
     static std::string num_rows = "20"; // Number of rows (items) to return --> Max : 20
-    static std::string row_offset = ""; // Row offset - for paging
+    static std::string row_offset = "0"; // Row offset - for paging
 
     // If function called as setter
     if (!get){
         // If parameter blank, substitute with previous. Use of null character "|" represents empty parameter
         search = (search_i == "|") ? "" : (search_i != "") ? search_i : search;
-        fields = (fields_i == "|") ? "" : (fields_i != "") ? "name,url,description~150,datetime_start,datetime_end,point,location_summary" : fields;
+        fields = (fields_i == "|") ? "" : (fields_i != "") ? fields_i : fields;
         coords = (coords_i != "") ? coords_i : coords;
         radius = (radius_i != "") ? radius_i : radius;
         start_date = (start_date_i != "") ? start_date_i : start_date;

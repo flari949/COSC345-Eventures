@@ -63,11 +63,12 @@ MapQuickView* Map_display::mapView() const
 }
 
 
+// Set up a basic default map view
 void Map_display::setupViewpoint()
 {
     // Center the map on Wellington, New Zealand
     const Point center(173.07275377115386,-41.35249807015349, SpatialReference::wgs84());
-    const Viewpoint viewpoint(center, 12000000.0); // You can adjust the scale as needed
+    const Viewpoint viewpoint(center, 12000000.0);
     m_mapView->setViewpoint(viewpoint);
 }
 
@@ -94,6 +95,7 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
     Map_display::eventInfo.resize(static_cast<int>(points.size()));
 
     int index = 0;
+    int eventptr = 0;
     for (auto const& location : points) {
         double lat = std::stod(location.first.first);
         double lng = std::stod(location.first.second);
@@ -101,7 +103,7 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
         // Number of events at location
         int occurrences = location.second;
         for (int itr = 0; itr < occurrences; itr++) {
-            Map_display::eventInfo[index].push_back(dataStrings[itr]);
+            Map_display::eventInfo[index].push_back(dataStrings[eventptr++]);
         }
 
         // Create a point using the event's latitude and longitude
@@ -174,13 +176,20 @@ void Map_display::transition_coords(Point center)
 // Parse new search parameters to EventFinda API
 void Map_display::searchHandler(const QString &text, int page)
 {
+    // If to page to previous, decrement result counter appropriately
+    int rem = Map_display::results%20;
+    int currpage = ((Map_display::results-rem)/20)-1;
+    if (rem == 0) rem = 20;
+    if (page < currpage){
+        Map_display::results -= (20 + rem);
+    }
+
     int offset = page * 20;
-    if (page > 0) {
+    if (page == 0) {
         Map_display::results = 0;
     }
     // Update API parameters using data retrieval URL setter function
-    std::vector<std::map<std::string, std::string>> eventarr = get_events(
-        text.toStdString(), "", "", "", "" , "", "20", std::to_string(offset), false);
+    get_events(text.toStdString(), "", "", "", "" , "", "20", std::to_string(offset), false);
 
     // Clear existing graphical overlays
     m_mapView->graphicsOverlays()->clear();
@@ -190,8 +199,8 @@ void Map_display::searchHandler(const QString &text, int page)
     createGraphics(overlay);
     m_mapView->graphicsOverlays()->append(overlay);
 
-    // Find function auto invoke
-    transition_coords(Map_display::activePoints[0]);
+    // Auto invoke find function
+//    transition_coords(Map_display::activePoints[0]);
 
     emit mapViewChanged();
 }
@@ -236,9 +245,10 @@ void Map_display::switchViews(bool next)
 void Map_display::showInfo(int index)
 {
     int numItems = static_cast<int>(Map_display::eventInfo[index].size());
+    // Retrieve each item at a given point
     for (int itr = 0; itr < numItems; itr++) {
         std::string desc = Map_display::eventInfo[index][itr];
-//        std::cout << desc << std::endl;
+//        std::cout << index << " : " << desc << std::endl;
     }
 }
 
@@ -258,27 +268,35 @@ void Map_display::connectSignals()
         auto identifyResult = std::unique_ptr<IdentifyGraphicsOverlayResult>(rawIdentifyResult);
         if (identifyResult && !identifyResult->graphics().empty()) {
             Esri::ArcGISRuntime::Graphic* clickedGraphic = identifyResult->graphics().at(0);
-            transition_coords(Map_display::activePoints[clickedGraphic->property("id").toInt()]);
-            showInfo(clickedGraphic->property("id").toInt());
+            int pointID = clickedGraphic->property("id").toInt();
+            Map_display::currIndex = pointID;
+            transition_coords(Map_display::activePoints[pointID]);
+            showInfo(pointID);
         }
     });
 }
 
 
-// Check neighbouring page populated
+// Check neighbouring pages populated
 int Map_display::checkPage(bool next) {
-    int page = (Map_display::results/20)-1;
+    int rem = Map_display::results % 20;
+    int page = ((Map_display::results - rem) /20)-1;
+    if (page <= -1) page = 0;
+
     if (next) {
         // If current page full (following page can exist)
         if (Map_display::results % 20 == 0) {
-            get_events("", "|", "", "", "" , "", "1", std::to_string(page+1), false);
+            get_events("", "|", "", "", "" , "", "1", std::to_string((page+1)*20), false);
+            int nextPageSize = static_cast<int>(get_events().size());
+            // Reset params
+            get_events("", "", "", "", "" , "", "20", std::to_string((page)*20), false);
             // If following page exists
-            if (get_events().size() >= 1) {
+            if (nextPageSize >= 1) {
                 return page+1;
             }
         }
     } else {
-        // If previous page exists ----------------------------------------> if paged -> reduce results count
+        // If previous page exists
         if (page > 0) {
             return page-1;
         }
@@ -286,6 +304,7 @@ int Map_display::checkPage(bool next) {
     // If page does not exist
     return -1;
 }
+
 
 
 

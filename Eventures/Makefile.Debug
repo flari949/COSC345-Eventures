@@ -19,7 +19,7 @@ CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStri
 INCPATH       = -I. -I"C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\include" -I"C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\include\LocalServer" -Isrc -Iinclude -IC:\Qt\6.5.2\msvc2019_64\include -IC:\Qt\6.5.2\msvc2019_64\include\QtQuickControls2 -IC:\Qt\6.5.2\msvc2019_64\include\QtQuick -IC:\Qt\6.5.2\msvc2019_64\include\QtOpenGL -IC:\Qt\6.5.2\msvc2019_64\include\QtMultimedia -IC:\Qt\6.5.2\msvc2019_64\include\QtGui -IC:\Qt\6.5.2\msvc2019_64\include\QtQmlModels -IC:\Qt\6.5.2\msvc2019_64\include\QtQml -IC:\Qt\6.5.2\msvc2019_64\include\QtQmlIntegration -IC:\Qt\6.5.2\msvc2019_64\include\QtWebSockets -IC:\Qt\6.5.2\msvc2019_64\include\QtNetwork -IC:\Qt\6.5.2\msvc2019_64\include\QtPositioning -IC:\Qt\6.5.2\msvc2019_64\include\QtSensors -IC:\Qt\6.5.2\msvc2019_64\include\QtCore -Idebug -I/include -IC:\Qt\6.5.2\msvc2019_64\mkspecs\win32-msvc 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /IGNORE:4099 /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = /LIBPATH:"C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\windows\x64\bin" /LIBPATH:"C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\windows\x64\lib" "C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\windows\x64\lib\EsriCommonQtd.lib" "C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\windows\x64\lib\EsriRuntimeQtd.lib" Ole32.lib /LIBPATH:C:\Users\user\Documents\GitHub\COSC345-Project\Eventures\include\lib C:\Users\user\Documents\GitHub\COSC345-Project\Eventures\include\lib\libcurl.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6QuickControls2d.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Quickd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6OpenGLd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Multimediad.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Guid.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6QmlModelsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Qmld.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6WebSocketsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Networkd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Positioningd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Sensorsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Cored.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6EntryPointd.lib shell32.lib  
+LIBS          = /LIBPATH:"C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\windows\x64\bin" /LIBPATH:"C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\windows\x64\lib" "C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\windows\x64\lib\EsriCommonQtd.lib" "C:\Program Files\ArcGIS SDKs\Qt200.2.0\sdk\windows\x64\lib\EsriRuntimeQtd.lib" Ole32.lib /LIBPATH:C:\Users\user\Documents\GitHub\COSC345-Project\Eventures\include\lib C:\Users\user\Documents\GitHub\COSC345-Project\Eventures\include\lib\libcurl.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6QuickControls2d.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Quickd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6OpenGLd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Multimediad.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Guid.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6QmlModelsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Qmld.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6WebSocketsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Networkd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Positioningd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Sensorsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Cored.lib debug\map_display_resource.res C:\Qt\6.5.2\msvc2019_64\lib\Qt6EntryPointd.lib shell32.lib  
 QMAKE         = C:\Qt\6.5.2\msvc2019_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\map_display_resource.res
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -150,11 +150,14 @@ DESTDIR_TARGET = debug\map_display.exe
 first: all
 all: Makefile.Debug  debug\map_display.exe
 
-debug\map_display.exe: C:\Qt\6.5.2\msvc2019_64\lib\Qt6QuickControls2d.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Quickd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6OpenGLd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Multimediad.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Guid.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6QmlModelsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Qmld.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6WebSocketsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Networkd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Positioningd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Sensorsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Cored.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6EntryPointd.lib $(OBJECTS) 
+debug\map_display.exe: C:\Qt\6.5.2\msvc2019_64\lib\Qt6QuickControls2d.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Quickd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6OpenGLd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Multimediad.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Guid.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6QmlModelsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Qmld.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6WebSocketsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Networkd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Positioningd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Sensorsd.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6Cored.lib C:\Qt\6.5.2\msvc2019_64\lib\Qt6EntryPointd.lib $(OBJECTS) debug\map_display_resource.res
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
 debug\data_fetch.obj debug\event_url.obj debug\process_raw.obj debug\request.obj debug\main.obj debug\Map_display.obj debug\qrc_qml.obj debug\moc_Map_display.obj
 $(LIBS)
 <<
+
+debug\map_display_resource.res: map_display_resource.rc
+	rc /NOLOGO -D_DEBUG $(DEFINES) -fo debug\map_display_resource.res map_display_resource.rc
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug map_display.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -167,6 +170,7 @@ dist:
 clean: compiler_clean 
 	-$(DEL_FILE) debug\data_fetch.obj debug\event_url.obj debug\process_raw.obj debug\request.obj debug\main.obj debug\Map_display.obj debug\qrc_qml.obj debug\moc_Map_display.obj
 	-$(DEL_FILE) debug\map_display.vc.pdb debug\map_display.ilk debug\map_display.idb
+	-$(DEL_FILE) debug\map_display_resource.res
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash debug\map_display.pdb

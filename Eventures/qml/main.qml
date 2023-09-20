@@ -40,7 +40,7 @@ ApplicationWindow {
             }
 
             Image {
-                source: "images/idea9.png" // Set the path to your image
+                source: "images/idea9.png"
                 width: 40 // Set the width of the image
                 height: 40 // Set the height of the image
             }
@@ -49,7 +49,7 @@ ApplicationWindow {
         CustomMenuItem {
             text: "Eventures"
             onClicked: {
-                // Handle the button click event for "Eventures"
+                // Handle the button click event
             }
             anchors {
                 right: parent.right
@@ -239,6 +239,7 @@ ApplicationWindow {
     }
 
     ZoomButtons {
+        id: buttonsCol
         anchors.fill: parent
         anchors.bottomMargin: 30
         anchors.rightMargin: 10
@@ -247,16 +248,12 @@ ApplicationWindow {
     // Function to parse search values and update graphics
     function searchSubmit() {
         model.searchHandler(searchBar.text, 0);
+        buttonsCol.reload();
     }
 
     // Function to change zoom
     function zoom(inc) {
         model.setZoom(inc);
-    }
-
-    // Function to iterate over markers
-    function switchPoint(next) {
-        model.switchViews(next);
     }
 
     // Function to focus on active point
