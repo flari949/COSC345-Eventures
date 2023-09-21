@@ -42,6 +42,7 @@
 #include <QUuid>
 #include "TaskWatcher.h"
 #include "IdentifyGraphicsOverlayResult.h"
+#include "CoordinateFormatter.h"
 
 using namespace Esri::ArcGISRuntime;
 
@@ -67,7 +68,7 @@ MapQuickView* Map_display::mapView() const
 void Map_display::setupViewpoint()
 {
     // Center the map on Wellington, New Zealand
-    const Point center(173.07275377115386,-41.35249807015349, SpatialReference::wgs84());
+    const Point center(173.0728,-41.3564, SpatialReference::wgs84());
     const Viewpoint viewpoint(center, 12000000.0);
     m_mapView->setViewpoint(viewpoint);
 }
@@ -212,6 +213,7 @@ void Map_display::setZoom(bool magnify)
     double scale = m_mapView->mapScale();
     scale *= (magnify) ? 0.8 : 1.2;
     m_mapView->setViewpointScale(scale);
+
     emit mapViewChanged();
 };
 
@@ -303,6 +305,22 @@ int Map_display::checkPage(bool next) {
     }
     // If page does not exist
     return -1;
+}
+
+
+// Get coordinates at the centre of the map - Maintains search parameter
+void Map_display::mapCentre() {
+    Point center = m_mapView->screenToLocation(m_mapView->width()/2, m_mapView->height()/2);
+    std::string coords = Esri::ArcGISRuntime::CoordinateFormatter::toLatitudeLongitude(
+                             center, Esri::ArcGISRuntime::LatitudeLongitudeFormat::DecimalDegrees, 4).toStdString();
+    std::string lat = coords.substr(0,7);
+    std::string lng = coords.substr(9,8);
+    if (coords[7] == 'S') lat = "-" + lat;
+    if (coords[17] == 'W') lng = "-" + lng;
+
+    // Update API parameters using data retrieval URL setter function
+    get_events("", "", lat + "," + lng, std::to_string(m_mapView->mapScale()/11000), "" , "", "20", "", false);
+    searchHandler("", 0);
 }
 
 

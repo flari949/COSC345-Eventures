@@ -48,6 +48,7 @@ public:
     Q_INVOKABLE void findPoint();
     Q_INVOKABLE int checkPage(bool next);
     Q_INVOKABLE void setupViewpoint();
+    Q_INVOKABLE void mapCentre();
 
 
 signals:
