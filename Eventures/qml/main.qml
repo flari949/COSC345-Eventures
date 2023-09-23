@@ -171,7 +171,7 @@ ApplicationWindow {
 
     Rectangle {
         id: searchRectangle
-        width: parent.width - 80 // Span the full width of the parent
+        width: parent.width - 70 // Span the full width of the parent
         height: 50 // Set the height of the search bar area
         color: "black" // Set the background color of the search bar area
         anchors.top: parent.top // Position it below the top bar
@@ -181,11 +181,12 @@ ApplicationWindow {
 
         Rectangle {
                 id: inputFieldBackground
-                width: parent.width - 100
+                width: parent.width
                 height: parent.height - 10
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left;
                 anchors.leftMargin: 20
+                anchors.right: parent.right;
                 color: "black"
                 radius: 20
 
@@ -209,23 +210,26 @@ ApplicationWindow {
                         }
                     }
 
+
+
         Item {
                 anchors.top: searchRectangle.top
-                anchors.topMargin: 5 // Position 10 pixels below the top of the inputFieldBackground
+                anchors.topMargin: 5
 
-                anchors.right: parent.right
-                anchors.rightMargin: 100 // Adjust the right margin as needed
+                anchors.right: inputFieldBackground.right
+                anchors.rightMargin: 45
 
                 Rectangle {
-                    width: 80
+                    width: 40
                     height: 40
                     color: "#fe817b"
-                    radius: 5 // You can adjust the radius to round the corners if needed
+                    radius: 30
 
-                    Text {
+                    Image {
                         anchors.centerIn: parent
-                        text: "Go!"
-                        color: "white" // Set the text color to white or any desired color
+                        source: "images/search.png"
+                        width: 15
+                        height: 15
                     }
 
                     MouseArea {
@@ -238,11 +242,13 @@ ApplicationWindow {
         }
     }
 
+    TicketRectangle {
+
+       }
+
     ZoomButtons {
         id: buttonsCol
         anchors.fill: parent
-        anchors.bottomMargin: 30
-        anchors.rightMargin: 10
     }
 
     // Function to parse search values and update graphics

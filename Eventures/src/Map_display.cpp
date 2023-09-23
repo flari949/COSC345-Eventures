@@ -247,8 +247,11 @@ void Map_display::showInfo(int index)
     int numItems = static_cast<int>(Map_display::eventInfo[index].size());
     // Retrieve each item at a given point
     for (int itr = 0; itr < numItems; itr++) {
-        std::string desc = Map_display::eventInfo[index][itr];
-//        std::cout << index << " : " << desc << std::endl;
+      std::string desc = Map_display::eventInfo[index][itr];
+
+        m_eventInformation = QString::fromStdString(Map_display::eventInfo[index][itr]);
+        emit eventInfoChanged();
+     // std::cout << index << " : " << desc << std::endl;
     }
 }
 
@@ -271,9 +274,26 @@ void Map_display::connectSignals()
             int pointID = clickedGraphic->property("id").toInt();
             Map_display::currIndex = pointID;
             transition_coords(Map_display::activePoints[pointID]);
+
+            // shows the event information, and ensures the qml is visible on click
             showInfo(pointID);
+            setTicketVisible(true);
+
         }
     });
+}
+
+bool Map_display::isTicketVisible() const
+{
+    return m_ticketVisible;
+}
+
+void Map_display::setTicketVisible(bool visible)
+{
+    if (m_ticketVisible != visible) {
+      m_ticketVisible = visible;
+      emit ticketVisibleChanged(visible);
+    }
 }
 
 
