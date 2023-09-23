@@ -57,6 +57,7 @@ public:
     Q_INVOKABLE void setupViewpoint();
     void setTicketVisible(bool visible);
     bool isTicketVisible() const;
+    Q_INVOKABLE void mapCentre();
 
 
 signals:
