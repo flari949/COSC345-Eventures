@@ -42,7 +42,7 @@ Item {
 
 
     onClicked: {
-                ticketVisible = false; // Set to false to hide the ticketRectangle
+                model.ticketVisible = false; // Set to false to hide the ticketRectangle
             }
 
     Image {

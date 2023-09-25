@@ -39,10 +39,6 @@ class Map_display : public QObject
 
     Q_PROPERTY(Esri::ArcGISRuntime::MapQuickView* mapView READ mapView WRITE setMapView NOTIFY mapViewChanged)
     Q_PROPERTY(bool ticketVisible READ isTicketVisible WRITE setTicketVisible NOTIFY ticketVisibleChanged)
-    Q_PROPERTY(QString eventTitle READ eventTitle NOTIFY eventInfoChanged)
-    Q_PROPERTY(QString eventDate READ eventDate NOTIFY eventInfoChanged)
-    Q_PROPERTY(QString eventLocation READ eventLocation NOTIFY eventInfoChanged)
-    Q_PROPERTY(QString eventLink READ eventLink NOTIFY eventInfoChanged)
     Q_PROPERTY(QString eventInformation READ eventInformation NOTIFY eventInfoChanged)
 
 
@@ -76,15 +72,7 @@ private:
     void transition_coords(Esri::ArcGISRuntime::Point point);
     void connectSignals();
     bool m_ticketVisible = false; // Initial value is false
-    QString m_eventTitle;
-    QString m_eventDate;
-    QString m_eventLocation;
-    QString m_eventLink;
     QString m_eventInformation;
-    QString eventTitle() const { return m_eventTitle; }
-    QString eventDate() const { return m_eventDate; }
-    QString eventLocation() const { return m_eventLocation; }
-    QString eventLink() const { return m_eventLink; }
     QString eventInformation() const { return m_eventInformation; }
 
     void showInfo(int index);
