@@ -23,14 +23,17 @@ Item {
 
     Column {
         id: col
-        anchors.bottom: parent.bottom
+        anchors.top: parent.top
+        anchors.topMargin: 120
+        anchors.rightMargin: 10
         anchors.right: parent.right
-        spacing: 10
+
+        //spacing: 10
 
 
         Button {
-            width: 40
-            height: 40
+            width: 30
+            height: 30
 
             MouseArea {
                 id: getCentre
@@ -64,8 +67,8 @@ Item {
 
 
         Button {
-            width: 40
-            height: 40
+            width: 30
+            height: 30
 
 
             MouseArea {
@@ -82,18 +85,18 @@ Item {
                     height: parent.height
                 }
 
-                Text {
+                Image {
                     anchors.centerIn: parent
-                    text: ">"
-                    width: 20
-                    height: 20
+                    source: "images/angle-left.png"
+                    width: 15
+                    height: 15
                 }
             }
         }
 
         Button {
-            width: 40
-            height: 40
+            width: 30
+            height: 30
 
             MouseArea {
                 id: prevItem
@@ -109,27 +112,20 @@ Item {
                     height: parent.height
                 }
 
-                Text {
+                Image {
                     anchors.centerIn: parent
-                    text: "<"
-                    width: 20
-                    height: 20
+                    source: "images/angle-right.png"
+                    width: 15
+                    height: 15
                 }
             }
         }
 
 
-        // Spacer item
-        Item {
-            width: 1
-            height: 40
-        }
-
-
         Button {
             id: inc
-            width: 40
-            height: 40
+            width: 30
+            height: 30
             property int valid: model.checkPage(true)
 
 
@@ -150,19 +146,19 @@ Item {
                     height: parent.height
                 }
 
-                Text {
+                Image {
                     anchors.centerIn: parent
-                    text: ">>"
-                    width: 20
-                    height: 20
+                    source: "images/angle-double-left.png"
+                    width: 15
+                    height: 15
                 }
             }
         }
 
         Button {
             id: dec
-            width: 40
-            height: 40
+            width: 30
+            height: 30
             property int valid: model.checkPage(false)
 
 
@@ -183,26 +179,26 @@ Item {
                     height: parent.height
                 }
 
-                Text {
+                Image {
                     anchors.centerIn: parent
-                    text: "<<"
-                    width: 20
-                    height: 20
+                    source: "images/angle-double-right.png"
+                    width: 15
+                    height: 15
                 }
             }
         }
+    }
 
-
-        // Spacer item
-        Item {
-            width: 1
-            height: 40
-        }
+    Column {
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.bottomMargin: 30
+        anchors.rightMargin: 10
 
 
         Button {
-            width: 40
-            height: 40
+            width: 30
+            height: 30
 
 
             MouseArea {
@@ -229,8 +225,9 @@ Item {
         }
 
         Button {
-            width: 40
-            height: 40
+            width: 30
+            height: 30
+
 
             MouseArea {
                 id: minusButtonArea

@@ -81,12 +81,14 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
     Map_display::results += static_cast<int>(eventarr.size());
     Map_display::eventInfo.clear();
 
+
     // Get unique location coordinates & repetition count - prevents layering markers
     std::map<std::pair<std::string, std::string>, int> points;
     std::vector<std::string> dataStrings;
 
     for (int itr = 0; itr < eventarr.size(); itr++) {
         dataStrings.push_back(eventarr[itr]["description"]);
+
         // Count point occurrences - can truncate coordinate values for generalization
         points[std::make_pair(eventarr[itr]["lat"], eventarr[itr]["lng"])] += 1;
     }
@@ -238,6 +240,7 @@ void Map_display::switchViews(bool next)
     transition_coords(Map_display::activePoints[index]);
 
     Map_display::currIndex = index;
+    showInfo(index);
 
     emit mapViewChanged();
 }
@@ -249,8 +252,10 @@ void Map_display::showInfo(int index)
     int numItems = static_cast<int>(Map_display::eventInfo[index].size());
     // Retrieve each item at a given point
     for (int itr = 0; itr < numItems; itr++) {
-        std::string desc = Map_display::eventInfo[index][itr];
-//        std::cout << index << " : " << desc << std::endl;
+      //std::string desc = Map_display::eventInfo[index][itr];
+
+        m_eventInformation = QString::fromStdString(Map_display::eventInfo[index][itr]);
+        emit eventInfoChanged();
     }
 }
 
@@ -273,9 +278,27 @@ void Map_display::connectSignals()
             int pointID = clickedGraphic->property("id").toInt();
             Map_display::currIndex = pointID;
             transition_coords(Map_display::activePoints[pointID]);
+
+            // shows the event information, and ensures the qml is visible on click
             showInfo(pointID);
+            setTicketVisible(true);
+
         }
     });
+}
+
+bool Map_display::isTicketVisible() const
+{
+    return m_ticketVisible;
+}
+
+void Map_display::setTicketVisible(bool visible)
+{
+    if (m_ticketVisible != visible) {
+      m_ticketVisible = visible;
+      emit ticketVisibleChanged(visible);
+
+    }
 }
 
 

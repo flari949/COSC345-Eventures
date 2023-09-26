@@ -38,6 +38,9 @@ class Map_display : public QObject
     Q_OBJECT
 
     Q_PROPERTY(Esri::ArcGISRuntime::MapQuickView* mapView READ mapView WRITE setMapView NOTIFY mapViewChanged)
+    Q_PROPERTY(bool ticketVisible READ isTicketVisible WRITE setTicketVisible NOTIFY ticketVisibleChanged)
+    Q_PROPERTY(QString eventInformation READ eventInformation NOTIFY eventInfoChanged)
+
 
 public:
     explicit Map_display(QObject* parent = nullptr);
@@ -48,26 +51,37 @@ public:
     Q_INVOKABLE void findPoint();
     Q_INVOKABLE int checkPage(bool next);
     Q_INVOKABLE void setupViewpoint();
+    void setTicketVisible(bool visible);
+    bool isTicketVisible() const;
     Q_INVOKABLE void mapCentre();
 
 
 signals:
     void mapViewChanged();
+    void ticketVisibleChanged(bool visible);
+    void eventInfoChanged();
+
+
+
 
 
 private:
     Esri::ArcGISRuntime::MapQuickView* mapView() const;
     void setMapView(Esri::ArcGISRuntime::MapQuickView* mapView);
-
     void createGraphics(Esri::ArcGISRuntime::GraphicsOverlay* overlay);
     void transition_coords(Esri::ArcGISRuntime::Point point);
     void connectSignals();
+    bool m_ticketVisible = false; // Initial value is false
+    QString m_eventInformation;
+    QString eventInformation() const { return m_eventInformation; }
+
     void showInfo(int index);
 
     // Maintain list of active point graphics
     std::vector<Esri::ArcGISRuntime::Point> activePoints;
     // Description associated with active points
     std::vector<std::vector<std::string>> eventInfo;
+
     // Index of the currently highlighted point
     int currIndex = 0;
     // Number of results under search returned so far
