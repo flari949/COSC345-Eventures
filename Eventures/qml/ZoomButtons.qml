@@ -38,6 +38,7 @@ Item {
             MouseArea {
                 id: getCentre
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
 
                 onClicked: {
                     getCoords();
@@ -74,7 +75,7 @@ Item {
             MouseArea {
                 id: nextItem
                 anchors.fill: parent
-
+                cursorShape: Qt.PointingHandCursor
                 onClicked: {
                     switchPoint(true);
                 }
@@ -101,6 +102,7 @@ Item {
             MouseArea {
                 id: prevItem
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
 
                 onClicked: {
                     switchPoint(false);
@@ -132,6 +134,7 @@ Item {
             MouseArea {
                 id: incPage
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
 
                 onClicked: {
                     model.searchHandler("", inc.valid)
@@ -165,6 +168,7 @@ Item {
             MouseArea {
                 id: decPage
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
 
                 onClicked: {
                     model.searchHandler("", dec.valid)
@@ -204,6 +208,7 @@ Item {
             MouseArea {
                 id: plusButtonArea
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
 
                 onClicked: {
                     zoom(true);
@@ -232,6 +237,7 @@ Item {
             MouseArea {
                 id: minusButtonArea
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
 
                 onClicked: {
                     zoom(false);
