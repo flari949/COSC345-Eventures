@@ -78,6 +78,7 @@ ApplicationWindow {
                 MouseArea {
                     id: homeButtonArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
 
                     onClicked: {model.setupViewpoint()}
 
@@ -103,6 +104,7 @@ ApplicationWindow {
                 MouseArea {
                     id: heartButtonArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
 
                     onClicked: {}
 
@@ -128,6 +130,7 @@ ApplicationWindow {
                 MouseArea {
                     id: calendarButtonArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
 
                     onClicked: {}
 
@@ -207,6 +210,10 @@ ApplicationWindow {
                             Keys.onReturnPressed: {
                                 searchSubmit();
                             }
+                            MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.IBeamCursor
+                                }
                         }
                     }
 
@@ -234,6 +241,7 @@ ApplicationWindow {
 
                     MouseArea {
                         anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
                         onClicked: {
                             searchSubmit();
                         }
