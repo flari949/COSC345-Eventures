@@ -211,9 +211,9 @@ ApplicationWindow {
                                 searchSubmit();
                             }
                             MouseArea {
-                                    anchors.fill: parent
-                                    cursorShape: Qt.IBeamCursor
-                                }
+                                anchors.fill: parent
+                                cursorShape: Qt.IBeamCursor
+                            }
                         }
                     }
 
