@@ -68,7 +68,7 @@ std::vector<std::map<std::string, std::string>> get_events(
 
     // Set default search parameters
     static std::string search = ""; // General search parameter
-    static std::string fields = "name,url,description,datetime_start,datetime_end,point,location_summary"; // Fields to retrieve
+    static std::string fields = ""; // Fields to retrieve
     static std::string coords = "-41.35249807015349,173.07275377115386"; // Format: latitude,longitude --> Default : Wellington
     static std::string radius = "2000"; // Distance in kilometers -> requires coordinate param be set
     static std::string start_date = ""; // Defaults to now; format : YYYY-MM-DD
@@ -76,10 +76,12 @@ std::vector<std::map<std::string, std::string>> get_events(
     static std::string num_rows = "20"; // Number of rows (items) to return --> Max : 20
     static std::string row_offset = "0"; // Row offset - for paging
 
+    std::string baseVars = "name,url,description,datetime_start,location";
+
     // If function called as setter
     if (!get){
         // If parameter blank, substitute with previous. Use of null character "|" represents empty parameter
-        search = (search_i == "|") ? "" : (search_i != "") ? search_i : search;
+        search = (search_i == "|") ? "" : (search_i != "") ? search_i : baseVars;
         fields = (fields_i == "|") ? "" : (fields_i != "") ? fields_i : fields;
         coords = (coords_i != "") ? coords_i : coords;
         radius = (radius_i != "") ? radius_i : radius;
