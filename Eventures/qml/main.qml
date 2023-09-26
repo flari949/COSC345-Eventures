@@ -251,7 +251,7 @@ ApplicationWindow {
     }
 
     TicketRectangle {
-
+        id: eventInfo
        }
 
     ZoomButtons {
