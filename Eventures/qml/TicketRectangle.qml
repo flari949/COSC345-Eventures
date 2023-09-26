@@ -3,7 +3,28 @@ import QtQuick.Controls 2.4
 
 
 Item {
-    property bool ticketVisible: model.ticketVisible // Bind to the property in your C++ class
+
+    function updateIndex(change) {
+        desc.index += change;
+        model.showInfo(desc.index);
+//        refresh();
+    }
+
+    function refresh() {
+        desc.title = model.getTitle(desc.index);
+        desc.url = model.getUrl(desc.index);
+        desc.date = model.getDate(desc.index);
+        desc.location = model.getLocation(desc.index);
+    }
+
+    id: desc
+    property bool ticketVisible: model.ticketVisible
+    property int index: 0
+    property string title: ""
+    property string url: ""
+    property string date: ""
+    property string location: ""
+
 
     width: 300
     height: 500
@@ -19,7 +40,6 @@ Item {
         height: parent.height
         fillMode: Image.PreserveAspectFit
         visible: ticketVisible // Control visibility based on the property
-
     }
 
     FontLoader {
@@ -34,23 +54,23 @@ Item {
     }
 
     RoundButton{
-    anchors.right: parent.right
-    anchors.rightMargin: 20
-    anchors.top: parent.top
-    anchors.topMargin: 20
-    visible: ticketVisible // Control visibility based on the property
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        anchors.top: parent.top
+        anchors.topMargin: 20
+        visible: ticketVisible // Control visibility based on the property
 
 
-    onClicked: {
-                model.ticketVisible = false; // Set to false to hide the ticketRectangle
-            }
+        onClicked: {
+                    model.ticketVisible = false; // Set to false to hide the ticketRectangle
+                }
 
-    Image {
-        anchors.centerIn: parent
-        source: "images/cross.png"
-        width: 15
-        height: 15
-    }
+        Image {
+            anchors.centerIn: parent
+            source: "images/cross.png"
+            width: 15
+            height: 15
+        }
     }
 
     Rectangle {
@@ -83,7 +103,7 @@ Item {
 
                 Text {
                     id: title
-                    text: "Saturday Laughs with David Correos and Neil Thornton"
+                    text: desc.title
                     font.family: customFont.name
                     font.bold: true
                     font.pixelSize: 20
@@ -96,7 +116,7 @@ Item {
                     id: date
                     anchors.top: title.bottom
                     anchors.topMargin: 20
-                    text: "Sat 23 Sep 2023, 8:00pm–9:45pm"
+                    text: desc.date
                     font.pixelSize: 12
                     color: "black"
                     width: parent.width
@@ -107,7 +127,7 @@ Item {
                     id: location
                     anchors.top: date.bottom
                     anchors.topMargin: 10
-                    text: "Abandoned Taproom, 20 Parumoana Street, Porirua - Mana"
+                    text: desc.location
                     font.pixelSize: 12
                     color: "black"
                     width: parent.width
@@ -118,7 +138,7 @@ Item {
                     id: link
                     anchors.top: location.bottom
                     anchors.topMargin: 10
-                    text: "EventFinda link: "
+                    text: desc.url
                     font.pixelSize: 12
                     color: "black"
                     width: parent.width
@@ -134,11 +154,23 @@ Item {
                     color: "black"
                     width: parent.width
                     wrapMode: Text.WordWrap
+                    onTextChanged: refresh()
                 }
 
+                Button {
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "<"
+                    onClicked: updateIndex(-1)
+                }
+
+                Button {
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: ">"
+                    onClicked: updateIndex(1)
+                }
            }
         }
-
     }
-
 }

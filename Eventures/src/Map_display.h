@@ -54,6 +54,13 @@ public:
     void setTicketVisible(bool visible);
     bool isTicketVisible() const;
     Q_INVOKABLE void mapCentre();
+    Q_INVOKABLE void showInfo(int subIndex);
+
+    Q_INVOKABLE QString getUrl(int i);
+    Q_INVOKABLE QString getTitle(int i);
+    Q_INVOKABLE QString getDate(int i);
+    Q_INVOKABLE QString getLocation(int i);
+
 
 
 signals:
@@ -74,13 +81,12 @@ private:
     bool m_ticketVisible = false; // Initial value is false
     QString m_eventInformation;
     QString eventInformation() const { return m_eventInformation; }
-
-    void showInfo(int index);
+    int formatSubIndex(int i);
 
     // Maintain list of active point graphics
     std::vector<Esri::ArcGISRuntime::Point> activePoints;
     // Description associated with active points
-    std::vector<std::vector<std::string>> eventInfo;
+    std::vector<std::vector<std::vector<std::string>>> eventInfo;
 
     // Index of the currently highlighted point
     int currIndex = 0;

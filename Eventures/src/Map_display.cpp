@@ -84,10 +84,15 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
 
     // Get unique location coordinates & repetition count - prevents layering markers
     std::map<std::pair<std::string, std::string>, int> points;
-    std::vector<std::string> dataStrings;
+    std::vector<std::vector<std::string>> dataStrings;
+    dataStrings.resize(5);
 
     for (int itr = 0; itr < eventarr.size(); itr++) {
-        dataStrings.push_back(eventarr[itr]["description"]);
+        dataStrings[0].push_back(eventarr[itr]["name"]);
+        dataStrings[1].push_back(eventarr[itr]["description"]);
+        dataStrings[2].push_back(eventarr[itr]["url"]);
+        dataStrings[3].push_back(eventarr[itr]["datetime_start"]);
+        dataStrings[4].push_back(eventarr[itr]["location_summary"]);
 
         // Count point occurrences - can truncate coordinate values for generalization
         points[std::make_pair(eventarr[itr]["lat"], eventarr[itr]["lng"])] += 1;
@@ -95,7 +100,10 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
 
     if (points.empty()) return;
     Map_display::activePoints.clear();
-    Map_display::eventInfo.resize(static_cast<int>(points.size()));
+    Map_display::eventInfo.resize(5);
+    for (int itr = 0; itr < 5; itr++) {
+        Map_display::eventInfo[itr].resize(static_cast<int>(points.size()));
+    }
 
     int index = 0;
     int eventptr = 0;
@@ -106,7 +114,10 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
         // Number of events at location
         int occurrences = location.second;
         for (int itr = 0; itr < occurrences; itr++) {
-            Map_display::eventInfo[index].push_back(dataStrings[eventptr++]);
+            for (int i = 0; i < 5; i++) {
+                Map_display::eventInfo[i][index].push_back(dataStrings[i][eventptr]);
+            }
+            eventptr += 1;
         }
 
         // Create a point using the event's latitude and longitude
@@ -240,23 +251,67 @@ void Map_display::switchViews(bool next)
     transition_coords(Map_display::activePoints[index]);
 
     Map_display::currIndex = index;
-    showInfo(index);
+    showInfo(0);
 
     emit mapViewChanged();
 }
 
 
-// Display event info box
-void Map_display::showInfo(int index)
+// Format requested index
+int Map_display::formatSubIndex(int i)
 {
-    int numItems = static_cast<int>(Map_display::eventInfo[index].size());
-    // Retrieve each item at a given point
-    for (int itr = 0; itr < numItems; itr++) {
-      //std::string desc = Map_display::eventInfo[index][itr];
-
-        m_eventInformation = QString::fromStdString(Map_display::eventInfo[index][itr]);
-        emit eventInfoChanged();
+    int numItems = static_cast<int>(Map_display::eventInfo[0][Map_display::currIndex].size());
+    while (i < 0) i += numItems;
+    if (numItems > 0){
+        if (i >= numItems) i = i % numItems;
     }
+    return i;
+}
+
+
+// Get event title
+QString Map_display::getTitle(int subIndex)
+{
+    int index = Map_display::currIndex;
+    subIndex = formatSubIndex(subIndex);
+    return QString::fromStdString(Map_display::eventInfo[0][index][subIndex]);
+}
+
+
+// Display event info box
+void Map_display::showInfo(int subIndex)
+{
+    int index = Map_display::currIndex;
+    subIndex = formatSubIndex(subIndex);
+    m_eventInformation = QString::fromStdString(Map_display::eventInfo[1][index][subIndex]);
+    emit eventInfoChanged();
+}
+
+
+// Get event URL
+QString Map_display::getUrl(int subIndex)
+{
+    int index = Map_display::currIndex;
+    subIndex = formatSubIndex(subIndex);
+    return QString::fromStdString(Map_display::eventInfo[2][index][subIndex]);
+}
+
+
+// Get event date
+QString Map_display::getDate(int subIndex)
+{
+    int index = Map_display::currIndex;
+    subIndex = formatSubIndex(subIndex);
+    return QString::fromStdString(Map_display::eventInfo[3][index][subIndex]);
+}
+
+
+// Get event date
+QString Map_display::getLocation(int subIndex)
+{
+    int index = Map_display::currIndex;
+    subIndex = formatSubIndex(subIndex);
+    return QString::fromStdString(Map_display::eventInfo[4][index][subIndex]);
 }
 
 
@@ -280,7 +335,7 @@ void Map_display::connectSignals()
             transition_coords(Map_display::activePoints[pointID]);
 
             // shows the event information, and ensures the qml is visible on click
-            showInfo(pointID);
+            showInfo(0);
             setTicketVisible(true);
 
         }
