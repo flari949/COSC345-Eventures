@@ -77,6 +77,8 @@ std::vector<std::map<std::string, std::string>> get_events(
     static std::string row_offset = "0"; // Row offset - for paging
 
     std::string baseVars = "name,url,description,datetime_start,location";
+    std::string baseCoords = "-41.35249807015349,173.07275377115386";
+    std::string baseRad = "2000";
 
     // If function called as setter
     if (!get){
@@ -84,7 +86,7 @@ std::vector<std::map<std::string, std::string>> get_events(
         search = (search_i == "|") ? "" : (search_i != "") ? search_i : baseVars;
         fields = (fields_i == "|") ? "" : (fields_i != "") ? fields_i : fields;
         coords = (coords_i != "") ? coords_i : coords;
-        radius = (radius_i != "") ? radius_i : radius;
+        radius = (radius_i == "|") ? baseRad : (radius_i != "") ? radius_i : radius;
         start_date = (start_date_i != "") ? start_date_i : start_date;
         end_date = (end_date_i != "") ? end_date_i : end_date;
         num_rows = (num_rows_i != "") ? num_rows_i : num_rows;

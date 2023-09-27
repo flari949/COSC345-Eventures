@@ -205,6 +205,7 @@ ApplicationWindow {
                                 }
                             }
                             Keys.onReturnPressed: {
+                                model.setupViewpoint();
                                 searchSubmit();
                             }
                         }
