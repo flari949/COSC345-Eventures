@@ -15,6 +15,8 @@ Item {
         desc.url = model.getUrl(desc.index);
         desc.date = model.getDate(desc.index);
         desc.location = model.getLocation(desc.index);
+        nextButton.visible = desc.ticketVisible && model.multiplePoints()
+        prevButton.visible = desc.ticketVisible && model.multiplePoints()
     }
 
     id: desc
@@ -74,11 +76,12 @@ Item {
     }
 
     RoundButton {
+        id: nextButton
         anchors.left: parent.left
         anchors.leftMargin: 30
         anchors.bottom: parent.bottom
-         anchors.bottomMargin: 20
-        visible: ticketVisible
+        anchors.bottomMargin: 20
+        visible: ticketVisible && model.multiplePoints()
         onClicked: updateIndex(-1)
 
         Image {
@@ -90,11 +93,12 @@ Item {
     }
 
     RoundButton {
+        id: prevButton
         anchors.right: parent.right
         anchors.rightMargin: 30
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
-        visible: ticketVisible
+        visible: ticketVisible && model.multiplePoints()
         onClicked: updateIndex(1)
 
         Image {

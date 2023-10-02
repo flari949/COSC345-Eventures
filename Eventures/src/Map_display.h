@@ -60,6 +60,8 @@ public:
     Q_INVOKABLE QString getTitle(int i);
     Q_INVOKABLE QString getDate(int i);
     Q_INVOKABLE QString getLocation(int i);
+    Q_INVOKABLE bool multiplePoints();
+
 
 
 

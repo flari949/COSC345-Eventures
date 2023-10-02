@@ -408,6 +408,11 @@ void Map_display::mapCentre() {
 }
 
 
-
-
+// Check if multiple items exist at location
+bool Map_display::multiplePoints() {
+    if (static_cast<int>(Map_display::eventInfo[0][Map_display::currIndex].size()) > 1) {
+        return true;
+    }
+    return false;
+}
 
