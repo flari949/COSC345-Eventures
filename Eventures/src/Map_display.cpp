@@ -310,7 +310,7 @@ QString Map_display::getDate(int subIndex)
 }
 
 
-// Get event date
+// Get event location
 QString Map_display::getLocation(int subIndex)
 {
     int index = Map_display::currIndex;
@@ -403,8 +403,8 @@ void Map_display::mapCentre() {
     // Update API parameters using data retrieval URL setter function
     get_events("", "", lat + "," + lng, std::to_string(m_mapView->mapScale()/13000), "" , "", "20", "", false);
     searchHandler("", 0);
-    // Reset request params
-    get_events("", "", "", "|", "" , "", "20", "", false);
+    // Reset request params --> Paging unavailable
+    get_events("", "", "|", "|", "" , "", "20", "", false);
 }
 
 

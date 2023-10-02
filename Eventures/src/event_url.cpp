@@ -33,6 +33,5 @@ std::string event_url(const std::string& search, const std::string& fields, cons
     if (!row_offset.empty()) {
         catUrl << "offset=" << row_offset;
     }
-
     return catUrl.str();
 }
