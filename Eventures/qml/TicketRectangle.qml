@@ -15,6 +15,8 @@ Item {
         desc.url = model.getUrl(desc.index);
         desc.date = model.getDate(desc.index);
         desc.location = model.getLocation(desc.index);
+        nextButton.visible = desc.ticketVisible && model.multiplePoints()
+        prevButton.visible = desc.ticketVisible && model.multiplePoints()
     }
 
     id: desc
@@ -73,6 +75,40 @@ Item {
         }
     }
 
+    RoundButton {
+        id: nextButton
+        anchors.left: parent.left
+        anchors.leftMargin: 30
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 20
+        visible: ticketVisible && model.multiplePoints()
+        onClicked: updateIndex(-1)
+
+        Image {
+            anchors.centerIn: parent
+            source: "images/angle-left.png"
+            width: 15
+            height: 15
+        }
+    }
+
+    RoundButton {
+        id: prevButton
+        anchors.right: parent.right
+        anchors.rightMargin: 30
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 20
+        visible: ticketVisible && model.multiplePoints()
+        onClicked: updateIndex(1)
+
+        Image {
+            anchors.centerIn: parent
+            source: "images/angle-right.png"
+            width: 15
+            height: 15
+        }
+    }
+
     Rectangle {
         width: 300
         height: 350
@@ -94,11 +130,9 @@ Item {
             contentHeight: parent.height * 1.5
             ScrollBar.vertical: ScrollBar { id: vbar }
 
-
             Rectangle {
                 id: contentRect
                 width: parent.width - 30
-                height: title.height + date.height + location.height + link.height + information.height
                 color: "transparent"
 
                 Text {
@@ -112,37 +146,56 @@ Item {
                     wrapMode: Text.WordWrap
                 }
 
-                Text {
-                    id: date
+                Rectangle {
+                    id: colorRectangle
+                    width: parent.width
                     anchors.top: title.bottom
-                    anchors.topMargin: 20
-                    text: desc.date
-                    font.pixelSize: 12
-                    color: "black"
-                    width: parent.width
-                    wrapMode: Text.WordWrap
-                }
-
-                Text {
-                    id: location
-                    anchors.top: date.bottom
                     anchors.topMargin: 10
-                    text: desc.location
-                    font.pixelSize: 12
-                    color: "black"
-                    width: parent.width
-                    wrapMode: Text.WordWrap
+                    color: "#fe817b" // Background color for location and date/time
+                    radius: 10 // Adjust the radius for the rounded corners
+
+                    property int totalHeight: date.implicitHeight + 20 + location.implicitHeight
+
+                    height: totalHeight // Set the height of the Rectangle
+
+                    Text {
+                        id: date
+                        anchors.top: parent.top
+                        anchors.topMargin: 5
+                        text: "Date and Start time: " + desc.date
+                        font.pixelSize: 12
+                        color: "black"
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        width: parent.width
+                        wrapMode: Text.WordWrap
+                    }
+
+                    Text {
+                        id: location
+                        anchors.top: date.bottom
+                        anchors.topMargin: 10
+                        text: "Location: " + desc.location
+                        font.pixelSize: 12
+                        color: "black"
+                        width: parent.width
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        wrapMode: Text.WordWrap
+                    }
                 }
 
                 Text {
                     id: link
-                    anchors.top: location.bottom
-                    anchors.topMargin: 10
-                    text: desc.url
+                    anchors.top: colorRectangle.bottom
+                    anchors.topMargin: 20
+                    textFormat: Text.RichText  // Set the textFormat to RichText
+                    text: "Link to event: <a href='" + desc.url + "'>" + desc.url + "</a>"
                     font.pixelSize: 12
-                    color: "black"
+                    color: "black"  // You can set the color to a different color for hyperlinks
                     width: parent.width
                     wrapMode: Text.WordWrap
+                    onLinkActivated: Qt.openUrlExternally(link)
                 }
 
                 Text {
@@ -156,21 +209,8 @@ Item {
                     wrapMode: Text.WordWrap
                     onTextChanged: refresh()
                 }
-
-                Button {
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: "<"
-                    onClicked: updateIndex(-1)
-                }
-
-                Button {
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: ">"
-                    onClicked: updateIndex(1)
-                }
-           }
+            }
         }
+
     }
 }

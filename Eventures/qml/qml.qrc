@@ -28,6 +28,11 @@
         <file>images/ticket.svg</file>
         <file>images/ticketoutlined.svg</file>
         <file>fonts/Mirage.otf</file>
+        <file>images/reset.png</file>
+        <file>images/activepoints.png</file>
+        <file>images/pin.png</file>
+        <file>images/load.png</file>
+        <file>images/load2.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

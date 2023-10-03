@@ -102,52 +102,29 @@ ApplicationWindow {
                 height: 40
 
                 MouseArea {
-                    id: heartButtonArea
+                    id: getCentre
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
 
-                    onClicked: {}
+                    onClicked: {
+                        getCoords();
+                    }
 
                     Rectangle {
-                        color: heartButtonArea.pressed ? "#fe817b" : "black"
+                        color: getCentre.pressed ? "#fe817b" : "black"
                         width: parent.width
                         height: parent.height
                     }
 
                     Image {
                         anchors.centerIn: parent
-                        source: "images/heart.png"
+                        source: "images/load2.png"
                         width: 30
                         height: 30
                     }
                 }
             }
 
-            Button {
-                width: 40
-                height: 40
-
-                MouseArea {
-                    id: calendarButtonArea
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-
-                    onClicked: {}
-
-                    Rectangle {
-                        color: calendarButtonArea.pressed ? "#fe817b" : "black"
-                        width: parent.width
-                        height: parent.height
-                    }
-
-                    Image {
-                        anchors.centerIn: parent
-                        source: "images/calendar.png"
-                        width: 30
-                        height: 30
-                    }
-                }
-            }
         }
     }
 
@@ -193,7 +170,12 @@ ApplicationWindow {
                 color: "black"
                 radius: 20
 
-                TextInput {
+                MouseArea {
+                        id: cursorArea
+                        anchors.fill: parent
+                        cursorShape: Qt.IBeamCursor
+
+                        TextInput {
                             id: searchBar
                             anchors.fill: parent
                             text: "Auckland.."
@@ -205,17 +187,16 @@ ApplicationWindow {
                             onActiveFocusChanged: {
                                 if (activeFocus) {
                                     text = ""; // Clear the placeholder text when clicked
-                                }
+                                 }
                             }
+
                             Keys.onReturnPressed: {
+                                model.setupViewpoint();
                                 searchSubmit();
-                            }
-                            MouseArea {
-                                anchors.fill: parent
-                                cursorShape: Qt.IBeamCursor
                             }
                         }
                     }
+        }
 
 
 
@@ -273,6 +254,11 @@ ApplicationWindow {
     // Function to focus on active point
     function findPoint() {
         model.findPoint();
+    }
+
+    // Function to find central coordinates
+    function getCoords() {
+        model.mapCentre()
     }
 }
 

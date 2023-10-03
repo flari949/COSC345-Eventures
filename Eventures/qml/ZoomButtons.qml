@@ -16,10 +16,6 @@ Item {
         dec.valid=model.checkPage(false)
     }
 
-    // Function to find central coordinates
-    function getCoords() {
-        model.mapCentre()
-    }
 
     Column {
         id: col
@@ -27,44 +23,6 @@ Item {
         anchors.topMargin: 120
         anchors.rightMargin: 10
         anchors.right: parent.right
-
-        //spacing: 10
-
-
-        Button {
-            width: 30
-            height: 30
-
-            MouseArea {
-                id: getCentre
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-
-                onClicked: {
-                    getCoords();
-                }
-
-                Rectangle {
-                    color: getCentre.pressed ? "#fe817b" : "white"
-                    width: parent.width
-                    height: parent.height
-                }
-
-                Text {
-                    anchors.centerIn: parent
-                    text: "|*|"
-                    width: 20
-                    height: 20
-                }
-            }
-        }
-
-
-        // Spacer item
-        Item {
-            width: 1
-            height: 40
-        }
 
 
         Button {
@@ -88,7 +46,7 @@ Item {
 
                 Image {
                     anchors.centerIn: parent
-                    source: "images/angle-left.png"
+                    source: "images/angle-right.png"
                     width: 15
                     height: 15
                 }
@@ -116,7 +74,7 @@ Item {
 
                 Image {
                     anchors.centerIn: parent
-                    source: "images/angle-right.png"
+                    source: "images/angle-left.png"
                     width: 15
                     height: 15
                 }
@@ -151,7 +109,7 @@ Item {
 
                 Image {
                     anchors.centerIn: parent
-                    source: "images/angle-double-left.png"
+                    source: "images/angle-double-right.png"
                     width: 15
                     height: 15
                 }
@@ -185,7 +143,7 @@ Item {
 
                 Image {
                     anchors.centerIn: parent
-                    source: "images/angle-double-right.png"
+                    source: "images/angle-double-left.png"
                     width: 15
                     height: 15
                 }

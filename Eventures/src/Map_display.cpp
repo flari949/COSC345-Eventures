@@ -81,11 +81,10 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
     Map_display::results += static_cast<int>(eventarr.size());
     Map_display::eventInfo.clear();
 
-
     // Get unique location coordinates & repetition count - prevents layering markers
     std::map<std::pair<std::string, std::string>, int> points;
     std::vector<std::vector<std::string>> dataStrings;
-    dataStrings.resize(5);
+    dataStrings.resize(7); // Extend dataStrings to accommodate latitude and longitude
 
     for (int itr = 0; itr < eventarr.size(); itr++) {
         dataStrings[0].push_back(eventarr[itr]["name"]);
@@ -93,34 +92,36 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
         dataStrings[2].push_back(eventarr[itr]["url"]);
         dataStrings[3].push_back(eventarr[itr]["datetime_start"]);
         dataStrings[4].push_back(eventarr[itr]["location_summary"]);
+        dataStrings[5].push_back(eventarr[itr]["lat"]); // Store latitude in dataStrings
+        dataStrings[6].push_back(eventarr[itr]["lng"]); // Store longitude in dataStrings
 
-        // Count point occurrences - can truncate coordinate values for generalization
-        points[std::make_pair(eventarr[itr]["lat"], eventarr[itr]["lng"])] += 1;
+        // Count point occurrences using the unique location identifier
+        points[std::make_pair(dataStrings[5][itr], dataStrings[6][itr])] += 1;
     }
 
     if (points.empty()) return;
     Map_display::activePoints.clear();
-    Map_display::eventInfo.resize(5);
-    for (int itr = 0; itr < 5; itr++) {
+    Map_display::eventInfo.resize(7); // Extend eventInfo to accommodate latitude and longitude
+    for (int itr = 0; itr < 7; itr++) {
         Map_display::eventInfo[itr].resize(static_cast<int>(points.size()));
     }
 
     int index = 0;
     int eventptr = 0;
     for (auto const& location : points) {
-        double lat = std::stod(location.first.first);
-        double lng = std::stod(location.first.second);
+        double lat = std::stod(dataStrings[5][eventptr]);
+        double lng = std::stod(dataStrings[6][eventptr]);
 
         // Number of events at location
         int occurrences = location.second;
         for (int itr = 0; itr < occurrences; itr++) {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 7; i++) {
                 Map_display::eventInfo[i][index].push_back(dataStrings[i][eventptr]);
             }
             eventptr += 1;
         }
 
-        // Create a point using the event's latitude and longitude
+        // Create a point using the event's latitude and longitude from dataStrings
         Point point(lng, lat, SpatialReference::wgs84());
 
         PictureMarkerSymbol* point_symbol = new PictureMarkerSymbol(QUrl("qrc:/qml/images/marker4.png"), this);
@@ -148,12 +149,14 @@ void Map_display::createGraphics(GraphicsOverlay *overlay)
             // Add both the circle and text graphics to the combined overlay
             combinedOverlay->graphics()->append(circleGraphic);
             combinedOverlay->graphics()->append(textGraphic);
+
         }
         Map_display::activePoints.push_back(point);
     }
 
     return;
 }
+
 
 
 // Set the view (created in QML)
@@ -285,6 +288,7 @@ void Map_display::showInfo(int subIndex)
     subIndex = formatSubIndex(subIndex);
     m_eventInformation = QString::fromStdString(Map_display::eventInfo[1][index][subIndex]);
     emit eventInfoChanged();
+
 }
 
 
@@ -306,7 +310,7 @@ QString Map_display::getDate(int subIndex)
 }
 
 
-// Get event date
+// Get event location
 QString Map_display::getLocation(int subIndex)
 {
     int index = Map_display::currIndex;
@@ -397,11 +401,18 @@ void Map_display::mapCentre() {
     if (coords[17] == 'W') lng = "-" + lng;
 
     // Update API parameters using data retrieval URL setter function
-    get_events("", "", lat + "," + lng, std::to_string(m_mapView->mapScale()/11000), "" , "", "20", "", false);
+    get_events("", "", lat + "," + lng, std::to_string(m_mapView->mapScale()/13000), "" , "", "20", "", false);
     searchHandler("", 0);
+    // Reset request params --> Paging unavailable
+    get_events("", "", "|", "|", "" , "", "20", "", false);
 }
 
 
-
-
+// Check if multiple items exist at location
+bool Map_display::multiplePoints() {
+    if (static_cast<int>(Map_display::eventInfo[0][Map_display::currIndex].size()) > 1) {
+        return true;
+    }
+    return false;
+}
 
