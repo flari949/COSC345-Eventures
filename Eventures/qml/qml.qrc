@@ -33,6 +33,16 @@
         <file>images/pin.png</file>
         <file>images/load.png</file>
         <file>images/load2.png</file>
+        <file>UserGuide.qml</file>
+        <file>images/white-angle-double-left.png</file>
+        <file>images/white-angle-double-right.png</file>
+        <file>images/white-angle-left.png</file>
+        <file>images/white-angle-right.png</file>
+        <file>images/white-search.png</file>
+        <file>images/white-marker.png</file>
+        <file>images/white-minus.png</file>
+        <file>images/white-plus.png</file>
+        <file>images/help.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>
