@@ -125,6 +125,40 @@ ApplicationWindow {
                 }
             }
 
+            Button {
+                width: 40
+                height: 40
+
+                MouseArea {
+                    id: infoButtonArea
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+
+                    onClicked: {
+                       //desc.guideVisible = !desc.guideVisible;
+                        userGuide.visible = true
+                        // userGuide.guideVisible = !userGuide.guideVisible; // Toggle visibility
+                        //infoPopup.open()
+                    }
+
+                    Rectangle {
+                        color: infoButtonArea.pressed ? "#fe817b" : "black"
+                        width: parent.width
+                        height: parent.height
+                    }
+
+                    Image {
+                        anchors.centerIn: parent
+                        source: "images/help.png"
+                        width: 30
+                        height: 30
+                    }
+                }
+            }
+
+            UserGuide{
+                id: userGuide
+            }
         }
     }
 
