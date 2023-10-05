@@ -75,13 +75,16 @@ Item {
         }
     }
 
-    RoundButton {
-        id: nextButton
+    Rectangle{
+        visible: ticketVisible && model.multiplePoints()
         anchors.left: parent.left
         anchors.leftMargin: 30
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 20
-        visible: ticketVisible && model.multiplePoints()
+        anchors.bottomMargin: 50
+
+    RoundButton {
+        id: nextButton
+        visible: false //&& model.multiplePoints()
         onClicked: updateIndex(-1)
 
         Image {
@@ -92,13 +95,17 @@ Item {
         }
     }
 
+    }
+
+    Rectangle{
+        visible: ticketVisible && model.multiplePoints()
+        anchors.right: parent.right
+        anchors.rightMargin: 60
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 50
+
     RoundButton {
         id: prevButton
-        anchors.right: parent.right
-        anchors.rightMargin: 30
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 20
-        visible: ticketVisible && model.multiplePoints()
         onClicked: updateIndex(1)
 
         Image {
@@ -107,6 +114,7 @@ Item {
             width: 15
             height: 15
         }
+    }
     }
 
     Rectangle {
