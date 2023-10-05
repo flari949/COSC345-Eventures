@@ -8,9 +8,8 @@ Popup {
     property bool guideVisible: true
     width: 300
     height: 500
-    x: 35//parent.width / 2 - width /3
-    y: -270 // parent.height / 2 - height / 3
-
+    x: 35   //parent.width / 2 - width /3
+    y: -270
     background: Rectangle{
         color: "transparent"
     }
@@ -340,7 +339,7 @@ Popup {
                     id: doubleLeftArrowButtonText
                     width: 180
                     font.italic: true
-                    text: "What this button does..."
+                    text: "View the previous page of results"
                     font.pixelSize: 12
                     color: "black"
                     wrapMode: Text.WordWrap
@@ -371,7 +370,7 @@ Popup {
                     id: doubleRightArrowButtonText
                     width: 180
                     font.italic: true
-                    text: "What this button does..."
+                    text: "View the next page of results"
                     font.pixelSize: 12
                     color: "black"
                     wrapMode: Text.WordWrap
