@@ -16,8 +16,52 @@ The Eventures application project is a group project for the COSC345 university 
 ### What is Eventures
 > Eventures aims to combine [EventFinda](eventfinda.co.nz) event data along with [ArcGIS](https://www.arcgis.com/apps/mapviewer/index.html) geographical mapping services data to superimpose event data on a visual interface for a unique and valuable exploration and discovery application.
 
+### Table of Contents
+- [User guide](#user-guide)
+- [Installation Guide](#installation-guide)
+- [Prerequisites](#prerequisites)
+- [Project Setup with QT](#project-setup-with-qt)
+  - [Compiling](#compiling)
+  - [Qt Runtime Dependencies (For deployment)](#copy-qt-runtime-dependencies-for-deployment)
+  - [Running The Executable](#running-the-executable)
+- [Project Setup with Command line](#project-setup-with-command-line)
+  - [Compilation](#compilation)
+  - [Copy Qt Runtime Dependencies (For Deployment)](#copy-qt-runtime-dependencies-for-deployment)
+  - [Running The Executable](#running-the-executable)
+- [Discord](#discord)
+- [Artifact Generation](#artifact-generation)
+- [Target Audience](#target-audience)
+- [The Group](#the-group)
+- [Contributions](#contributions)
+
 ### Eventures Questionnaire
 Link to Questionnaire: https://www.surveymonkey.com/r/QFQFH97
+
+### User Guide
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/720caf3e-bd5d-47e8-b844-14f6d75acd27" widht = 800 height = 400>
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/809a6bdf-140c-4f32-b739-c62501c17427" width = "20" height = "20">  *Filter events by search location*
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/665961b1-8889-4b47-9111-bc20801f6ef0" width = "20" height = "20">  *Represents event at a location*
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/ae3e18d5-fa16-4ac6-acdc-f030cb8ee689" width = "20" height = "20">  *Reset map to default view*
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/9fa5bacb-0f96-4941-8f57-964ff74cfe42" width = "20" height = "20">  *Refresh events in area*
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/db8e761e-cab5-4c3f-a2a1-124aa6977727" width = "20" height = "20">  *View previous event*
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/0a342979-1275-49a7-8d5c-a92799d673bd" width = "20" height = "20">  *View next event*
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/9aae6d12-db97-4df7-8662-983ca11dd08f" width = "20" height = "20">  *View previous page of events*
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/7ac7c18b-ee0d-4c29-b58f-a5152987f75b" width = "20" height = "20">  *View next page of events*
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/9211a7c8-8774-4bf5-9d4c-1d154e2e6159" width = "20" height = "20"> *Zoom in to map view*
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/49710ee6-7364-4db3-9a1b-58703ee8fe3b" width = "20" height = "20">  *Zoom out of map view*
+
+<img src="https://github.com/KKristie/COSC345-Eventures/assets/112597138/2122ceba-1106-4d39-a4f8-9a5ae110b48f" width = "20" height = "20">  *Show in-app user guide*
 
 ## Installation Guide
 **Tested with Software Versions:**
@@ -144,6 +188,7 @@ There are two available methods for configuring and executing the project: throu
     ```
     ./Eventures.exe
     ```
+
 ## Discord
 Join our Discord community to connect with other developers, ask questions, and get help with the project:
 [Join Eventures Discord](https://discord.gg/YpR748V89w)
