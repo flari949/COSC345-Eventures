@@ -68,7 +68,7 @@ std::vector<std::map<std::string, std::string>> get_events(
 
     // Set default search parameters
     static std::string search = ""; // General search parameter
-    static std::string fields = "name,url,description,datetime_start,point"; // Fields to retrieve
+    static std::string fields = "name,url,description,datetime_start,point,location_summary"; // Fields to retrieve
     static std::string coords = "-41.35249807015349,173.07275377115386"; // Format: latitude,longitude --> Default : Wellington
     static std::string radius = "2000"; // Distance in kilometers -> requires coordinate param be set
     static std::string start_date = ""; // Defaults to now; format : YYYY-MM-DD
@@ -76,7 +76,7 @@ std::vector<std::map<std::string, std::string>> get_events(
     static std::string num_rows = "20"; // Number of rows (items) to return --> Max : 20
     static std::string row_offset = "0"; // Row offset - for paging
 
-    std::string baseVars = "name,url,description,datetime_start,point";
+    std::string baseVars = "name,url,description,datetime_start,point,location_summary";
     std::string baseCoords = "-41.35249807015349,173.07275377115386";
     std::string baseRad = "2000";
 

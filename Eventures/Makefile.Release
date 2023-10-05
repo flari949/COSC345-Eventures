@@ -195,13 +195,20 @@ release\qrc_qml.cpp: qml\qml.qrc \
 		qml\ZoomButtons.qml \
 		qml\CustomMenuItem.qml \
 		qml\main.qml \
+		qml\UserGuide.qml \
+		qml\images\white-plus.png \
 		qml\images\activepoints.png \
+		qml\images\white-angle-left.png \
 		qml\images\cross.png \
 		qml\images\idea8.png \
 		qml\images\marker6.png \
+		qml\images\white-angle-double-right.png \
 		qml\images\ticketoutlined.svg \
 		qml\images\plus.png \
+		qml\images\white-angle-right.png \
+		qml\images\help.png \
 		qml\images\search.png \
+		qml\images\white-search.png \
 		qml\images\heart.png \
 		qml\images\angle-left.png \
 		qml\images\marker4.png \
@@ -210,18 +217,21 @@ release\qrc_qml.cpp: qml\qml.qrc \
 		qml\images\calendar.png \
 		qml\images\pin.png \
 		qml\images\marker5.png \
+		qml\images\white-minus.png \
 		qml\images\angle-double-left.png \
 		qml\images\idea9.png \
 		qml\images\calendar1.png \
 		qml\images\marker2.png \
 		qml\images\reset.png \
 		qml\images\minus.png \
+		qml\images\white-angle-double-left.png \
 		qml\images\idea7.png \
 		qml\images\angle-right.png \
 		qml\images\ticket.svg \
 		qml\images\marker1.png \
 		qml\images\load2.png \
 		qml\images\load.png \
+		qml\images\white-marker.png \
 		qml\images\home.png \
 		qml\fonts\Mirage.otf
 	C:\Qt\6.5.2\msvc2019_64\bin\rcc.exe -name qml --no-zstd qml\qml.qrc -o release\qrc_qml.cpp
