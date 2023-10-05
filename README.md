@@ -16,6 +16,25 @@ The Eventures application project is a group project for the COSC345 university 
 ### What is Eventures
 > Eventures aims to combine [EventFinda](eventfinda.co.nz) event data along with [ArcGIS](https://www.arcgis.com/apps/mapviewer/index.html) geographical mapping services data to superimpose event data on a visual interface for a unique and valuable exploration and discovery application.
 
+### Table of Contents
+- [Installation Guide](#installation-guide)
+- [Prerequisites](#prerequisites)
+- [Project Setup with QT](#project-setup-with-qt)
+  - [Compiling](#compiling)
+  - [Qt Runtime Dependencies (For deployment)](#copy-qt-runtime-dependencies-for-deployment)
+  - [Running The Executable](#running-the-executable)
+- [Project Setup with Command line](#project-setup-with-command-line)
+  - [Compilation](#compilation)
+  - [Copy Qt Runtime Dependencies (For Deployment)](#copy-qt-runtime-dependencies-for-deployment)
+  - [Running The Executable](#running-the-executable)
+- [Discord](#discord)
+- [Artifact Generation](#artifact-generation)
+- [Target Audience](#target-audience)
+- [The Group](#the-group)
+- [Contributions](#contributions)
+
+
+
 ### Eventures Questionnaire
 Link to Questionnaire: https://www.surveymonkey.com/r/QFQFH97
 
