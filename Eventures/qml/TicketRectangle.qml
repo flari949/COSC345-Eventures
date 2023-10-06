@@ -7,7 +7,9 @@ Item {
     function updateIndex(change) {
         desc.index += change;
         model.showInfo(desc.index);
-//        refresh();
+        nextButton.visible =  model.multiplePoints()
+        prevButton.visible =  model.multiplePoints()
+      //  refresh();
     }
 
     function refresh() {
@@ -15,8 +17,9 @@ Item {
         desc.url = model.getUrl(desc.index);
         desc.date = model.getDate(desc.index);
         desc.location = model.getLocation(desc.index);
-        nextButton.visible = desc.ticketVisible && model.multiplePoints()
-        prevButton.visible = desc.ticketVisible && model.multiplePoints()
+        nextButton.visible = model.multiplePoints()
+        prevButton.visible = model.multiplePoints()
+
     }
 
     id: desc
@@ -76,7 +79,8 @@ Item {
     }
 
     Rectangle{
-        visible: ticketVisible && model.multiplePoints()
+        id: nextRectangle
+        visible: ticketVisible
         anchors.left: parent.left
         anchors.leftMargin: 30
         anchors.bottom: parent.bottom
@@ -84,7 +88,6 @@ Item {
 
     RoundButton {
         id: nextButton
-        visible: false //&& model.multiplePoints()
         onClicked: updateIndex(-1)
 
         Image {
@@ -98,7 +101,7 @@ Item {
     }
 
     Rectangle{
-        visible: ticketVisible && model.multiplePoints()
+        visible: ticketVisible
         anchors.right: parent.right
         anchors.rightMargin: 60
         anchors.bottom: parent.bottom
@@ -154,62 +157,68 @@ Item {
                     wrapMode: Text.WordWrap
                 }
 
+                Text {
+                    id: date
+                    anchors.top: title.bottom
+                    anchors.topMargin: 5
+                    text: "Date and Start time: " + desc.date
+                    font.pixelSize: 12
+                    color: "black"
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    width: parent.width
+                    wrapMode: Text.WordWrap
+                }
+
+                Text {
+                    id: location
+                    anchors.top: date.bottom
+                    anchors.topMargin: 10
+                    text: "Location: " + desc.location
+                    font.pixelSize: 12
+                    color: "black"
+                    width: parent.width
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    wrapMode: Text.WordWrap
+                }
+
                 Rectangle {
                     id: colorRectangle
                     width: parent.width
-                    anchors.top: title.bottom
+                    anchors.top: location.bottom
                     anchors.topMargin: 10
                     color: "#fe817b" // Background color for location and date/time
                     radius: 10 // Adjust the radius for the rounded corners
 
-                    property int totalHeight: date.implicitHeight + 20 + location.implicitHeight
+                    property int totalHeight: link.implicitHeight + 20
 
                     height: totalHeight // Set the height of the Rectangle
 
+
                     Text {
-                        id: date
+                        id: link
                         anchors.top: parent.top
-                        anchors.topMargin: 5
-                        text: "Date and Start time: " + desc.date
-                        font.pixelSize: 12
-                        color: "black"
-                        anchors.left: parent.left
-                        anchors.leftMargin: 5
-                        width: parent.width
-                        wrapMode: Text.WordWrap
-                    }
-
-                    Text {
-                        id: location
-                        anchors.top: date.bottom
                         anchors.topMargin: 10
-                        text: "Location: " + desc.location
-                        font.pixelSize: 12
-                        color: "black"
-                        width: parent.width
                         anchors.left: parent.left
                         anchors.leftMargin: 5
+                        textFormat: Text.RichText  // Set the textFormat to RichText
+                        text: "Link to event: <a href='" + desc.url + "'>" + desc.url + "</a>"
+                        font.pixelSize: 12
+                        color: "black"  // You can set the color to a different color for hyperlinks
+                        width: parent.width
                         wrapMode: Text.WordWrap
+                        onLinkActivated: Qt.openUrlExternally(link)
                     }
+
+
                 }
 
-                Text {
-                    id: link
-                    anchors.top: colorRectangle.bottom
-                    anchors.topMargin: 20
-                    textFormat: Text.RichText  // Set the textFormat to RichText
-                    text: "Link to event: <a href='" + desc.url + "'>" + desc.url + "</a>"
-                    font.pixelSize: 12
-                    color: "black"  // You can set the color to a different color for hyperlinks
-                    width: parent.width
-                    wrapMode: Text.WordWrap
-                    onLinkActivated: Qt.openUrlExternally(link)
-                }
 
                 Text {
                     id: information
-                    anchors.top: link.bottom
-                    anchors.topMargin: 20
+                    anchors.top: colorRectangle.bottom
+                    anchors.topMargin: 30
                     text: model.eventInformation
                     font.pixelSize: 12
                     color: "black"
